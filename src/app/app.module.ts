@@ -30,7 +30,7 @@ import { AppRoutes } from "src/app/app.routes";
 NgModule({
     declarations: [
         AppComponent,
-        AppRoutes.components,
+        AppRoutes.components
     ],
     imports: [
         BrowserModule,
@@ -55,11 +55,11 @@ NgModule({
             provide: ng2Translate.MissingTranslationHandler,
             useFactory: (http: Http) => {
                 return {
-                    handle: (key: string) => `[${key}]`
+                    handle: (params: ng2Translate.MissingTranslationHandlerParams) => `[${params.key}]`
                 };
             },
             deps: [Http]
-        },
+        }
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     bootstrap: [AppComponent],
