@@ -1,0 +1,21 @@
+﻿@import '../common/_variables';
+
+nav {
+    min-height: $navbar-min-height;
+
+    .right.menu {
+        &.lang a {
+            padding: 12px 4px;
+            cursor: pointer;
+
+            &.active {
+                font-weight: bold;
+                color: blue;
+            }
+        }
+
+        &.user {
+            margin-left: 1em !important;
+        }
+    }
+}

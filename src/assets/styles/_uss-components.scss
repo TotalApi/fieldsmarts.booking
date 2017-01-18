@@ -1,0 +1,16 @@
+﻿.uss-component{
+    &.disabled {
+        * {
+            cursor: default!important;
+            pointer-events: none!important;
+        }
+        input, textarea, i, div.text {
+            opacity: 0.45!important;
+        }
+    }
+
+    .uss-tags-editor .ui.selection.dropdown, .ui.selection.dropdown.search > input.search{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}

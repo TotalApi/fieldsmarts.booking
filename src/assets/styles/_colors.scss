@@ -1,0 +1,31 @@
+﻿$toolbars: #24343a;
+$main-color: #40aec5;
+$table-row-border: #e9e9ea;
+$table-row-odd: #eefafc;
+$table-text-body: #2195ad;
+$table-text-header: #333;
+$table-header: #fafafb;
+$body-color: #f5f6f7;
+$table-tr-even: #eefafc;
+$table-tr-odd: #fff;
+
+.main-color {
+    color: #40aec5;
+}
+
+/* 
+    Простые классы для декларативного указания цвета. 
+*/
+.green, [green] {
+    color: green;
+}
+.blue, [blue] {
+    color: blue;
+}
+.red, [red] {
+    color: red;
+}
+
+.orange, [orange] {
+    color: coral;
+}

@@ -1,0 +1,52 @@
+﻿@import './preloader.css';
+@import './_colors.scss';
+@import './_data-table.scss';
+@import './_semantic.scss';
+@import './_uss-components.scss';
+
+.pointer {
+    cursor: pointer!important;
+}
+
+.inline {
+    display: inline!important;
+}
+
+.inline-block {
+    display: inline-block!important;
+}
+
+.block {
+    display: block!important;
+}
+
+.margin-bottom-small {
+    margin-bottom: 5px !important;
+}
+
+.disabled {
+    cursor: default !important;
+    color: gray!important;
+}
+
+.toast-container {
+    z-index: 1000000;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+    z-index: 10000;
+}
+
+.fixed {
+    position: fixed;
+    z-index: 10000;
+}
+
+.scrollHidden{
+    overflow: hidden !important;
+}
