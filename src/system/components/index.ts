@@ -1,1 +1,1 @@
-﻿
+﻿export * from './semanticui/semantic';
