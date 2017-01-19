@@ -1,4 +1,5 @@
-﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.2\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.2\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -88,6 +89,7 @@
     <Content Include="src\app\app.scss" />
     <Content Include="src\app\components\common\_mixins.scss" />
     <Content Include="src\app\components\common\_variables.scss" />
+    <Content Include="src\app\components\timeBooking\time-booking.component.html" />
     <Content Include="src\app\pages\home\home.page.scss" />
     <Content Include="src\assets\styles\globals.scss" />
     <Content Include="src\assets\styles\_colors.scss" />
@@ -99,7 +101,11 @@
     <Content Include="webpack.config.js" />
     <Content Include="prebuild.bat" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
+    <TypeScriptCompile Include="src\app\components\timeBooking\time-booking.component.ts" />
+    <TypeScriptCompile Include="src\app\models\Sales.ts" />
+    <TypeScriptCompile Include="src\app\services\sales.service.ts" />
     <TypeScriptCompile Include="src\app\services\translate.service.ts" />
+    <Content Include="src\app\components\timeBooking\time-booking.component.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -133,6 +139,13 @@
     <TypeScriptCompile Include="src\polyfills.browser.ts" />
     <TypeScriptCompile Include="src\system\components\components.module.ts" />
     <TypeScriptCompile Include="src\system\components\index.ts" />
+    <TypeScriptCompile Include="src\system\components\semanticui\dropdown\dropdown-menu.ts" />
+    <TypeScriptCompile Include="src\system\components\semanticui\dropdown\dropdown.service.ts" />
+    <TypeScriptCompile Include="src\system\components\semanticui\search.service.ts" />
+    <TypeScriptCompile Include="src\system\components\semanticui\select\select-option.ts" />
+    <TypeScriptCompile Include="src\system\components\semanticui\select\select.ts" />
+    <TypeScriptCompile Include="src\system\components\semanticui\semantic.ts" />
+    <TypeScriptCompile Include="src\system\components\semanticui\transition.ts" />
     <TypeScriptCompile Include="src\system\decorators\api-method.decorator.ts" />
     <TypeScriptCompile Include="src\system\decorators\api-service.decorator.ts" />
     <TypeScriptCompile Include="src\system\decorators\app-component.decorator.ts" />

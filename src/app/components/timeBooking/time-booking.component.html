@@ -1,0 +1,33 @@
+﻿<div>
+    <table class="ji-dashboard">
+        <thead>
+        <tr>
+            <td colspan="7">
+                <button (click)="previousWeek()"><</button>
+                <button (click)="nextWeek()">></button>
+
+                <sui-select [(ngModel)]="selectedMonth" #select>
+                    <sui-select-option *ngFor="let option of monthList" [value]="option"></sui-select-option>
+                </sui-select>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-center td-width" *ngFor="let day of availableTimeSlotsByDay" ng-class="{'ji-is-today': isToday(day.dayOfTheWeek)}">
+                <span class="ji-day-th">{{ day.dayOfTheWeek | date: 'EEE' }}</span>
+                <span class="ji-date-th">{{ day.dayOfTheWeek | date: 'd' }}</span>
+            </td>
+        </tr>
+
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let time of allTimeSlots; let idx = index">
+                <td time-slot read-only="false" is-selected="false" *ngFor="let day of availableTimeSlotsByDay">
+                    <div *ngIf="isTimeAvailable(day, time)">
+                        <a class="ui label" (click)="bookTime(day, time)">{{time | date : 'h:mma':'UTC'}}</a>
+                    </div>
+                </td>
+            </tr>
+
+    </table>
+</div>
