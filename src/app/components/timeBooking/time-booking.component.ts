@@ -134,7 +134,7 @@ export class TimeBookingComponent implements OnInit {
     }
 
     public onSelectedMonthChanged(month: number) {
-        const today = new Date(Date.now());
+        /*const today = new Date(Date.now());
         let year = today.getFullYear();
         let day = 1; //first day of the month in case of the month is future
         if (month < today.getMonth()) {
@@ -144,7 +144,9 @@ export class TimeBookingComponent implements OnInit {
             day = today.getDate() + 1;
         }
         const firstDayOfSelectedMonth = new Date(year, month, day);
-        this.getSalesAvailableSlots(firstDayOfSelectedMonth);
+        this.getSalesAvailableSlots(firstDayOfSelectedMonth);*/
+
+        
     }
 
     public nextWeek(): void {

@@ -6,7 +6,7 @@
                 <button (click)="previousWeek()"><</button>
                 <button (click)="nextWeek()">></button>
 
-                <sui-select [(ngModel)]="selectedMonth" #select>
+                <sui-select [(ngModel)]="selectedMonth" (ngModelChange)="onSelectedMonthChanged($event)" #select>
                     <sui-select-option *ngFor="let option of monthList" [value]="option"></sui-select-option>
                 </sui-select>
             </td>
