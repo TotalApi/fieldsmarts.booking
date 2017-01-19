@@ -35,6 +35,8 @@ export class TimeBookingComponent implements OnInit {
 
     public hasPrevious: boolean = false;
 
+    public selectedTime: Date;
+
     constructor(
         public sales: SalesService,
         private router: Router,
@@ -58,6 +60,16 @@ export class TimeBookingComponent implements OnInit {
         });
     }
 
+    public isSelected(day: SalesSchedule, time: Date) {
+        let m = moment(day.dayOfTheWeek);
+        let t = moment(time).year(m.year()).month(m.month()).date(m.date()).toDate();
+        return !!day.dayOfTheWeek &&
+            !!this.selectedTime &&
+            t.getDate() === this.selectedTime.getDate() &&
+            t.getHours() === this.selectedTime.getHours() &&
+            t.getMinutes() === this.selectedTime.getMinutes();
+    }
+
     public isTimeAvailable(day: SalesSchedule, time: Date): boolean {
         let m = moment(day.dayOfTheWeek);
         let t = moment(time).year(m.year()).month(m.month()).date(m.date()).toDate();
@@ -65,7 +77,8 @@ export class TimeBookingComponent implements OnInit {
     }
 
     public bookTime(day: SalesSchedule, time: Date) {
-        
+        const t = moment(time);
+        this.selectedTime = moment(day.dayOfTheWeek).hours(t.hours()).minutes(t.minutes()).seconds(t.seconds()).toDate();
     }
 
     public isToday(date: Date | moment.Moment | string): boolean {
