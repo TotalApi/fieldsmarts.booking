@@ -89,11 +89,11 @@
     <Content Include="src\app\app.scss" />
     <Content Include="src\app\components\common\_mixins.scss" />
     <Content Include="src\app\components\common\_variables.scss" />
-    <Content Include="src\app\components\timeBooking\time-booking.component.html" />
-    <Content Include="src\app\components\wizard-page\wizardPage.component.html" />
-    <Content Include="src\app\pages\wizard-phone\wizardPhone.page.html" />
-    <Content Include="src\app\pages\wizard-name\wizardName.page.html" />
-    <Content Include="src\app\pages\wizard-home\wizardHome.page.scss" />
+    <Content Include="src\app\components\time-booking\time-booking.component.html" />
+    <Content Include="src\app\components\wizard-page\wizard-page.component.html" />
+    <Content Include="src\app\pages\wizard-phone\wizard-phone.page.html" />
+    <Content Include="src\app\pages\wizard-name\wizard-name.page.html" />
+    <Content Include="src\app\pages\wizard-home\wizard-home.page.scss" />
     <Content Include="src\assets\styles\globals.scss" />
     <Content Include="src\assets\styles\_colors.scss" />
     <Content Include="src\assets\styles\_semantic.scss" />
@@ -101,20 +101,22 @@
     <Content Include="tsconfig.json" />
     <Content Include="webpack.config.js" />
     <Content Include="prebuild.bat" />
-    <TypeScriptCompile Include="src\app\components\timeBooking\time-booking.component.ts" />
+    <TypeScriptCompile Include="src\app\components\time-booking\time-booking.component.ts" />
     <TypeScriptCompile Include="src\app\models\Sales.ts" />
+    <TypeScriptCompile Include="src\app\pages\wizard-calendar\wizard-calendar.page.ts" />
     <TypeScriptCompile Include="src\app\services\sales.service.ts" />
     <None Include="Properties\PublishProfiles\Test - Current.pubxml" />
     <None Include="Properties\PublishProfiles\Test - Production.pubxml" />
-    <TypeScriptCompile Include="src\app\components\wizard-page\wizardPage.component.ts" />
-    <TypeScriptCompile Include="src\app\pages\wizard-phone\wizardPhone.page.ts" />
-    <TypeScriptCompile Include="src\app\pages\wizard-name\wizardName.page.ts" />
+    <TypeScriptCompile Include="src\app\components\wizard-page\wizard-page.component.ts" />
+    <TypeScriptCompile Include="src\app\pages\wizard-phone\wizard-phone.page.ts" />
+    <TypeScriptCompile Include="src\app\pages\wizard-name\wizard-name.page.ts" />
     <TypeScriptCompile Include="src\app\services\wizard.service.ts" />
     <TypeScriptCompile Include="src\app\services\translate.service.ts" />
-    <Content Include="src\app\components\timeBooking\time-booking.component.scss" />
-    <Content Include="src\app\components\wizard-page\wizardPage.component.scss" />
-    <Content Include="src\app\pages\wizard-name\wizardName.page.scss" />
-    <Content Include="src\app\pages\wizard-phone\wizardPhone.page.scss" />
+    <Content Include="src\app\components\time-booking\time-booking.component.scss" />
+    <Content Include="src\app\components\wizard-page\wizard-page.component.scss" />
+    <Content Include="src\app\pages\wizard-name\wizard-name.page.scss" />
+    <Content Include="src\app\pages\wizard-phone\wizard-phone.page.scss" />
+    <Content Include="src\app\pages\wizard-calendar\wizard-calendar.page.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -124,8 +126,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\app\app.html" />
-    <Content Include="src\app\pages\home\home.page.html" />
-    <Content Include="src\app\pages\wizard-home\wizardHome.page.html" />
+    <Content Include="src\app\pages\wizard-calendar\wizard-calendar.page.html" />
+    <Content Include="src\app\pages\wizard-home\wizard-home.page.html" />
     <Content Include="src\assets\images\logo.png" />
     <Content Include="src\assets\scripts\linq.array.js" />
     <Content Include="src\index.html" />
@@ -140,7 +142,7 @@
     <TypeScriptCompile Include="src\app\app.routes.ts" />
     <TypeScriptCompile Include="src\app\app.ts" />
     <TypeScriptCompile Include="src\app\components\index.ts" />
-    <TypeScriptCompile Include="src\app\pages\wizard-home\wizardHome.page.ts" />
+    <TypeScriptCompile Include="src\app\pages\wizard-home\wizard-home.page.ts" />
     <TypeScriptCompile Include="src\app\pages\index.ts" />
     <TypeScriptCompile Include="src\app\services\auth-guard.service.ts" />
     <TypeScriptCompile Include="src\app\services\index.ts" />

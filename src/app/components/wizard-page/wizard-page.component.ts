@@ -9,8 +9,8 @@ declare type WizardCommand = { caption?: string; route?: string; action?: (comma
 
 @ng.Component({
     selector: 'wizard-page',
-    styleUrls: ['./wizardPage.component.scss'],
-    templateUrl: './wizardPage.component.html',
+    styleUrls: ['./wizard-page.component.scss'],
+    templateUrl: './wizard-page.component.html',
     encapsulation: ng.ViewEncapsulation.None
 })
 @AppComponent()

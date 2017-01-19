@@ -3,8 +3,8 @@ import { AppRoute } from 'src/app/app.routes';
 import {AppWizardService} from "../../services/wizard.service";
 
 @ng.Component({
-    styleUrls: ['./wizardPhone.page.scss'],
-    templateUrl: './wizardPhone.page.html',
+    styleUrls: ['./wizard-phone.page.scss'],
+    templateUrl: './wizard-phone.page.html',
     encapsulation: ng.ViewEncapsulation.None
 })
 @AppRoute({ menuPath: 'wizard-phone' })

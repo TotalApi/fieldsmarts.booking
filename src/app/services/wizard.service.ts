@@ -37,6 +37,7 @@ export class AppWizardService {
         switch (current) {
             case 'home': return 'wizard-name';
             case 'wizard-name': return 'wizard-phone';
+            case 'wizard-phone': return 'wizard-calendar';
             default: return current;
         }
     }
@@ -45,6 +46,7 @@ export class AppWizardService {
         switch (current) {
             case 'wizard-name': return 'home';
             case 'wizard-phone': return 'wizard-name';
+            case 'wizard-calendar': return 'wizard-phone';
             default: return current;
         }
     }

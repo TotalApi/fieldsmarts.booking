@@ -1,4 +1,5 @@
-﻿export * from './wizard-home/wizardHome.page';
-export * from './wizard-name/wizardName.page';
-export * from './wizard-phone/wizardPhone.page';
+﻿export * from './wizard-home/wizard-home.page';
+export * from './wizard-name/wizard-name.page';
+export * from './wizard-phone/wizard-phone.page';
+export * from './wizard-calendar/wizard-calendar.page';
 
