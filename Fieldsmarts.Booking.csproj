@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
@@ -90,22 +90,31 @@
     <Content Include="src\app\components\common\_mixins.scss" />
     <Content Include="src\app\components\common\_variables.scss" />
     <Content Include="src\app\components\timeBooking\time-booking.component.html" />
-    <Content Include="src\app\pages\home\home.page.scss" />
+    <Content Include="src\app\components\wizard-page\wizardPage.component.html" />
+    <Content Include="src\app\pages\wizard-phone\wizardPhone.page.html" />
+    <Content Include="src\app\pages\wizard-name\wizardName.page.html" />
+    <Content Include="src\app\pages\wizard-home\wizardHome.page.scss" />
     <Content Include="src\assets\styles\globals.scss" />
     <Content Include="src\assets\styles\_colors.scss" />
-    <Content Include="src\assets\styles\_data-table.scss" />
     <Content Include="src\assets\styles\_semantic.scss" />
-    <Content Include="src\assets\styles\_uss-components.scss" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
     <Content Include="webpack.config.js" />
     <Content Include="prebuild.bat" />
-    <None Include="Properties\PublishProfiles\Test.pubxml" />
     <TypeScriptCompile Include="src\app\components\timeBooking\time-booking.component.ts" />
     <TypeScriptCompile Include="src\app\models\Sales.ts" />
     <TypeScriptCompile Include="src\app\services\sales.service.ts" />
+    <None Include="Properties\PublishProfiles\Test - Current.pubxml" />
+    <None Include="Properties\PublishProfiles\Test - Production.pubxml" />
+    <TypeScriptCompile Include="src\app\components\wizard-page\wizardPage.component.ts" />
+    <TypeScriptCompile Include="src\app\pages\wizard-phone\wizardPhone.page.ts" />
+    <TypeScriptCompile Include="src\app\pages\wizard-name\wizardName.page.ts" />
+    <TypeScriptCompile Include="src\app\services\wizard.service.ts" />
     <TypeScriptCompile Include="src\app\services\translate.service.ts" />
     <Content Include="src\app\components\timeBooking\time-booking.component.scss" />
+    <Content Include="src\app\components\wizard-page\wizardPage.component.scss" />
+    <Content Include="src\app\pages\wizard-name\wizardName.page.scss" />
+    <Content Include="src\app\pages\wizard-phone\wizardPhone.page.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -116,6 +125,7 @@
   <ItemGroup>
     <Content Include="src\app\app.html" />
     <Content Include="src\app\pages\home\home.page.html" />
+    <Content Include="src\app\pages\wizard-home\wizardHome.page.html" />
     <Content Include="src\assets\images\logo.png" />
     <Content Include="src\assets\scripts\linq.array.js" />
     <Content Include="src\index.html" />
@@ -130,7 +140,7 @@
     <TypeScriptCompile Include="src\app\app.routes.ts" />
     <TypeScriptCompile Include="src\app\app.ts" />
     <TypeScriptCompile Include="src\app\components\index.ts" />
-    <TypeScriptCompile Include="src\app\pages\home\home.page.ts" />
+    <TypeScriptCompile Include="src\app\pages\wizard-home\wizardHome.page.ts" />
     <TypeScriptCompile Include="src\app\pages\index.ts" />
     <TypeScriptCompile Include="src\app\services\auth-guard.service.ts" />
     <TypeScriptCompile Include="src\app\services\index.ts" />
