@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment';
 import { SystemComponent } from '../decorators/system-component.decorator';
-import { UssEnumDescriptionPipe } from '../pipes/enum.pipe';
 import {isString, isArray} from "../utils";
 import { Reflection } from '../utils/Reflection';
 
@@ -56,20 +55,6 @@ export abstract class UssDirectiveBase<T> implements ng.OnInit, ng.OnDestroy {
             });
         }
     };
-
-/*
-    private _hostComponent: T;
-    protected get hostComponent(): T {
-        if (!this._hostComponent) {
-            // попробуем получить ссылку на хост-компонент полулегальным способом
-            if (this.viewContainer['_element'])
-                this._hostComponent = this.viewContainer['_element'].component;
-            // если это не получилось и если компонент передаёт ссылку на самого себя в nativeElement получим оттуда
-            this._hostComponent = this._hostComponent || this.hostElementRef.nativeElement['__controller'];
-        }
-        return this._hostComponent;
-    }
-*/
 
     protected hostNativeElement: HTMLElement;
     protected hostViewContainer: ng.ViewContainerRef;

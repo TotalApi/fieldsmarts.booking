@@ -13,7 +13,7 @@ declare type TRouteSettings = {
     menuPath?: string;
     access?: {
         needAuth?: boolean;
-        forRoles?: App.UserRole[];
+        forRoles?: TUserRole[];
         alwaysVisible?: boolean;
     };
 }
@@ -101,8 +101,8 @@ export class AppRoutes {
         return true;
     }
 
-    private static isSuitableUserRole(roles: number[]): boolean {
-        return roles.contains(system.auth.LoggedUser.UserRole);
+    private static isSuitableUserRole(roles: TUserRole[]): boolean {
+        return roles.contains(system.auth.LoggedUser.role);
     }
 
     public static config: IRoute[] = [

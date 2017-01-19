@@ -43,3 +43,10 @@ declare var linq: linqjs.Enumerable;
 
 declare function require(name: string): any;
 
+
+declare type TUserRole = 'Admin' | '';
+
+interface User {
+    userName: string;
+    role: TUserRole;
+}

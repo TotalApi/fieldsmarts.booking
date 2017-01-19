@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Http, HttpModule } from '@angular/http';
+import { AppTranslateService, AppTranslateLoader } from './services/translate.service';
 
 /*
     3rd party
@@ -26,8 +27,7 @@ import { AppComponent } from './app';
 
 import { AppRoutes } from "src/app/app.routes";
 
-@
-NgModule({
+@NgModule({
     declarations: [
         AppComponent,
         AppRoutes.components
@@ -48,7 +48,7 @@ NgModule({
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         {
             provide: ng2Translate.TranslateLoader,
-            useFactory: (http: Http) => new ng2Translate.TranslateStaticLoader(http, 'api/i18n', '.json'),
+            useFactory: (http: Http) => new AppTranslateLoader(http, 'http://192.168.3.202:7202/locales', '.json'),
             deps: [Http]
         },
         {
@@ -66,12 +66,9 @@ NgModule({
 })
 export class AppModule {
 
-    constructor(private translate: ng2Translate.TranslateService) {
-        // this language will be used as a fallback when a translation isn't found in the current language
-        translate.setDefaultLang('ru');
-
-        // the lang to use, if the lang isn't available, it will use the current loader to get them
-        translate.use('ru');
+    constructor(private translate: AppTranslateService, private auth: system.UssAuthService) {
+        translate.init();
+        auth.Login('lionsoft@ukr.net', 'P@ssw0rd');
     }
 
 }

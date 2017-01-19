@@ -1,13 +1,5 @@
-<app-nav-bar></app-nav-bar>
-
-<app-side-bar
-    (onVisibilityChanged)="onSidebarVisibilityChanged($event)">
-</app-side-bar>
-
-<main [ngClass]="{'sidebar-opened': isSidebarVisible}">
-    <router-outlet></router-outlet>
-    
-    <footer class="app-footer">
-        <span>© 2016</span>
-    </footer>
+<main>
+    <router-outlet>
+        
+    </router-outlet>
 </main>

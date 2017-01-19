@@ -7,5 +7,4 @@
 /// <reference path="legacy/rome.d.ts" />
 /// <reference path="legacy/moment.d.ts" />
 /// <reference path="custom-typings.d.ts" />
-/// <reference path="models.d.ts" />
 

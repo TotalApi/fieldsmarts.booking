@@ -26,7 +26,7 @@ export class AppAuthGuard implements CanActivate {
 
         if (currRouteRoles) {
             result = this.auth.IsLoggedIn
-                && currRouteRoles.contains(this.auth.LoggedUser.UserRole);
+                && currRouteRoles.contains(this.auth.LoggedUser.role);
             
             msg = !result ? 'Access denied for your current role' : null;
         }

@@ -10,8 +10,8 @@ function root(__path) {
 }
 
 var NODE_ENV = process.env.NODE_ENV || 'development';
-//var BACKEND_ADDRESS = 'http://tv.aelitsoft.com';
-var BACKEND_ADDRESS = 'http://192.168.3.202:7702';
+//var BACKEND_ADDRESS = 'http://192.168.3.202:7702';
+var BACKEND_ADDRESS = 'http://178.215.162.3:1234';
 var appStylesPath = 'src\\assets\\styles';
 var appStyles = RegExp(appStylesPath);
 var bundledStyles = RegExp('(node_modules|bower_components|' + appStylesPath + ')');

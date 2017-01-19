@@ -8,7 +8,7 @@ import {SystemService} from '../decorators/system-service.decorator';
 
 export interface UssAuthServiceEvent {
     action: 'loggedIn' | 'loggedOut';
-    user: App.User;
+    user: User;
 }
 
 export interface IUssAuthService {
@@ -20,7 +20,7 @@ export interface IUssAuthService {
     /**
      * Информация о текущем залогиненом пользователе
      */
-    LoggedUser: App.User;
+    LoggedUser: User;
 
     /**
      * Информация о логине текущего пользователя
@@ -37,11 +37,13 @@ export interface IUssAuthService {
      */
     AccessTokenExpires: moment.Moment;
 
-    Login(login: string, password: string): Promise <App.User>;
-    Logout(noReload?: boolean): Promise<void>;
+    Login(login: string, password: string): Promise <User>;
+    Logout(noReload?: boolean): void;
+/*
     Register(login: string, password: string): Promise<App.User>;
     RestorePassword(email: string): Promise<void>;
     ResetPassword(email: string, password: string, code: string): Promise<App.User>;
+*/
 }
 
 @Injectable()
@@ -64,11 +66,9 @@ export class UssAuthService {
 
         if (this.IsLoggedIn) {
             // Восстанавливаем данные о текущем пользователе из локального хранилища.
-            this.LoggedUser = <App.User>{
-                Id: localStorage.getItem(`${this.storageKey}_uid`),
-                UserName: localStorage.getItem(`${this.storageKey}_login`),
-                Email: localStorage.getItem(`${this.storageKey}_uemail`),
-                UserRole: parseInt(localStorage.getItem(`${this.storageKey}_urole`)),
+            this.LoggedUser = <User>{
+                userName: localStorage.getItem(`${this.storageKey}_uid`),
+                role: localStorage.getItem(`${this.storageKey}_urole`),
             }
             // Обновим данные о пользователе
             this.updateUserInfo();
@@ -92,7 +92,7 @@ export class UssAuthService {
     /**
      * Информация о текущем залогиненом пользователе
      */
-    public LoggedUser = <App.User>{};
+    public LoggedUser = <User>{};
 
     /**
      * Информация о логине текущего пользователя
@@ -112,15 +112,14 @@ export class UssAuthService {
     /**
      * Обновляет информацию о пользователе.
      */
-    private updateUserInfo(userNameOrId?: string): Promise<App.User> {
-        userNameOrId = userNameOrId || localStorage.getItem(`${this.storageKey}_uid`) || this.LoggedUserName;
-        return this.account.Load(userNameOrId)
+    private updateUserInfo(userNameOrId?: string): Promise<User> {
+        //userNameOrId = userNameOrId || localStorage.getItem(`${this.storageKey}_uid`) || this.LoggedUserName;
+        return this.account.CurrentUserInfo()
             .then(user => {
                 this.LoggedUser = user;
                 if (user) {
-                    localStorage.setItem(`${this.storageKey}_uid`, user.Id);
-                    localStorage.setItem(`${this.storageKey}_uemail`, user.Email);
-                    localStorage.setItem(`${this.storageKey}_urole`, user.UserRole ? user.UserRole.toString() : '0');
+                    localStorage.setItem(`${this.storageKey}_uid`, user.userName);
+                    localStorage.setItem(`${this.storageKey}_urole`, user.role);
 
                     const ev = <UssAuthServiceEvent>{ action: UssAuthService.Event.loggedIn, user };
                     this.onAuthEvent.emit(ev);
@@ -131,8 +130,8 @@ export class UssAuthService {
             });
     }
 
-    public Login(login: string, password: string/*, rememberMe: boolean = true*/): Promise<App.User> {
-        return this.account.BearerLogin(login, password)
+    public Login(login: string, password: string/*, rememberMe: boolean = true*/): Promise<User> {
+        return this.account.Login(login, password)
             .then(r => {
                 this.LoggedUserName = r.userName;
                 this.AccessToken = r.access_token;
@@ -145,7 +144,7 @@ export class UssAuthService {
             });
     }
 
-    public Logout(noReload?: boolean): Promise<void> {
+    public Logout(noReload?: boolean): void {
         //sessionStorage.removeItem(this.tokenKey);
         localStorage.removeItem(`${this.storageKey}_access`);
         localStorage.removeItem(`${this.storageKey}_login`);
@@ -155,15 +154,15 @@ export class UssAuthService {
         localStorage.removeItem(`${this.storageKey}_uemail`);
         localStorage.removeItem(`${this.storageKey}_urole`);
         const user = this.LoggedUser;
-        this.LoggedUser = <App.User>{};
+        this.LoggedUser = <User>{};
         this.LoggedUserName = null;
         this.AccessToken = null;
         this.AccessTokenExpires = null;
         const ev = <UssAuthServiceEvent>{ action: UssAuthService.Event.loggedOut, user };
         this.onAuthEvent.emit(ev);
-        return this.account.Logout();
     }
 
+/*
     public Register(login: string, password: string): Promise<App.User> {
         return this.account.Register(login, password).then(() => this.Login(login, password));
     }
@@ -175,6 +174,7 @@ export class UssAuthService {
     public ResetPassword(email: string, password: string, code: string): Promise<App.User> {
         return this.account.ResetPassword(email, password, code).then(u => this.Login(u.UserName, password));
     }
+*/
 }
 
 export var auth: IUssAuthService =
@@ -187,7 +187,9 @@ export var auth: IUssAuthService =
     get AccessTokenExpires() { return UssAuthService.Instance.AccessTokenExpires; },
     Login: (login, password) => UssAuthService.Instance.Login(login, password),
     Logout: (noReload) => UssAuthService.Instance.Logout(noReload),
+/*
     Register: (login, password) => UssAuthService.Instance.Register(login, password),
     ResetPassword: (email, password, code) => UssAuthService.Instance.ResetPassword(email, password, code),
     RestorePassword: (email) => UssAuthService.Instance.RestorePassword(email),
+*/
 }

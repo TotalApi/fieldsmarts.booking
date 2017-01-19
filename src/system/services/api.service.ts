@@ -39,7 +39,9 @@ export class UssApiService {
 
     private static objectToStringParams(params: any, url: string, methodDescriptor: IApiMethodMetadata): string {
         let res = url || "";
-        if (methodDescriptor.route && methodDescriptor.route !== "/") {
+        if (methodDescriptor.route && methodDescriptor.route.StartsWith("/")) {
+            res = methodDescriptor.route.substr(1);
+        } else if (methodDescriptor.route && methodDescriptor.route !== "/") {
             if (!methodDescriptor.route.StartsWith('/') && !res.EndsWith('/'))
                 res = res + "/";
             res = res + methodDescriptor.route;

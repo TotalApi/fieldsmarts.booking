@@ -88,10 +88,7 @@
     <Content Include="src\app\app.scss" />
     <Content Include="src\app\components\common\_mixins.scss" />
     <Content Include="src\app\components\common\_variables.scss" />
-    <Content Include="src\app\components\nav-bar\nav-bar.component.scss" />
-    <Content Include="src\app\components\side-bar\side-bar.component.scss" />
     <Content Include="src\app\pages\home\home.page.scss" />
-    <Content Include="src\app\pages\login\login.page.scss" />
     <Content Include="src\assets\styles\globals.scss" />
     <Content Include="src\assets\styles\_colors.scss" />
     <Content Include="src\assets\styles\_data-table.scss" />
@@ -102,6 +99,7 @@
     <Content Include="webpack.config.js" />
     <Content Include="prebuild.bat" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
+    <TypeScriptCompile Include="src\app\services\translate.service.ts" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -111,10 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\app\app.html" />
-    <Content Include="src\app\components\nav-bar\nav-bar.component.html" />
-    <Content Include="src\app\components\side-bar\side-bar.component.html" />
     <Content Include="src\app\pages\home\home.page.html" />
-    <Content Include="src\app\pages\login\login.page.html" />
     <Content Include="src\assets\images\logo.png" />
     <Content Include="src\assets\scripts\linq.array.js" />
     <Content Include="src\index.html" />
@@ -129,11 +124,8 @@
     <TypeScriptCompile Include="src\app\app.routes.ts" />
     <TypeScriptCompile Include="src\app\app.ts" />
     <TypeScriptCompile Include="src\app\components\index.ts" />
-    <TypeScriptCompile Include="src\app\components\nav-bar\nav-bar.component.ts" />
-    <TypeScriptCompile Include="src\app\components\side-bar\side-bar.component.ts" />
     <TypeScriptCompile Include="src\app\pages\home\home.page.ts" />
     <TypeScriptCompile Include="src\app\pages\index.ts" />
-    <TypeScriptCompile Include="src\app\pages\login\login.page.ts" />
     <TypeScriptCompile Include="src\app\services\auth-guard.service.ts" />
     <TypeScriptCompile Include="src\app\services\index.ts" />
     <TypeScriptCompile Include="src\system.browser.ts" />
@@ -156,7 +148,6 @@
     <TypeScriptCompile Include="src\system\directives\index.ts" />
     <TypeScriptCompile Include="src\system\index.ts" />
     <TypeScriptCompile Include="src\system\pipes\console.pipe.ts" />
-    <TypeScriptCompile Include="src\system\pipes\enum.pipe.ts" />
     <TypeScriptCompile Include="src\system\pipes\format-date-time.pipe.ts" />
     <TypeScriptCompile Include="src\system\pipes\index.ts" />
     <TypeScriptCompile Include="src\system\pipes\where.pipe.ts" />
@@ -195,7 +186,6 @@
     <TypeScriptCompile Include="src\typings\legacy\linq.d.ts" />
     <TypeScriptCompile Include="src\typings\legacy\moment.d.ts" />
     <TypeScriptCompile Include="src\typings\legacy\rome.d.ts" />
-    <TypeScriptCompile Include="src\typings\models.d.ts" />
     <TypeScriptCompile Include="src\typings\reflect.d.ts" />
     <TypeScriptCompile Include="src\vendor.browser.ts" />
   </ItemGroup>

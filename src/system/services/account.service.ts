@@ -22,19 +22,26 @@ export class BearerLoginResponse {
 @ApiService("api/Account")
 export class UssAccountService extends UssApiService {
 
-    @ApiMethod({ method: "POST", route: "Login" })
-    public Login(login: string, password: string, rememberMe?: boolean): Promise<App.User> {
-        return this.request<App.User>({ Login: login, Password: password, RememberMe: rememberMe }).toPromise();
+/*
+    @ApiMethod({ method: "GET", route: "{login}" })
+    public Load(login: string): Promise<App.User> {
+        return this.request<App.User>({ login }).toPromise();
+    }
+*/
+    @ApiMethod({ method: "GET", route: "MyUserInfo" })
+    public CurrentUserInfo(): Promise<User> {
+        return this.request<User>().toPromise();
     }
 
-    @ApiMethod({ method: "POST", route: "BearerLogin" })
-    public BearerLogin(login: string, password: string): Promise<BearerLoginResponse> {
+    @ApiMethod({ method: "POST", route: "/token" })
+    public Login(login: string, password: string): Promise<BearerLoginResponse> {
         return this.request<BearerLoginResponse>(`grant_type=password&username=${login}&password=${password}`).toPromise();
     }
 
-    @ApiMethod({ method: "POST", route: "Logout" })
-    public Logout(): Promise<void> {
-        return this.request<void>().toPromise();
+/*
+    @ApiMethod({ method: "POST", route: "Login" })
+    public Login(login: string, password: string, rememberMe?: boolean): Promise<App.User> {
+        return this.request<App.User>({ Login: login, Password: password, RememberMe: rememberMe }).toPromise();
     }
 
     @ApiMethod({ method: "POST", route: "Register" })
@@ -52,9 +59,6 @@ export class UssAccountService extends UssApiService {
         return this.request<App.User>({ Email: email, Password: password, Code: code }).toPromise();
     }
 
-    @ApiMethod({ method: "GET", route: "{login}" })
-    public Load(login: string): Promise<App.User> {
-        return this.request<App.User>({ login }).toPromise();
-    }
+*/
 
 }
