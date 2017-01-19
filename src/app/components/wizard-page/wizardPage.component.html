@@ -1,0 +1,18 @@
+<div class="wizard-page {{class}} {{id}}">
+    <div class="content" *ngIf="title && description">
+        <div>{{title|translate}}</div>
+        <div>{{description|translate}}</div>
+    </div>
+
+    <div class="content">
+        <ng-content></ng-content>
+    </div>
+    
+    <pre style="background-color: lightgoldenrodyellow; border: 1px solid black">{{wizard.data | json}}</pre>
+
+    <div class="footer">
+        <button [hidden]="back.isHidden" (click)="execute(back)">{{back.caption|translate}}</button>
+        <button [hidden]="next.isHidden" (click)="execute(next)">{{next.caption|translate}}</button>
+    </div> 
+
+</div>

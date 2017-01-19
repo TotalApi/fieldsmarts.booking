@@ -1,1 +1,1 @@
-﻿
+﻿export * from './wizard-page/wizardPage.component';

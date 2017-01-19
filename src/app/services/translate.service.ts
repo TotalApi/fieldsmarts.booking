@@ -35,3 +35,15 @@ export class AppTranslateLoader extends ng2Translate.TranslateStaticLoader {
         return super.getTranslation(`lang_${lang}`);
     }
 }
+
+
+export class AppMissingTranslationHandler extends ng2Translate.MissingTranslationHandler {
+    constructor(private http: Http) {
+        super();
+    }    
+
+    handle(params: ng2Translate.MissingTranslationHandlerParams) {
+        //return `[${params.key}]`;
+        return params.key;
+    }
+}

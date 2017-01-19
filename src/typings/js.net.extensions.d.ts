@@ -133,7 +133,7 @@ interface String {
         Converts JSON string to an object. Returns defValue for invalid or empty JSON string.
         The JSON string can be not braketed with { and  }.
     */
-    FromJson(defValue): any;
+    FromJson(defValue?: any): any;
 
     ToMd5(): string;
     /*

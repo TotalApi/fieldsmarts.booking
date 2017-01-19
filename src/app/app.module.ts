@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Http, HttpModule } from '@angular/http';
-import { AppTranslateService, AppTranslateLoader } from './services/translate.service';
+import { AppTranslateService, AppTranslateLoader, AppMissingTranslationHandler } from './services/translate.service';
 
 /*
     3rd party
@@ -53,11 +53,7 @@ import { AppRoutes } from "src/app/app.routes";
         },
         {
             provide: ng2Translate.MissingTranslationHandler,
-            useFactory: (http: Http) => {
-                return {
-                    handle: (params: ng2Translate.MissingTranslationHandlerParams) => `[${params.key}]`
-                };
-            },
+            useFactory: (http: Http) => new AppMissingTranslationHandler(http),
             deps: [Http]
         }
     ],

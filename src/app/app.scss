@@ -1,20 +1,9 @@
 ﻿@import './components/common/_variables';
 
 main {
-    padding: 15px;
-    margin-left: 0;
-    transition: margin-left 0.5s ease;
+    padding: 0;
+    margin: 0;
+    //transition: margin-left 0.5s ease;
     overflow-y: auto;
-    height: calc(100% - #{$navbar-min-height});
-}
-
-main.sidebar-opened {
-    margin-left: $sidebar-width;
-}
-
-.app-footer {
-    position: fixed;
-    bottom: 0;
-    background: #fff;
-    width: 100%;
+    height: 100%;
 }
