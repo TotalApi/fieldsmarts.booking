@@ -89,6 +89,7 @@
     <Content Include="src\app\components\common\_mixins.scss" />
     <Content Include="src\app\components\common\_variables.scss" />
     <Content Include="src\app\pages\home\home.page.scss" />
+    <Content Include="src\app\pages\wizard\home.page.html" />
     <Content Include="src\assets\styles\globals.scss" />
     <Content Include="src\assets\styles\_colors.scss" />
     <Content Include="src\assets\styles\_data-table.scss" />
@@ -99,7 +100,9 @@
     <Content Include="webpack.config.js" />
     <Content Include="prebuild.bat" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
+    <TypeScriptCompile Include="src\app\pages\wizard\home.page.ts" />
     <TypeScriptCompile Include="src\app\services\translate.service.ts" />
+    <Content Include="src\app\pages\wizard\home.page.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
