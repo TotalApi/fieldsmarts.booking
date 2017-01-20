@@ -29,25 +29,46 @@
         position: absolute;
         bottom: 0;
         width: 100%;
-        background-color: #FF6400;
-        font-size: 130%;
 
+        .progress {
+            margin: 2em .5em 1em;
+            position: relative;
 
-        .back, .next {
-            min-width: 33%;
-            color: white !important;
-            box-shadow: none;
+            &.ui {
+                .bar {
+                    min-width: 0;
+                    background-color: #FF6400;
+                }
+
+                .label {
+                    text-align: right;
+                    top: -350%;
+                }
+            }
+        }
+
+        .buttons {
+            background-color: #FF6400;
+            font-size: 130%;
             height: 50px;
-        }
 
-        .back {
-            float: left;
-            font-size: 90%;
-        }
 
-        .next {
-            float: right;
-            font-size: 100%;
+            .back, .next {
+                min-width: 33%;
+                color: white !important;
+                box-shadow: none;
+                height: 50px;
+            }
+
+            .back {
+                float: left;
+                font-size: 90%;
+            }
+
+            .next {
+                float: right;
+                font-size: 100%;
+            }
         }
     }
 }

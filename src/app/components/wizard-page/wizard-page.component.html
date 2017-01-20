@@ -11,11 +11,19 @@
     </div>
 
     <pre style="background-color: lightgoldenrodyellow; border: 1px solid black">{{wizard.data | json}}</pre>
+    <pre style="background-color: lightgoldenrodyellow; border: 1px solid black">{{wizard.state | json}}</pre>
     <pre style="background-color: lightgoldenrodyellow; border: 1px solid black">form.valid = {{ussForm.valid}}</pre>
+                      
 
-    <div class="footer">
-        <uss-button #backBtn class="back" type="empty" [hidden]="back.isHidden" (click)="backBtn.execute(execute, this, back)">{{back.caption|translate}}</uss-button>
-        <uss-button #nextBtn class="next" type="empty" [hidden]="next.isHidden" [disabled]="ussForm.invalid" (click)="nextBtn.execute(execute, this, next)">{{next.caption|translate}}</uss-button>
+    <div class="footer" *ngIf="!back.isHidden || !next.isHidden">
+        <div class="ui tiny active progress">
+            <div class="label">{{wizard.state.currentStep}} {{'of' | translate}} {{wizard.state.totalSteps}}</div>
+            <div class="bar" [ngStyle]="{'width': wizard.state.currentStep*100/wizard.state.totalSteps + '%'}"></div>
+        </div> 
+        <div class="buttons">
+            <uss-button #backBtn class="back" type="empty" [hidden]="back.isHidden" (click)="backBtn.execute(execute, this, back)">{{back.caption|translate}}</uss-button>
+            <uss-button #nextBtn class="next" type="empty" [hidden]="next.isHidden" [disabled]="ussForm.invalid" (click)="nextBtn.execute(execute, this, next)">{{next.caption|translate}}</uss-button>
+        </div>
     </div>
 
 </div>
