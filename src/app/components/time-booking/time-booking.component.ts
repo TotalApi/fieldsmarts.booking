@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit } from '@angular/core';
+﻿import { Component, Input, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import * as system from 'src/system';
@@ -10,6 +10,7 @@ import {AvailableTimeSlots} from '../../models/Sales';
 import {SalesSchedule} from '../../models/Sales';
 import {SalesService} from '../../services/sales.service';
 
+export declare type DayTime = 'morning' | 'afternoon' | 'evening';
 
 @Component({
     selector: 'time-booking',
@@ -17,7 +18,7 @@ import {SalesService} from '../../services/sales.service';
     styleUrls: ['./time-booking.component.scss']
 })
 @AppComponent()
-export class TimeBookingComponent implements OnInit {
+export class TimeBookingComponent implements OnInit, OnChanges {
 
     public availableTimeSlotsByDay: Array<SalesSchedule> = [];
     private slotStartDate:Date;
@@ -37,6 +38,8 @@ export class TimeBookingComponent implements OnInit {
 
     public selectedTime: Date;
 
+    //public currentDayTime: DayTime = 'morning';
+
     constructor(
         public sales: SalesService,
         private router: Router,
@@ -45,19 +48,50 @@ export class TimeBookingComponent implements OnInit {
     ) {
     }
     
+    //@Output()
+    //dayTimeChanged: EventEmitter<DayTime> = new EventEmitter<DayTime>();
+
+    @Input() 
+    dayTime: DayTime = 'morning';
+
     ngOnInit() {
         this.populateMonthList('en');
         this.getSalesAvailableSlots(moment().toDate()).then(() => {
-            const times = this.availableTimeSlotsByDay.selectMany(x => x.times);
-            this.minTime = moment(times.minBy(x => x)).year(moment().year()).month(moment().month()).date(moment().date());
-            this.maxTime = moment(times.maxBy(x => x)).year(moment().year()).month(moment().month()).date(moment().date());
-
-            let currentTime = moment(this.minTime);
-            while (currentTime.isSameOrBefore(this.maxTime, "minute")) {
-                this.allTimeSlots.push(currentTime.toDate());
-                currentTime.add(30, "minute");
-            }
+            this.configurateTimeSlots();
         });
+
+        /*this.dayTimeChanged.subscribe((dayTime: DayTime) => {
+            this.currentDayTime = dayTime;
+        });*/
+    }
+
+    public configurateTimeSlots() {
+        this.allTimeSlots = [];
+
+        const times = this.availableTimeSlotsByDay.selectMany(x => x.times);
+        this.minTime = moment(times.minBy(x => x)).year(moment().year()).month(moment().month()).date(moment().date());
+        this.maxTime = moment(times.maxBy(x => x)).year(moment().year()).month(moment().month()).date(moment().date());
+
+        switch (this.dayTime) {
+            case 'morning':
+                this.maxTime = moment(this.maxTime).hours(11).minutes(30);
+            break;
+            case 'afternoon':
+                this.minTime = moment(this.minTime).hours(12).minutes(0);
+                this.maxTime = moment(this.maxTime).hours(17).minutes(30);
+            break;
+            case 'evening':
+                this.minTime = moment(this.minTime).hours(18).minutes(0);
+            break;
+        default:
+        }
+
+
+        let currentTime = moment(this.minTime);
+        while (currentTime.isSameOrBefore(this.maxTime, "minute")) {
+            this.allTimeSlots.push(currentTime.toDate());
+            currentTime.add(30, "minute");
+        }
     }
 
     public isSelected(day: SalesSchedule, time: Date) {
@@ -109,7 +143,7 @@ export class TimeBookingComponent implements OnInit {
             var availableTimeSlotsStrings = response.availableTimeSlots;
             this.availableTimeSlots = new Array<Date>();
             for (var i = 0; i < availableTimeSlotsStrings.length; i++) {
-                var date = new Date(availableTimeSlotsStrings[i].toString());
+                var date = moment(availableTimeSlotsStrings[i].toString()).utc().toDate();
                 this.availableTimeSlots.push(date);
             }
             this.populateAvailableSlotsByDay(this.availableTimeSlots, startDate);
@@ -164,5 +198,12 @@ export class TimeBookingComponent implements OnInit {
         var prevousWeekFirstDay = new Date(currentSlotfirsttDay.getFullYear(), currentSlotfirsttDay.getMonth(), currentSlotfirsttDay.getDate());
         prevousWeekFirstDay.setDate(prevousWeekFirstDay.getDate() - 7);
         this.getSalesAvailableSlots(prevousWeekFirstDay);
+    }
+
+    ngOnChanges(changes: Object): void {
+        const dayTime = changes['dayTime'];
+        if (!!dayTime && this.availableTimeSlotsByDay.length > 0) {
+            this.configurateTimeSlots();
+        }
     }
 }
