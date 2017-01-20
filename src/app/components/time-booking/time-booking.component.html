@@ -9,6 +9,8 @@
                 <sui-select [(ngModel)]="selectedMonth" (ngModelChange)="onSelectedMonthChanged($event)" #select>
                     <sui-select-option *ngFor="let option of monthList" [value]="option"></sui-select-option>
                 </sui-select>
+                
+
             </td>
         </tr>
         <tr>
@@ -21,13 +23,15 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let time of allTimeSlots; let idx = index">
-                <td time-slot read-only="false" is-selected="false" *ngFor="let day of availableTimeSlotsByDay">
-                    <div *ngIf="isTimeAvailable(day, time.date)">
-                        <a class="ui label" [ngClass]="{ 'highlighted': isSelected(day, time.date) }" (click)="bookTime(day, time.date)">{{time.formatted}}</a>
-                    </div>
-                </td>
-            </tr>
-
+        <tr *ngFor="let time of allTimeSlots; let idx = index">
+            <td time-slot read-only="false" is-selected="false" *ngFor="let day of availableTimeSlotsByDay">
+                <div *ngIf="isTimeAvailable(day, time.date)">
+                    <a class="ui label" [ngClass]="{ 'highlighted': isSelected(day, time.date) }" (click)="bookTime(day, time.date)">{{time.formatted}}</a>
+                </div>
+            </td>
+        </tr>
     </table>
+    
+    <button (click)="saveBookTime()">SAVE BOOK</button>
+
 </div>

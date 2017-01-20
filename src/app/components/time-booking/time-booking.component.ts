@@ -9,7 +9,7 @@ import { TranslateService } from 'ng2-translate/ng2-translate';
 import {AvailableTimeSlots} from '../../models/Sales';
 import {SalesSchedule} from '../../models/Sales';
 import {SalesService} from '../../services/sales.service';
-
+import {PostBooking} from '../../models/Sales';
 export declare type DayTime = 'morning' | 'afternoon' | 'evening';
 
 @Component({
@@ -194,5 +194,14 @@ export class TimeBookingComponent implements OnInit, OnChanges {
         if (!!dayTime && this.availableTimeSlotsByDay.length > 0) {
             this.configurateTimeSlots();
         }
+    }
+
+    public saveBookTime() {
+        let b = new PostBooking();
+        b.franchisee = this.franchise;
+        b.salesNumber = this.salesNumber;
+        b.timeSlot = this.selectedTime;
+
+        this.sales.book(b);
     }
 }
