@@ -1,7 +1,10 @@
 <wizard-page 
-    id="wizard-name"
     [title]="wizard.data.callMe ? 'NO PROBLEM!' : '???????????'"
     [description]="wizard.data.callMe ? 'Send us your info & we\'ll be in touch within the next 24-48 hours.' : '?????????????? ????????? ???????? ??????????'"
->
-    <b>Enter your name and second name</b>
+>               
+    <uss-input [label]="'First & Last Name *' | translate"
+               placeholder="Your First & Last Name"
+               fieldName="firstName"
+               required>
+    </uss-input>
 </wizard-page>

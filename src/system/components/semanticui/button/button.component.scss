@@ -1,0 +1,9 @@
+﻿.uss-button {
+    &.uss-system-button {
+        min-width: 84px;
+        margin-left: 0.5em !important;
+    }
+    .uss-button-content {
+        display: inline-block;
+    }
+}

@@ -9,7 +9,7 @@ import { TranslateService } from 'ng2-translate/ng2-translate';
 import {AvailableTimeSlots} from '../../models/Sales';
 import {SalesSchedule} from '../../models/Sales';
 import {SalesService} from '../../services/sales.service';
-import * as moment from 'moment';
+
 
 @Component({
     selector: 'time-booking',

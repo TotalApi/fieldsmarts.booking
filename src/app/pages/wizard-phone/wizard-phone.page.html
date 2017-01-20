@@ -1,7 +1,11 @@
 <wizard-page 
-    id="wizard-phone"
     title="NO COLD CALLS"
     description="Promise, we respect your privacy."
->
-    <div>Phone number</div>
+>                              
+    <uss-input [label]="'Phone Number *' | translate"
+               placeholder="Your Phone Number"
+               fieldName="phoneNumber"
+               required>
+    </uss-input>
+
 </wizard-page>

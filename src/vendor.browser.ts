@@ -22,6 +22,7 @@ import 'ng2-toastr';
 import 'linq';
 import './assets/scripts/linq.array';
 
+window['moment'] = require('moment');
 
 /*
     3rd party styles

@@ -1,4 +1,5 @@
 import * as ng from '@angular/core';
+import * as ngForms from '@angular/forms';
 import * as rx from 'rxjs';
 import { AppRoute } from 'src/app/app.routes';
 import {AppComponent} from 'src/system/decorators/app-component.decorator';
@@ -23,12 +24,14 @@ export class WizardPageComponent implements ng.OnInit {
     @ng.Input('back') back: WizardCommand | string | boolean | any;
     @ng.Input('next') next: WizardCommand | string | any;
 
+    @ng.ViewChild('ussForm') ussForm: ngForms.NgForm;
+
     constructor(private wizard: AppWizardService) {
         
     }
 
     ngOnInit(): void {
-        this.id = this.id || '';
+        this.id = this.id || this.wizard.current;
         this.class = this.class || '';
 
         if (typeof this.back === 'boolean') {

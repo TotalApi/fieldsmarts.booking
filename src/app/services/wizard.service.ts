@@ -15,7 +15,15 @@ export class AppWizardService {
         email: '',
         postalCode: '',
         address: '',
+        wantSpam: false,
         callMe: false
+    }
+
+    public get current(): string {
+        let res = this.router.url;
+        if (res && res.startsWith('/'))
+            res = res.substr(1);
+        return res;
     }
 
     constructor(public router: Router) {
@@ -37,7 +45,8 @@ export class AppWizardService {
         switch (current) {
             case 'home': return 'wizard-name';
             case 'wizard-name': return 'wizard-phone';
-            case 'wizard-phone': return 'wizard-calendar';
+            case 'wizard-phone': return 'wizard-email';
+            case 'wizard-email': return 'wizard-calendar';
             default: return current;
         }
     }
@@ -46,7 +55,8 @@ export class AppWizardService {
         switch (current) {
             case 'wizard-name': return 'home';
             case 'wizard-phone': return 'wizard-name';
-            case 'wizard-calendar': return 'wizard-phone';
+            case 'wizard-email': return 'wizard-phone';
+            case 'wizard-calendar': return 'wizard-email';
             default: return current;
         }
     }
