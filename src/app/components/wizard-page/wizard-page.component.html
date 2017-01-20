@@ -1,20 +1,21 @@
 <div class="wizard-page {{class}} {{id}}">
-    <div class="content" *ngIf="title && description">
-        <div>{{title|translate}}</div>
-        <div>{{description|translate}}</div>
+    <div class="header" *ngIf="title && description">
+        <h2>{{title|translate}}</h2>
+        <h3>{{description|translate}}</h3>
     </div>
 
     <div class="content">     
-        <form #ussForm="ngForm" [ussDataSource]="wizard.data" novalidate>
+        <form #ussForm="ngForm" [ussDataSource]="wizard.data" class="ui form" novalidate>
             <ng-content></ng-content>
         </form>
     </div>
 
     <pre style="background-color: lightgoldenrodyellow; border: 1px solid black">{{wizard.data | json}}</pre>
+    <pre style="background-color: lightgoldenrodyellow; border: 1px solid black">form.valid = {{ussForm.valid}}</pre>
 
     <div class="footer">
-        <button [hidden]="back.isHidden" (click)="execute(back)">{{back.caption|translate}}</button>
-        <button [hidden]="next.isHidden" (click)="execute(next)">{{next.caption|translate}}</button>
+        <uss-button #backBtn class="back" type="empty" [hidden]="back.isHidden" (click)="backBtn.execute(execute, this, back)">{{back.caption|translate}}</uss-button>
+        <uss-button #nextBtn class="next" type="empty" [hidden]="next.isHidden" [disabled]="ussForm.invalid" (click)="nextBtn.execute(execute, this, next)">{{next.caption|translate}}</uss-button>
     </div>
 
 </div>

@@ -1,4 +1,53 @@
 .wizard-page {
     height: 100%;
-    padding: 1em;
+    padding: 0;
+    position: relative;
+
+    .header {
+        background-color: #D1CED6;
+        color: #003966;
+        margin-bottom: 2em;
+
+        h1, h2, h3 {
+            margin: 0;
+        }
+
+        h2 {
+            padding: 16px 16px 0;
+        }
+
+        h3 {
+            padding: 8px 16px 16px;
+        }
+    }
+
+    .content {
+        padding: 0 16px;
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: #FF6400;
+        font-size: 130%;
+
+
+        .back, .next {
+            min-width: 33%;
+            color: white !important;
+            box-shadow: none;
+            height: 50px;
+        }
+
+        .back {
+            float: left;
+            font-size: 90%;
+        }
+
+        .next {
+            float: right;
+            font-size: 100%;
+        }
+    }
 }

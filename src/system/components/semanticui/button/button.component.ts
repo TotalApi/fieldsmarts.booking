@@ -109,7 +109,7 @@ export class UssButtonComponent implements ng.OnChanges {
     }
 
     @ng.HostListener("click", ['$event'])
-    click($event) {
+    onClick($event) {
         if (this.disabled || this.inputDisabled || this.loading || this.inputLoading) {
             $event.stopPropagation();
             $event.preventDefault();
@@ -126,8 +126,11 @@ export class UssButtonComponent implements ng.OnChanges {
      */
     public execute(fn: () => Promise<any> | Observable<any> | any, context?: Object): Promise<any> | Observable<any> | any {
         if (this.disabled || this.inputDisabled || this.loading || this.inputLoading) return () => { };
-        if (context)
-            fn = fn.bind(context);
+        const args = [];
+        for (let i = 2; i < arguments.length; i++) {
+            args.push(arguments[i]);
+        }
+        fn = fn.bind(context || this, ...args);
         const res = fn();
         if (res instanceof Observable || res instanceof Promise) {
             this.setLoading(true);

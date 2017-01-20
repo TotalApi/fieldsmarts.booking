@@ -4,12 +4,65 @@ import * as ojs from 'observe-js';
 import * as ng from '@angular/core';
 import * as ngForms from '@angular/forms';
 import * as rx from 'rxjs';
+import { CustomValidators } from '../common/CustomValidators';
 import { Json } from '../../utils/Json';
 import { isEmpty, isJsObject, debounce, isArray } from '../../utils/utils';
 import {Reflection} from '../../utils/Reflection';
 import {UssFormGroup} from './UssFormGroup';
 import {debug} from '../../services/messages.service';
 import {Inject} from '../../decorators/inject.decorator';
+
+export interface EnumerableItemMetadata {
+    Name: string;
+    Description: string;
+    Value: number;
+}
+
+/*
+export interface ObjectRefMetadata {
+    Name: string;
+    KeyPropertyName: string;
+    ObjectPropertyName: string;
+}
+*/
+
+export interface PropertyMetadata {
+    Name: string;
+    TypeName: string;
+    MaxLength?: number;
+    MinValue?: number;
+    MaxValue?: number;
+    Required?: boolean;
+    EnumerableMetadata: EnumerableItemMetadata[];
+//    ObjectRefMetadata: ObjectRefMetadata;
+/*
+    Description: string;
+    Format: string;
+    ColumnName: string;
+    Note: string;
+    Position: number;
+    Hidden?: boolean;
+    DefaultInvisible?: boolean;
+*/
+}
+
+export interface EntityMetadata {
+    RepresentExpression: string;
+    KeyAttrs: string[];
+    Properties: PropertyMetadata[];
+/*
+    TableName: string;
+    Url: string;
+    Name: string;
+    Description: string;
+    Group: string;
+    Menu: App.EntityMenu;
+    DateProperty: string;
+    NumberProperty: string;
+    Position: number;
+*/
+}
+
 
 /**
  * К компонента, реализующего этот интерфейс будет автоматически вызван метод onValidate для валидации.
@@ -25,7 +78,7 @@ export interface IUssValidateComponent {
  */
 export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implements ng.OnInit, ng.AfterViewInit, ng.OnChanges, IUssValidateComponent {
 
-    public static Inputs = ['value: model', 'required', 'control', 'placeholder', 'disabled', 'ussDataSource', '_fieldName: fieldName', 'class', 'label', 'defaultValue'];
+    public static Inputs = ['value: model', 'required', 'control', 'placeholder', 'metadata', 'disabled', 'ussDataSource', '_fieldName: fieldName', 'class', 'label', 'defaultValue'];
     public static Outputs = ['modelChange'];
 
     constructor(protected viewContainer: ng.ViewContainerRef, protected changeDetector: ng.ChangeDetectorRef) {
@@ -51,9 +104,14 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
     }
 
     @ng.Input('fieldName') _fieldName: string;
-    get fieldName(): string { return this._fieldName || "" }
+    get fieldName(): string { return this._fieldName || (this.propertyMetadata ? this.propertyMetadata.Name : "") }
 
     @ng.Input('defaultValue') defaultValue: any;
+
+    /**
+     * Ссылка на метаинформацию свойства или класса, связанного с данным компонентом.
+     */
+    @ng.Input('metadata') metadata: PropertyMetadata | (() => PropertyMetadata) | EntityMetadata | (() => EntityMetadata);
 
     public clearValue() {
         this.value = null;
@@ -62,11 +120,40 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
         this.emitChanges(null);
     }
 
+    public get propertyMetadata(): PropertyMetadata {
+        let res = undefined;
+        if (typeof this.metadata === "function") {
+            res = (<() => PropertyMetadata>this.metadata)();
+        } else {
+            res = this.metadata;
+        }
+        if (res && 'Properties' in res) {
+            res = (<EntityMetadata>res).Properties.firstOrDefault(pi => pi.Name === this._fieldName);
+        }
+        if (!res && this.ussFormGroup) {
+            const m = this.ussFormGroup.metadata;
+            if (m && m.Properties) {
+                res = m.Properties.firstOrDefault(pi => pi.Name === this._fieldName);
+            }
+        }
+        return res;
+    }
+
     /**
      * Название реального поля, содержащего значение
      */
     public get dataFieldName(): string {
         return this.fieldName;
+    }
+
+    public getEntityMetadata(): EntityMetadata {
+        let res = undefined;
+        if (typeof this.metadata === "function") {
+            res = (<() => EntityMetadata>this.metadata)();
+        } else {
+            res = this.metadata;
+        }
+        return res;
     }
 
     /**
@@ -87,6 +174,10 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
     @ng.Input('required') required: boolean | string;
     public isRequired() {
         let res = this.required === '' || this.required;
+        if (this.propertyMetadata && this.propertyMetadata.Required) {
+            // если кто-то явно не отменил признак required
+            res = this.required !== false && this.required !== 'false';
+        }
         return res;
     }
 
@@ -244,10 +335,8 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
                 this.control['_ussComponents'] = this.control['_ussComponents'] || [];
                 this.control['_ussComponents'].push(this);
             }
-        } else {
-            this.control = this.control || new ngForms.FormControl(this.value/*, CustomValidators.ussDataSourceComponentValidator(this)*/);
-            this.formGroup.controls[this.fieldName] = this.control;
         }
+        this.control = this.control || new ngForms.FormControl(this.value, CustomValidators.ussDataSourceComponentValidator(this));
         if (this.disabled)
             this.control.disable();
         else
@@ -348,7 +437,7 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
         if (ch.disabled) {
             this.initControl();
         }
-        if ((ch.dataSource || ch._fieldName)) {
+        if ((ch.dataSource || ch._fieldName || ch.metadata)) {
             this.initForm();
         }
     }
@@ -412,6 +501,14 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
     public toText(v: TValue): string {
         v = this.toValue(v);
         let res = (v === undefined || v === null) ? '' : v.toString();
+        if (this.propertyMetadata && res !== '') {
+            if (this.propertyMetadata.TypeName === 'integer' || this.propertyMetadata.TypeName === 'float')
+                res = isNaN(<any>v) ? '' : res;
+            else if (this.propertyMetadata.EnumerableMetadata)
+                res = this.propertyMetadata.EnumerableMetadata.where(x => x.Value === <any>v)
+                    .select(x => x.Description || x.Name)
+                    .firstOrDefault() || res;
+        }
         return res;
     }
 
@@ -420,6 +517,20 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
      */
     public toValue(v: any): TValue {
         let res = v;
+        if (this.propertyMetadata && res !== undefined && res !== null) {
+            if (this.propertyMetadata.TypeName === 'integer' || this.propertyMetadata.EnumerableMetadata) {
+                res = parseInt(res);
+                if (isNaN(res)) {
+                    res = null;
+                }
+            }
+            else if (this.propertyMetadata.TypeName === 'float') {
+                res = parseFloat(res);
+                if (isNaN(res)) {
+                    res = null;
+                }
+            }
+        }
         return res;
     }
 
@@ -442,7 +553,6 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
      */
     onValidate(control: ngForms.AbstractControl): { [key: string]: boolean } {
         let res = null;
-/*
         if (control) {
             res = Json.assign(null, CustomValidators.ussPropertyMetadataValidator(this.propertyMetadata)(control));
             if (this.isRequired()) {
@@ -452,7 +562,6 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
                 delete res.required;
             }
         }
-*/
         return res;
     }
 }

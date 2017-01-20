@@ -154,6 +154,7 @@
     <TypeScriptCompile Include="src\system.browser.ts" />
     <TypeScriptCompile Include="src\app.browser.ts" />
     <TypeScriptCompile Include="src\polyfills.browser.ts" />
+    <TypeScriptCompile Include="src\system\components\common\CustomValidators.ts" />
     <TypeScriptCompile Include="src\system\components\common\UssDataSourceComponent.ts" />
     <TypeScriptCompile Include="src\system\components\common\UssFormGroup.ts" />
     <TypeScriptCompile Include="src\system\components\components.module.ts" />

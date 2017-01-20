@@ -3,7 +3,8 @@ import * as ngForms from '@angular/forms';
 import { SystemComponent } from '../../decorators/system-component.decorator';
 import { UssDirectiveBase } from '../../directives/directive.base';
 import { UssDataSourceBaseDirective } from './data-source.base.directive';
-import {UssFormGroup} from '../common/UssFormGroup';
+import { UssFormGroup } from '../common/UssFormGroup';
+import { EntityMetadata, PropertyMetadata } from '../common/UssDataSourceComponent';
 var Enumerable: linqjs.Enumerable = require('linq');
 
 @ng.Directive({
@@ -21,6 +22,10 @@ export class UssDataSourceFormDirective extends UssDirectiveBase<ngForms.NgForm>
      */
     @ng.Input('ussDataSource') dataSource: Object;
 
+    /**
+     * Метаинформация (опционально) для класса, передаваемого в качестве источника данных
+     */
+    @ng.Input('metadata') metadata: EntityMetadata;
 
     public ngForm: ngForms.NgForm;
 
@@ -32,6 +37,11 @@ export class UssDataSourceFormDirective extends UssDirectiveBase<ngForms.NgForm>
 
     ngOnInit() {
         super.ngOnInit();
+        if (this.dataSource && !this.metadata) {
+            this.metadata = <any>{
+                Properties: Enumerable.from(this.dataSource).select(kv => <PropertyMetadata>{ Name: kv.key }).toArray()
+            };
+        }
         this.ngForm = Enumerable.from(this.hostViewContainer.injector['_view']).select(kv => kv.value).firstOrDefault(x => x instanceof ngForms.NgForm);
 
         this.initForm();
@@ -39,7 +49,7 @@ export class UssDataSourceFormDirective extends UssDirectiveBase<ngForms.NgForm>
 
     private initForm() {
         if (this.ngForm) {
-            this.ngForm.form = UssFormGroup.create(this.dataSource);
+            this.ngForm.form = UssFormGroup.create(this.metadata, this.dataSource);
             this.hostElementRef.nativeElement['_ussDataSource'] = this;
         }
     }

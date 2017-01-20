@@ -1,29 +1,37 @@
 ﻿import { FormGroup, FormControl, Validators, Validator, FormBuilder } from '@angular/forms';
+import { CustomValidators } from "./CustomValidators";
+import { EntityMetadata, PropertyMetadata } from './UssDataSourceComponent';
+
 
 export class UssFormGroup extends FormGroup {
+    public metadata?: EntityMetadata;
     public datasource?: any;
 
-    constructor(datasource?: any) {
-        if (datasource) {
-            super(UssFormGroup.createFormControls(datasource));
+    constructor(metadata?: EntityMetadata, datasource?: any) {
+        if (metadata) {
+            super(UssFormGroup.createFormControls(metadata));
+            this.metadata = metadata;
+            if (datasource)
             this.setDatasource(datasource);
         }
     }
 
-    private static createFormControls(datasource: any) {
+    private static createFormControls(metadata: EntityMetadata) {
         const formControls = {};
-        if (datasource) {
-            for (let prop in datasource) {
-                if (datasource.hasOwnProperty(prop)) {
-                    formControls[prop] = new FormControl(undefined/*, CustomValidators.ussFormValidator(prop)*/);
+        if (metadata) {
+            for (let prop of metadata.Properties) {
+                formControls[prop.Name] = new FormControl(undefined, CustomValidators.ussFormValidator(prop));
                 }
             }
-        }
         return formControls;
+        }
+
+    public static create(metadata: EntityMetadata, datasource?: any): UssFormGroup {
+        return new UssFormGroup(metadata, datasource);
     }
 
-    public static create(datasource?: any): UssFormGroup {
-        return new UssFormGroup(datasource);
+    public getPropertyMetadata(name: string) {
+        return this.metadata ? this.metadata.Properties.firstOrDefault(x => x.Name === name) : null;
     }
 
     public setDatasource(datasource: any): UssFormGroup {

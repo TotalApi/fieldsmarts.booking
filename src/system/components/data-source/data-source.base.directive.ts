@@ -5,6 +5,7 @@ import { UssDirectiveBase } from '../../directives/directive.base';
 import { SystemComponent } from '../../decorators/system-component.decorator';
 import { UssFormGroup } from '../common/UssFormGroup';
 import {isJsObject, debounce } from '../../utils/utils';
+import { EntityMetadata, PropertyMetadata } from '../common/UssDataSourceComponent';
 var Enumerable: linqjs.Enumerable = require('linq');
 
 export class UssSimpleValueComponent {
@@ -39,6 +40,14 @@ export class UssSimpleValueComponent {
 
     public control: ngForms.FormControl;
 
+    public metadata: PropertyMetadata | (() => PropertyMetadata);
+    public get propertyMetadata(): PropertyMetadata {
+        if (typeof this.metadata === "function")
+            return (<() => PropertyMetadata>this.metadata)();
+        else
+            return this.metadata;
+    }
+
     public get value(): any { return this.getValueFn() }
     public set value(v: any) { this.setValueFn(v) }
 
@@ -58,6 +67,12 @@ export class UssSimpleValueComponent {
         let res = v;
         if (this.toValueFn) {
             res = this.toValueFn(v);
+        }
+        else if (this.propertyMetadata && v !== undefined && v !== null) {
+            if (this.propertyMetadata.TypeName === 'integer')
+                res = parseInt(res);
+            else if (this.propertyMetadata.TypeName === 'float')
+                res = parseFloat(res);
         }
         return res;
     }
@@ -105,10 +120,25 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
      */
     @ng.Input('autoSelect') autoSelectOnFocus: boolean = false;
 
+    @ng.Input('metadata') metadata: EntityMetadata | PropertyMetadata | any;
+
     /**
      * Ссылка на форму, внутри которой лежит компонент
      */
     protected form: UssFormGroup;
+
+    protected get propertyMetadata(): PropertyMetadata {
+        let res = null;
+        if (this.metadata) {
+            if (this.metadata.Properties) {
+                res = Enumerable.from<PropertyMetadata>(this.metadata.Properties).firstOrDefault(x => x.Name === this.fieldName);
+            } else {
+                res = this.metadata;
+            }
+        }
+        return res;
+    }
+
 
     /**
      * Это интерфейс для работы с компонентом (установка/получение форматированного значения).
@@ -186,6 +216,7 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
      * Обновление значения компонента в источнике данных.
      */
     protected updateValue(value?: any) {
+        this.fieldName = this.fieldName || (this.propertyMetadata ? this.propertyMetadata.Name : undefined);
         if (this.dataSource && this.fieldName && this.wasInit) {
             this.dataSource[this.fieldName] = value === undefined ? this.value : value;
         }
@@ -209,6 +240,7 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
             hostComponent.toText,
             hostComponent.toValue
         );
+        res.metadata = this.propertyMetadata;
         return res;
     }
 
@@ -232,6 +264,7 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
     }
 
     protected initControl() {
+        this.fieldName = this.fieldName || (this.propertyMetadata ? this.propertyMetadata.Name : undefined);
         const formDirective = Enumerable.from(this.hostViewContainer.injector['_view'])
             .select(kv => kv.value)
             .firstOrDefault(x => x instanceof ngForms.FormGroupDirective);
@@ -247,14 +280,19 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
 
         if (this.form) {
             this.dataSource = this.dataSource || this.form.datasource;
+            this.metadata = this.metadata || this.form.metadata;
             if (this.dataSource && this.ussHostComponent) {
                 let fieldName = this.fieldName;
+                if (!fieldName && this.propertyMetadata) {
+                    fieldName = this.propertyMetadata.Name;
+                }
                 const control = <ngForms.FormControl>this.form.controls[fieldName];
                 if (control) {
                     control['_ussComponents'] = control['_ussComponents'] || [];
                     control['_ussComponents'].push(this.ussHostComponent);
                     this.ussHostComponent.control = control;
                 }
+                this.ussHostComponent.metadata = this.propertyMetadata;
                 setTimeout(() => {
                     this.ussHostComponent.value = this.dataSource[fieldName];
                 });
