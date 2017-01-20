@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
+﻿import { Component, Input, OnInit, Output, EventEmitter, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import * as system from 'src/system';
@@ -29,7 +29,7 @@ export class TimeBookingComponent implements OnInit, OnChanges {
     private minTime: moment.Moment;
     private maxTime: moment.Moment;
 
-    public allTimeSlots: Array<Date> = [];
+    public allTimeSlots: Array<any> = [];
 
     private franchise: string = 'corporate';
     private salesNumber: string = '17011868331'; 
@@ -89,7 +89,7 @@ export class TimeBookingComponent implements OnInit, OnChanges {
 
         let currentTime = moment(this.minTime);
         while (currentTime.isSameOrBefore(this.maxTime, "minute")) {
-            this.allTimeSlots.push(currentTime.toDate());
+            this.allTimeSlots.push({ date: currentTime.toDate(), formatted: currentTime.format("H:mm A") });
             currentTime.add(30, "minute");
         }
     }
