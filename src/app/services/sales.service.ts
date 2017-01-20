@@ -6,6 +6,9 @@ import {UssApiService} from '../../system/services/api.service';
 import {ApiMethod} from '../../system/decorators/api-method.decorator';
 import {ApiService} from '../../system/decorators/api-service.decorator';
 import {Http} from '@angular/http';
+import {SalesConsultant} from '../models/Sales';
+import {Sales} from '../models/Sales';
+import {PostBooking} from '../models/Sales';
 
 @Injectable()
 @ApiService("api/sales")
@@ -17,4 +20,18 @@ export class SalesService extends UssApiService {
         return this.request<AvailableTimeSlots>({ p1: franchisee, p2: salesNumber, p3: startingDate.toISOString() }).toPromise();
     }
     
+    @ApiMethod({ method: "GET", route: "salesconsultant?postCode={p1}", useBody: false })
+    getSalesConsultant(postalCode: string): Promise<SalesConsultant> {
+            return this.request<SalesConsultant>({ p1: postalCode }).toPromise();
+        }
+
+    @ApiMethod({ method: "POST", useBody: true })
+    save(sales: Sales): Promise<any> {
+        return this.request<Sales>(sales).toPromise();
+    }
+
+    @ApiMethod({ method: "POST", route: "book", useBody: true })
+    book(bookingModel: PostBooking): Promise<any> {
+        return this.request<PostBooking>(bookingModel).toPromise();
+    }
 }
