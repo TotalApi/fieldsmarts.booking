@@ -31,14 +31,9 @@ export class TimeBookingComponent implements OnInit, OnChanges {
 
     public allTimeSlots: Array<any> = [];
 
-    private franchise: string = 'corporate';
-    private salesNumber: string = '17011868331'; 
-
     public hasPrevious: boolean = false;
 
     public selectedTime: Date;
-
-    //public currentDayTime: DayTime = 'morning';
 
     constructor(
         public sales: SalesService,
@@ -47,22 +42,16 @@ export class TimeBookingComponent implements OnInit, OnChanges {
         public translate: TranslateService
     ) {
     }
-    
-    //@Output()
-    //dayTimeChanged: EventEmitter<DayTime> = new EventEmitter<DayTime>();
 
-    @Input() 
-    dayTime: DayTime = 'morning';
+    @Input() dayTime: DayTime = 'morning';
+    @Input() franchise: string;
+    @Input() salesNumber: string;
 
     ngOnInit() {
         this.populateMonthList('en');
         this.getSalesAvailableSlots(moment().toDate()).then(() => {
             this.configurateTimeSlots();
         });
-
-        /*this.dayTimeChanged.subscribe((dayTime: DayTime) => {
-            this.currentDayTime = dayTime;
-        });*/
     }
 
     public configurateTimeSlots() {

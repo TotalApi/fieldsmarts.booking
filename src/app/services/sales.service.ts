@@ -26,12 +26,12 @@ export class SalesService extends UssApiService {
         }
 
     @ApiMethod({ method: "POST", useBody: true })
-    save(sales: Sales): Promise<any> {
+    save(sales: Sales): Promise<Sales> {
         return this.request<Sales>(sales).toPromise();
     }
 
     @ApiMethod({ method: "POST", route: "book", useBody: true })
-    book(bookingModel: PostBooking): Promise<any> {
+    book(bookingModel: PostBooking): Promise<PostBooking> {
         return this.request<PostBooking>(bookingModel).toPromise();
     }
 }
