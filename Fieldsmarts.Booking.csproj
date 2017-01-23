@@ -240,6 +240,7 @@
     <TypeScriptCompile Include="src\typings\legacy\moment.d.ts" />
     <TypeScriptCompile Include="src\typings\legacy\rome.d.ts" />
     <TypeScriptCompile Include="src\typings\reflect.d.ts" />
+    <TypeScriptCompile Include="src\styles.browser.ts" />
     <TypeScriptCompile Include="src\vendor.browser.ts" />
   </ItemGroup>
   <ItemGroup>

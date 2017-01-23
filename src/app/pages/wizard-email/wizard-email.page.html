@@ -1,13 +1,18 @@
 <wizard-page 
     title="JUST IN CASE..."
     description="We'll email you if we can't reach you by phone."
->               
+>    
     <uss-input [label]="'Email *' | translate"
-                placeholder="Your Email"
-                fieldName="email"
-                required>
+               placeholder="Your Email"
+               class="uss row"
+               fieldName="email"
+               required>
     </uss-input>
 
-    <uss-checkbox type="toggle" [label]="'dsgdfgdfg' | translate" fieldName="wantSpam"></uss-checkbox>
+    <uss-checkbox
+        class="uss row"
+        type="toggle" [label]="'YES! Keep me updated on Spray-Net\'s latest contests, blogs, events & other fun stuff!' | translate"
+        fieldName="wantSpam">
+    </uss-checkbox>
 
 </wizard-page>
