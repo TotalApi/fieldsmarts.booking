@@ -64,6 +64,12 @@ export class AppWizardService {
             case 'wizard-location':
                 this.state.currentStep = 4;
                 break;
+            case 'wizard-address':
+                this.state.currentStep = 4;
+                break;
+            case 'wizard-calendar':
+                this.state.currentStep = 5;
+                break;
         }
     }
 
@@ -72,7 +78,9 @@ export class AppWizardService {
             case 'home': return 'wizard-name';
             case 'wizard-name': return 'wizard-phone';
             case 'wizard-phone': return 'wizard-email';
-            case 'wizard-email': return 'wizard-calendar';
+            case 'wizard-email': return 'wizard-location';
+            case 'wizard-location': return 'wizard-address';
+            case 'wizard-address': return 'wizard-calendar';
             default: return current;
         }
     }
@@ -82,7 +90,9 @@ export class AppWizardService {
             case 'wizard-name': return 'home';
             case 'wizard-phone': return 'wizard-name';
             case 'wizard-email': return 'wizard-phone';
-            case 'wizard-calendar': return 'wizard-email';
+            case 'wizard-location': return 'wizard-email';
+            case 'wizard-address': return 'wizard-location';
+            case 'wizard-calendar': return 'wizard-address';
             default: return current;
         }
     }

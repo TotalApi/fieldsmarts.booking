@@ -10,15 +10,17 @@ function root(__path) {
 }
 
 var NODE_ENV = process.env.NODE_ENV || 'development';
-var appStylesPath = 'src\\assets\\styles';
+var appStylesPath = 'src\\assets\\styles'.replace(/\\/g, '\\\\');
+var vendorStylesPath = 'node_modules|bower_components'.replace(/\\/g, '\\\\');
 var appStyles = RegExp(appStylesPath);
-var bundledStyles = RegExp('(node_modules|bower_components|' + appStylesPath + ')');
+var vendorStyles = RegExp('(' + vendorStylesPath + ')');
+var bundledStyles = RegExp('(' + vendorStylesPath + '|' + appStylesPath + ')');
 
 //var BACKEND_ADDRESS = 'http://192.168.3.202:7702';
 var BACKEND_ADDRESS = 'http://178.215.162.3:1234';
 
 var basePlugins = [
-    new ExtractTextPlugin('bundle.css'),
+    new ExtractTextPlugin('styles.css'),
     new webpack.optimize.CommonsChunkPlugin({ name: ['app', 'system', 'vendor', 'polyfills'], minChunks: Infinity }),
     new webpack.DefinePlugin({
         NODE_ENV: JSON.stringify(NODE_ENV),
@@ -66,7 +68,8 @@ var webpackConfig = {
         'polyfills': './src/polyfills.browser.ts',
         'vendor': './src/vendor.browser.ts',
         'system': './src/system.browser.ts',
-        'app': './src/app.browser.ts'
+        'app': './src/app.browser.ts',
+        'styles.css': './src/styles.browser.ts'
     },
 
     output: {
@@ -84,18 +87,18 @@ var webpackConfig = {
 
             { test: /\.json$/, loader: 'json-loader' },
 
-            { test: /\.(eot|gif|png)(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader" },
-            { test: /\.(woff|woff2)/, loader: "url-loader?prefix=font/&limit=5000" },
-            { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
-            { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=image/svg+xml" },
+            { test: /\.(eot|gif|png)(\?v=\d+\.\d+\.\d+)?$/i, loader: "file-loader" },
+            { test: /\.(woff|woff2)/i, loader: "url-loader?prefix=font/&limit=5000" },
+            { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/i, loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
+            { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/i, loader: "url-loader?limit=10000&mimetype=image/svg+xml" },
 
-            { test: /\.css$/, exclude: bundledStyles, loader: 'to-string-loader!css-loader' },
-            { test: /\.less$/, exclude: appStyles, loader: 'to-string-loader!less-loader' },
-            { test: /\.scss$/, exclude: appStyles, loader: 'raw-loader!sass-loader' },
+            { test: /\.css$/i, exclude: bundledStyles, loader: 'to-string-loader!css-loader' },
+            { test: /\.scss$/i, exclude: appStyles, loader: 'raw-loader!sass-loader' },
+            { test: /\.less$/i, exclude: appStyles, loader: 'to-string-loader!less-loader' },
 
-            { test: /\.css$/, include: bundledStyles, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader' }) },
-            { test: /\.less$/, include: appStyles, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: ['css-loader', 'less-loader'] }) },
-            { test: /\.scss$/, include: appStyles, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: ['css-loader', 'sass-loader?outputStyle=expanded&sourceMap&sourceMapContents'] }) }
+            { test: /\.css$/i, include: bundledStyles, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' }) },
+            { test: /\.scss$/i, include: appStyles, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: ['css-loader?sourceMap', 'sass-loader'] }) },
+            { test: /\.less$/i, include: appStyles, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: ['css-loader?sourceMap', 'less-loader'] }) }
         ]
     }
 };
@@ -114,7 +117,7 @@ var defaultConfig = {
     cache: true,
     output: {
         filename: '[name].bundle.js',
-        sourceMapFilename: '[name].bundle.map',
+        sourceMapFilename: '[name].map',
         chunkFilename: '[id].chunk.js'
     },
 

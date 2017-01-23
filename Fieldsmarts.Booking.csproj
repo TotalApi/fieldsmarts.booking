@@ -86,12 +86,13 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="packages.config" />
-    <Content Include="src\app\app.scss" />
+    <None Include="src\app\app.scss" />
     <Content Include="src\app\components\common\_mixins.scss" />
     <Content Include="src\app\components\common\_variables.scss" />
     <Content Include="src\app\components\time-booking\time-booking.component.html" />
     <Content Include="src\app\components\wizard-page\wizard-page.component.html" />
     <Content Include="src\app\pages\wizard-email\wizard-email.page.html" />
+    <Content Include="src\app\pages\wizard-location\wizard-location.page.html" />
     <Content Include="src\app\pages\wizard-phone\wizard-phone.page.html" />
     <Content Include="src\app\pages\wizard-name\wizard-name.page.html" />
     <Content Include="src\app\pages\wizard-home\wizard-home.page.scss" />
@@ -107,6 +108,7 @@
     <TypeScriptCompile Include="src\app\models\Sales.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-calendar\wizard-calendar.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-email\wizard-email.page.ts" />
+    <TypeScriptCompile Include="src\app\pages\wizard-location\wizard-location.page.ts" />
     <TypeScriptCompile Include="src\app\services\sales.service.ts" />
     <None Include="Properties\PublishProfiles\Test - Current.pubxml" />
     <None Include="Properties\PublishProfiles\Test - Production.pubxml" />
@@ -122,6 +124,7 @@
     <Content Include="src\app\pages\wizard-calendar\wizard-calendar.page.scss" />
     <Content Include="src\app\pages\wizard-email\wizard-email.page.scss" />
     <Content Include="src\system\components\semanticui\button\button.component.scss" />
+    <Content Include="src\app\pages\wizard-location\wizard-location.page.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -225,6 +228,7 @@
     <TypeScriptCompile Include="src\typings\legacy\moment.d.ts" />
     <TypeScriptCompile Include="src\typings\legacy\rome.d.ts" />
     <TypeScriptCompile Include="src\typings\reflect.d.ts" />
+    <TypeScriptCompile Include="src\styles.browser.ts" />
     <TypeScriptCompile Include="src\vendor.browser.ts" />
   </ItemGroup>
   <ItemGroup>

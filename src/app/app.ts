@@ -2,7 +2,6 @@ import { Component, ViewContainerRef, ViewChild, OnInit } from '@angular/core';
 import { AppModule } from './app.module';
 import { ToastsManager } from 'ng2-toastr';
 
-
 @Component({
     selector: 'app',
     styleUrls: ['./app.scss'],

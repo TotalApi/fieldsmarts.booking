@@ -423,10 +423,11 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
 
     ngOnInit() {
         this.assignInputElement();
-        this.initForm();
-        setTimeout(() => this.initForm(), 0);
+//        this.initForm();
+//        setTimeout(() => this.initForm(), 0);
     }
     ngAfterViewInit() {
+        this.initForm();
         this.wasInit = true;
         this.value = this.getDataSourceValue();
         this.observeChanges();
