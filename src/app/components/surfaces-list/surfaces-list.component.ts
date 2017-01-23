@@ -17,6 +17,9 @@ import {AppWizardService} from '../../services/wizard.service';
 })
 @AppComponent()
 export class SurfacesListComponent implements OnInit {
+
+    private surfaces = [{ name: 'Brick', isSelected: false }, { name: 'Windows', isSelected: false }, { name: 'Soffits', isSelected: false }, { name: 'Stucco', isSelected: false } ];
+
     constructor(
         public sales: SalesService,
         private router: Router,
@@ -31,6 +34,8 @@ export class SurfacesListComponent implements OnInit {
     }
 
 
-    
+    showOptions(surface) {
+        
+    }
 
 }
