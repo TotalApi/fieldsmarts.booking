@@ -1,25 +1,7 @@
 <wizard-page
-    title="YOUR LOCATION..."
-    description="Let's verify we work on your area">
+    title="SURFACES"
+    description="Select surfaces you'd like to revamp">
     
-    <div *ngIf="isPostCodeInvalid" class="redAlert">
-        Sorry
-        Unfortunatelly we do not serve your area
-    </div>
-    
-    <div *ngIf="assignment && assignment.isOutOfBounds" class="redAlert">
-        Sorry
-        You are a little outside our service area
-    </div>
-
-    <uss-input [label]="'Postal code *' | translate"
-               placeholder="Your Postal Code"
-               fieldName="postalCode"
-               required>
-    </uss-input>
-
-    <button (click)="saveLead()">SAVE LEAD</button>
-    <button (click)="checkPostCode()">Check postcode</button>
-
+    <surfaces-list></surfaces-list>
 
 </wizard-page>
