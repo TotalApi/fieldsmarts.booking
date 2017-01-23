@@ -9,6 +9,7 @@ import { TranslateService } from 'ng2-translate/ng2-translate';
 import {SalesService} from '../../services/sales.service';
 import {Sales} from '../../models/Sales';
 import {AppWizardService} from '../../services/wizard.service';
+import {Surface} from '../../models/Surface';
 
 @Component({
     selector: 'surfaces-list',
@@ -18,7 +19,11 @@ import {AppWizardService} from '../../services/wizard.service';
 @AppComponent()
 export class SurfacesListComponent implements OnInit {
 
-    private surfaces = [{ name: 'Brick', isSelected: false }, { name: 'Windows', isSelected: false }, { name: 'Soffits', isSelected: false }, { name: 'Stucco', isSelected: false } ];
+    private surfaces = [
+        <Surface>{ name: 'Brick' }, 
+        <Surface>{ name: 'Windows' }, 
+        <Surface>{ name: 'Soffits' }, 
+        <Surface>{ name: 'Stucco' } ];
 
     constructor(
         public sales: SalesService,

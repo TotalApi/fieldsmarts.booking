@@ -110,6 +110,7 @@
     <TypeScriptCompile Include="src\app\components\surfaces-list\surfaces-list.component.ts" />
     <TypeScriptCompile Include="src\app\components\time-booking\time-booking.component.ts" />
     <TypeScriptCompile Include="src\app\models\Sales.ts" />
+    <TypeScriptCompile Include="src\app\models\Surface.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-calendar\wizard-calendar.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-surfaces\wizard-surfaces.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-postcode\wizard-postcode.page.ts" />
