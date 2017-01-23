@@ -17,7 +17,11 @@ export class AppWizardCalendarPage {
 
     public selectedDayTime: DayTime = 'morning';
 
-    constructor(public wizard: AppWizardService) { }
+    public model: any;
+
+    constructor(public wizard: AppWizardService) {
+        this.model = wizard.data;
+    }
 
     private setDayTime(dayTime: DayTime) {
         this.selectedDayTime = dayTime;

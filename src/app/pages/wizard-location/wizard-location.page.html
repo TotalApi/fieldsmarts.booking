@@ -1,11 +1,11 @@
 <wizard-page 
-    title="What's your postal code?"
-    description="Let's make sure we serve your area."
->                              
-    <uss-input [label]="'Postal Code *' | translate"
-               placeholder="Your Postal Code"
-               fieldName="postalCode"
-               required>
+    title="YOUR ADDRESS"
+    description="Let's verify we work on your area"
+>               
+    <uss-input #search [label]="'Address *' | translate"
+                placeholder="Your address"
+                fieldName="address"
+                required>
     </uss-input>
-
+    
 </wizard-page>

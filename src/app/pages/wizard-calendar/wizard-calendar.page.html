@@ -1,5 +1,5 @@
 <wizard-page>
-    <time-booking [dayTime]="selectedDayTime" #timeBooking></time-booking>
+    <time-booking [franchise]="model.franchise" [salesNumber]="model.salesNumber" [dayTime]="selectedDayTime" #timeBooking></time-booking>
     <div class="ui buttons">
         <button class="ui button" (click)="setDayTime('morning')" [ngClass]="{ 'active': selectedDayTime === 'morning' }">{{ 'Morning' | translate }}</button>
         <button class="ui button" (click)="setDayTime('afternoon')" [ngClass]="{ 'active': selectedDayTime === 'afternoon' }">{{ 'Afternoon' | translate }}</button>

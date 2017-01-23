@@ -9,7 +9,10 @@ import { TranslateService } from 'ng2-translate/ng2-translate';
 import {AvailableTimeSlots} from '../../models/Sales';
 import {SalesSchedule} from '../../models/Sales';
 import {SalesService} from '../../services/sales.service';
-
+import {PostBooking} from '../../models/Sales';
+import {Sales} from '../../models/Sales';
+import {AppWizardService} from '../../services/wizard.service';
+import {PostCodeAssignment} from '../../models/Sales';
 export declare type DayTime = 'morning' | 'afternoon' | 'evening';
 
 @Component({
@@ -31,38 +34,29 @@ export class TimeBookingComponent implements OnInit, OnChanges {
 
     public allTimeSlots: Array<any> = [];
 
-    private franchise: string = 'corporate';
-    private salesNumber: string = '17011868331'; 
-
     public hasPrevious: boolean = false;
 
     public selectedTime: Date;
-
-    //public currentDayTime: DayTime = 'morning';
 
     constructor(
         public sales: SalesService,
         private router: Router,
         private location: Location,
-        public translate: TranslateService
+        public translate: TranslateService,
+        public wizard: AppWizardService,
+
     ) {
     }
-    
-    //@Output()
-    //dayTimeChanged: EventEmitter<DayTime> = new EventEmitter<DayTime>();
 
-    @Input() 
-    dayTime: DayTime = 'morning';
+    @Input() dayTime: DayTime = 'morning';
+    @Input() franchise: string;
+    @Input() salesNumber: string;
 
     ngOnInit() {
         this.populateMonthList('en');
         this.getSalesAvailableSlots(moment().toDate()).then(() => {
             this.configurateTimeSlots();
         });
-
-        /*this.dayTimeChanged.subscribe((dayTime: DayTime) => {
-            this.currentDayTime = dayTime;
-        });*/
     }
 
     public configurateTimeSlots() {
@@ -113,6 +107,7 @@ export class TimeBookingComponent implements OnInit, OnChanges {
     public bookTime(day: SalesSchedule, time: Date) {
         const t = moment(time);
         this.selectedTime = moment(day.dayOfTheWeek).hours(t.hours()).minutes(t.minutes()).seconds(t.seconds()).toDate();
+        this.wizard.data.bookTime = this.selectedTime;
     }
 
     public isToday(date: Date | moment.Moment | string): boolean {
@@ -206,4 +201,18 @@ export class TimeBookingComponent implements OnInit, OnChanges {
             this.configurateTimeSlots();
         }
     }
+
+    public saveBookTime() {
+        let b = new PostBooking();
+        b.franchisee = this.franchise;
+        b.salesNumber = this.salesNumber;
+        b.timeSlot = this.selectedTime;
+
+        this.sales.book(b).catch(e => {
+            
+        });
+    }
+
+    
+
 }

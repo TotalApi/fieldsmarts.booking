@@ -9,6 +9,8 @@ import { AppService } from "src/system";
 export class AppWizardService {
 
     public data = {
+        franchise: '',
+        salesNumber: '',
         firstName: '',
         lastName: '',
         phoneNumber: '',
@@ -16,7 +18,8 @@ export class AppWizardService {
         postalCode: '',
         address: '',
         wantSpam: false,
-        callMe: false
+        callMe: false,
+        bookTime: undefined
     }
 
     public state = {
@@ -64,11 +67,11 @@ export class AppWizardService {
             case 'wizard-location':
                 this.state.currentStep = 4;
                 break;
-            case 'wizard-address':
-                this.state.currentStep = 4;
+            case 'wizard-postcode':
+                this.state.currentStep = 5;
                 break;
             case 'wizard-calendar':
-                this.state.currentStep = 5;
+                this.state.currentStep = 6;
                 break;
         }
     }
@@ -79,8 +82,9 @@ export class AppWizardService {
             case 'wizard-name': return 'wizard-phone';
             case 'wizard-phone': return 'wizard-email';
             case 'wizard-email': return 'wizard-location';
-            case 'wizard-location': return 'wizard-address';
-            case 'wizard-address': return 'wizard-calendar';
+            case 'wizard-location': return 'wizard-postcode';
+            case 'wizard-postcode': return 'wizard-calendar';
+
             default: return current;
         }
     }
@@ -91,8 +95,9 @@ export class AppWizardService {
             case 'wizard-phone': return 'wizard-name';
             case 'wizard-email': return 'wizard-phone';
             case 'wizard-location': return 'wizard-email';
-            case 'wizard-address': return 'wizard-location';
-            case 'wizard-calendar': return 'wizard-address';
+            case 'wizard-postcode': return 'wizard-location';
+            case 'wizard-calendar': return 'wizard-postcode';
+
             default: return current;
         }
     }
