@@ -131,3 +131,16 @@ export class PostBooking {
         public notes: string;
         public timeSlot: Date;
     }
+
+export class PostCodeAssignment {
+        constructor() {
+        }
+
+        public postCode: string;
+        public region: string;
+        public salesConsultant: string;
+        public order: number;
+        public createdBy: string;
+        public isCommercial: boolean;
+        public isOutOfBounds: boolean;
+    }

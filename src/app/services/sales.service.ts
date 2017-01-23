@@ -9,6 +9,7 @@ import {Http} from '@angular/http';
 import {SalesConsultant} from '../models/Sales';
 import {Sales} from '../models/Sales';
 import {PostBooking} from '../models/Sales';
+import {PostCodeAssignment} from '../models/Sales';
 
 @Injectable()
 @ApiService("api/sales")
@@ -33,5 +34,10 @@ export class SalesService extends UssApiService {
     @ApiMethod({ method: "POST", route: "book", useBody: true })
     book(bookingModel: PostBooking): Promise<PostBooking> {
         return this.request<PostBooking>(bookingModel).toPromise();
+    }
+
+    @ApiMethod({ method: "GET", route: "postcodeassignment/{p1}/{p2}", useBody: true })
+    getPostCodeAssignmentForSale(postcode: string, isCommercial: boolean): Promise<PostCodeAssignment> {
+        return this.request<PostCodeAssignment>({ p1: postcode, p2: isCommercial }).toPromise();
     }
 }

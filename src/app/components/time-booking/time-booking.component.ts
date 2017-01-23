@@ -10,6 +10,9 @@ import {AvailableTimeSlots} from '../../models/Sales';
 import {SalesSchedule} from '../../models/Sales';
 import {SalesService} from '../../services/sales.service';
 import {PostBooking} from '../../models/Sales';
+import {Sales} from '../../models/Sales';
+import {AppWizardService} from '../../services/wizard.service';
+import {PostCodeAssignment} from '../../models/Sales';
 export declare type DayTime = 'morning' | 'afternoon' | 'evening';
 
 @Component({
@@ -39,7 +42,9 @@ export class TimeBookingComponent implements OnInit, OnChanges {
         public sales: SalesService,
         private router: Router,
         private location: Location,
-        public translate: TranslateService
+        public translate: TranslateService,
+        public wizard: AppWizardService,
+
     ) {
     }
 
@@ -202,6 +207,11 @@ export class TimeBookingComponent implements OnInit, OnChanges {
         b.salesNumber = this.salesNumber;
         b.timeSlot = this.selectedTime;
 
-        this.sales.book(b);
+        this.sales.book(b).catch(e => {
+            
+        });
     }
+
+    
+
 }
