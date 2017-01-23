@@ -1,6 +1,11 @@
 import * as ng from '@angular/core';
 import { AppRoute } from 'src/app/app.routes';
 import {AppWizardService} from "../../services/wizard.service";
+import {GeocodeService} from '../../services/geocode.service';
+import { AgmCoreModule, MapsAPILoader } from 'angular2-google-maps/core';
+import {UssInputComponent} from '../../../system/components/semanticui/input/inputs.component';
+
+declare var google: any;
 
 @ng.Component({
     styleUrls: ['./wizard-location.page.scss'],
@@ -8,8 +13,35 @@ import {AppWizardService} from "../../services/wizard.service";
     encapsulation: ng.ViewEncapsulation.None
 })
 @AppRoute({ menuPath: 'wizard-location' })
-export class AppWizardLocationPage {
+export class AppWizardLocationPage implements ng.OnInit {
 
-    constructor(public wizard: AppWizardService) { }
+    @ng.ViewChild("search")
+    public searchElement: UssInputComponent;
+
+    constructor(public wizard: AppWizardService, public geocode: GeocodeService, private mapsApiLoader: MapsAPILoader,
+    private ngZone: ng.NgZone) { }
+
+    /*private checkAddress() {
+        this.geocode.getSuggestedAddess(this.wizard.data.address).then((addr) => {
+
+        }).catch(e => {
+            
+        });
+    }*/
+
+    ngOnInit(): void {
+      this.mapsApiLoader.load().then(() => {
+          let autocomplete = new google.maps.places.Autocomplete(this.searchElement["inputElement"]);
+          autocomplete.addListener("place_changed", () => {
+            this.ngZone.run(() => {
+              const place = autocomplete.getPlace();
+                this.wizard.data.address = place["formatted_address"];
+
+                let postCode = place["address_components"].firstOrDefault(x => x["types"].contains("postal_code"));
+                postCode && (this.wizard.data.postalCode = postCode["long_name"]);
+            });
+          });
+        });
+    }
 
 }

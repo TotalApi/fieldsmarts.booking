@@ -32,6 +32,7 @@ export class AppWizardPostCodePage {
 
         this.sales.save(sale).then((sale: Sales) => {
             this.wizard.data.salesNumber = sale.salesNumber;
+            this.wizard.data.franchise = sale.franchisee;
         }).catch(e => {
 
         });

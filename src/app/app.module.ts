@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Http, HttpModule } from '@angular/http';
 import { AppTranslateService, AppTranslateLoader, AppMissingTranslationHandler } from './services/translate.service';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 /*
     3rd party
@@ -42,7 +43,11 @@ import { AppRoutes } from "src/app/app.routes";
 //        primeng.ButtonModule, primeng.DataTableModule, primeng.InputTextModule, primeng.ProgressBarModule, primeng.FileUploadModule,
         ng2Translate.TranslateModule.forRoot(),
         system.UssSystemModule,
-        system.UssComponentsModule
+        system.UssComponentsModule,
+        AgmCoreModule.forRoot({
+          libraries: ["places"],
+          apiKey: 'AIzaSyASScrTpFyyeEruSLIaOyg_GLmPwXoHLgA'
+        })
     ],
     providers: [
         system.appServices,

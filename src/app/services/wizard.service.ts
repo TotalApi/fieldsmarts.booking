@@ -9,8 +9,8 @@ import { AppService } from "src/system";
 export class AppWizardService {
 
     public data = {
-        franchise: 'corporate',
-        salesNumber: '17011868331',
+        franchise: '',
+        salesNumber: '',
         firstName: '',
         lastName: '',
         phoneNumber: '',
