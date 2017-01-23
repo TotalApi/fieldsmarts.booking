@@ -1,13 +1,14 @@
 ﻿import * as utils from "../utils/utils";
+import {isDevMode}  from '@angular/core';
 import {Json} from "../utils/Json";
 import {Injectable} from '@angular/core';
 import {Http, Headers, ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import { ErrorObservable } from 'rxjs/Observable/ErrorObservable';
-import { UssAuthService as Auth } from "./auth.service";
+import {ErrorObservable} from 'rxjs/Observable/ErrorObservable';
+import {UssAuthService as Auth } from "./auth.service";
 import {UssMessagesService, MessageType} from "./messages.service";
-import { Reflection } from '../utils/Reflection';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import {Reflection} from '../utils/Reflection';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
 
 export class UssHttp extends Http {
@@ -20,13 +21,13 @@ export class UssHttp extends Http {
 
     public AuthorizationManager: Auth;
 
-    private translate: TranslateService;
+    private static translate: TranslateService;
 
     public static get Instance(): Http { return Reflection.Injector.get(Http); }
 
     private createAuthorizationHeader(url: string | Request, options?: RequestOptionsArgs): RequestOptionsArgs {
-        if (this.translate === undefined) {
-            try { this.translate = Reflection.Injector.get(TranslateService) } catch (e) { this.translate = null; }
+        if (UssHttp.translate === undefined) {
+            try { UssHttp.translate = Reflection.Injector.get(TranslateService) } catch (e) { UssHttp.translate = null; }
         }
         let uri: string;
         if (url instanceof Request) {
@@ -41,8 +42,8 @@ export class UssHttp extends Http {
             if (this.AuthorizationManager && this.AuthorizationManager.IsLoggedIn) {
                 options.headers.append('Authorization', `Bearer ${this.AuthorizationManager.AccessToken}`);
             }
-            if (this.translate && this.translate.currentLang) {
-                options.headers.append('X-Language', this.translate.currentLang);
+            if (UssHttp.translate && UssHttp.translate.currentLang) {
+                options.headers.append('X-Language', UssHttp.translate.currentLang);
             }
         }
         return options;
@@ -98,6 +99,21 @@ export class UssHttp extends Http {
             error = err.Message.toString();
         else if (err.error_description !== undefined || err.error !== undefined)
             error = (err.error_description || err.error).toString();
+        else if (err.message) {
+            error = err.message;
+            if (Json.IsJsonLike(error)) {
+                err = Json.fromJson(error);
+                if (err.errorCode) {
+                    error = UssHttp.translate.instant(err.errorCode);
+                    if (err.developerMessage && isDevMode) {
+                        error = `${error}<hr/>${err.developerMessage}`;
+                    }
+                } else {
+                    error = this.ExctractError(err) || err;    
+                }
+                
+            }
+        }
         error = (error || '').replace(/(?:\r\n|\r|\n)/g, '<br/>');
 
         if (error === '[object ProgressEvent]')
