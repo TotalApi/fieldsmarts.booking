@@ -107,6 +107,7 @@ export class TimeBookingComponent implements OnInit, OnChanges {
     public bookTime(day: SalesSchedule, time: Date) {
         const t = moment(time);
         this.selectedTime = moment(day.dayOfTheWeek).hours(t.hours()).minutes(t.minutes()).seconds(t.seconds()).toDate();
+        this.wizard.data.bookTime = this.selectedTime;
     }
 
     public isToday(date: Date | moment.Moment | string): boolean {

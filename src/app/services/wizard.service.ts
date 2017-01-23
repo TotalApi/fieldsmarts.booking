@@ -18,7 +18,8 @@ export class AppWizardService {
         postalCode: '',
         address: '',
         wantSpam: false,
-        callMe: false
+        callMe: false,
+        bookTime: undefined
     }
 
     public state = {

@@ -4,6 +4,7 @@ import {AppWizardService} from "../../services/wizard.service";
 import {Sales} from '../../models/Sales';
 import {PostCodeAssignment} from '../../models/Sales';
 import {SalesService} from '../../services/sales.service';
+import {AccountService} from '../../services/account.service';
 
 @ng.Component({
     styleUrls: ['./wizard-postcode.page.scss'],
@@ -17,7 +18,8 @@ export class AppWizardPostCodePage {
     private assignment: PostCodeAssignment;
 
     constructor(public sales: SalesService,
-        public wizard: AppWizardService) { }
+        public wizard: AppWizardService,
+        public account: AccountService) { }
 
     public saveLead() {
         let sale = new Sales();
@@ -41,6 +43,11 @@ export class AppWizardPostCodePage {
     public checkPostCode() {
         this.sales.getPostCodeAssignmentForSale(this.wizard.data.postalCode, false).then((ass: PostCodeAssignment) => {
             this.assignment = ass;
+
+            this.account.getUserInfo(ass.salesConsultant).then(cons => {
+
+            });
+
             this.isPostCodeInvalid = false;
         }).catch(e => {
             this.isPostCodeInvalid = true;

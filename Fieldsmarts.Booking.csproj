@@ -89,8 +89,10 @@
     <Content Include="src\app\app.scss" />
     <Content Include="src\app\components\common\_mixins.scss" />
     <Content Include="src\app\components\common\_variables.scss" />
+    <Content Include="src\app\components\surfaces-list\surfaces-list.component.html" />
     <Content Include="src\app\components\time-booking\time-booking.component.html" />
     <Content Include="src\app\components\wizard-page\wizard-page.component.html" />
+    <Content Include="src\app\pages\wizard-surfaces\wizard-surfaces.page.html" />
     <Content Include="src\app\pages\wizard-postcode\wizard-postcode.page.html" />
     <Content Include="src\app\pages\wizard-location\wizard-location.page.html" />
     <Content Include="src\app\pages\wizard-email\wizard-email.page.html" />
@@ -105,13 +107,16 @@
     <Content Include="tsconfig.json" />
     <Content Include="webpack.config.js" />
     <Content Include="prebuild.bat" />
+    <TypeScriptCompile Include="src\app\components\surfaces-list\surfaces-list.component.ts" />
     <TypeScriptCompile Include="src\app\components\time-booking\time-booking.component.ts" />
     <TypeScriptCompile Include="src\app\models\Sales.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-calendar\wizard-calendar.page.ts" />
+    <TypeScriptCompile Include="src\app\pages\wizard-surfaces\wizard-surfaces.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-postcode\wizard-postcode.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-location\wizard-location.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-email\wizard-email.page.ts" />
     <TypeScriptCompile Include="src\app\services\geocode.service.ts" />
+    <TypeScriptCompile Include="src\app\services\account.service.ts" />
     <TypeScriptCompile Include="src\app\services\sales.service.ts" />
     <None Include="Properties\PublishProfiles\Test - Current.pubxml" />
     <None Include="Properties\PublishProfiles\Test - Production.pubxml" />
@@ -129,6 +134,8 @@
     <Content Include="src\system\components\semanticui\button\button.component.scss" />
     <Content Include="src\app\pages\wizard-location\wizard-location.page.scss" />
     <Content Include="src\app\pages\wizard-postcode\wizard-postcode.page.scss" />
+    <Content Include="src\app\pages\wizard-surfaces\wizard-surfaces.page.scss" />
+    <Content Include="src\app\components\surfaces-list\surfaces-list.component.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
