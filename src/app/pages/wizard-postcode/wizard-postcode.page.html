@@ -7,24 +7,20 @@
 >
     <div *ngIf="errorState==='invalid_code'">
         <div class="field uss-input uss-component">
-            <label>{{'Postal code *' | translate}}</label>
+            <label i18n>Postal code *</label>
             <div class="ui input fluid">
                 <div class="error-code">{{wizard.data.postalCode}}</div>
             </div>
         </div>
     </div>
     <div *ngIf="errorState==='outbound_code'">
-        outbound_code
+        <div class="field uss-input uss-component">
+            <label i18n>Your closest franchise partner will be in touch within the next 24-48 hours.</label>
+        </div>
     </div>
     <uss-input [label]="'Postal code *' | translate" [hidden]="errorState"
                placeholder="Your Postal Code"
                fieldName="postalCode"
                required>
     </uss-input>
-
-<!--
-    <button (click)="saveLead()">SAVE LEAD</button>
-    <button (click)="checkPostCode()">Check postcode</button>
-
--->
 </wizard-page>
