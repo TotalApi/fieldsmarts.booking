@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import {Sales} from '../../models/Sales';
 import {SalesService} from '../../services/sales.service';
 import {Surface} from '../../models/Surface';
+import {SurfacesService} from '../../services/surfaces.service';
 
 @ng.Component({
     styleUrls: ['./wizard-surfaces.page.scss'],
@@ -14,19 +15,19 @@ import {Surface} from '../../models/Surface';
 @AppRoute({ menuPath: 'wizard-surfaces' })
 export class AppWizardSurfacesPage {
 
-    private surfaces = [
-        <Surface>{ name: 'Brick' }, 
-        <Surface>{ name: 'Windows' }, 
-        <Surface>{ name: 'Soffits' }, 
-        <Surface>{ name: 'Stucco' } ];
+    private surfaces = [];
 
     constructor(public sales: SalesService,
-        public wizard: AppWizardService, public router: Router) { }
+        public wizard: AppWizardService,
+        public router: Router,
+        public surfacesService: SurfacesService) {
 
-    showOptions(surface) {
-        return this.router.navigate(['surface-options']).then((res) => {
-            return res;
-        });
+        wizard.data.surfaces = wizard.data.surfaces || surfacesService.getSurfaces();
+        this.surfaces = wizard.data.surfaces;
+    }
+
+    showOptions(surface: Surface) {
+        return this.router.navigate(['surface-options', surface.name]);
     }
 
 }

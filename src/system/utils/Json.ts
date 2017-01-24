@@ -113,8 +113,8 @@ export namespace Json {
 
         export function clone<T>(obj: T): T {
             if (!obj) return obj;
-            //return fromJson(toJson(obj));
-            return _.clone(obj);
+            return fromJson(toJson(obj));
+            //return _.clone(obj);
         }
 
         export function assign<T, TSource>(target: T, source: TSource): T & TSource {

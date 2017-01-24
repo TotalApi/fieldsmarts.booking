@@ -121,6 +121,7 @@
     <TypeScriptCompile Include="src\app\pages\wizard-postcode\wizard-postcode.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-location\wizard-location.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-email\wizard-email.page.ts" />
+    <TypeScriptCompile Include="src\app\services\surfaces.service.ts" />
     <TypeScriptCompile Include="src\app\services\geocode.service.ts" />
     <TypeScriptCompile Include="src\app\services\account.service.ts" />
     <TypeScriptCompile Include="src\app\services\sales.service.ts" />

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { AppService } from "src/system";
+import {Surface} from '../models/Surface';
 
 @Injectable()
 @AppService()
@@ -19,7 +20,8 @@ export class AppWizardService {
         address: '',
         wantSpam: false,
         callMe: false,
-        bookTime: undefined
+        bookTime: undefined,
+        surfaces: undefined
     }
 
     public state = {

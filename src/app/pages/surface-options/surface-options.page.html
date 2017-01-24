@@ -1,0 +1,10 @@
+<div>
+    <div *ngFor="let option of surface.options">
+        <uss-checkbox type="toggle" [label]="option.description" [ussDataSource]="option" [fieldName]="'isSelected'">
+        </uss-checkbox>
+        <br/>
+    </div>
+</div>
+
+<button (click)="cancel()">Cancel</button>
+<button (click)="done()">Done</button>
