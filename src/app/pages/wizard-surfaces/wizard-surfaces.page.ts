@@ -34,8 +34,8 @@ export class AppWizardSurfacesPage {
     select(surface: Surface) {
         surface.isSelected = !surface.isSelected;
 
-        const ifAnySelected = (surface.options as SurfaceOption[]).any(x => x.isSelected);
-        if (surface.name === 'not_listed' || !ifAnySelected) {
+        const ifAnySelected = () => (surface.options as SurfaceOption[]).any(x => x.isSelected);
+        if (surface.name === 'not_listed' || !ifAnySelected()) {
             this.router.navigate(['surface-options', surface.name]);
         }
     }
