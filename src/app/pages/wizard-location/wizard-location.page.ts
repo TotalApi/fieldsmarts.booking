@@ -12,11 +12,10 @@ declare var google: any;
     templateUrl: './wizard-location.page.html',
     encapsulation: ng.ViewEncapsulation.None
 })
-@AppRoute({ menuPath: 'wizard-location' })
+@AppRoute({ routerLink: 'wizard-location' })
 export class AppWizardLocationPage implements ng.OnInit {
 
-    @ng.ViewChild("search")
-    public searchElement: UssInputComponent;
+    @ng.ViewChild("search") searchElement: UssInputComponent;
 
     constructor(public wizard: AppWizardService, public geocode: GeocodeService, private mapsApiLoader: MapsAPILoader,
     private ngZone: ng.NgZone) { }
@@ -31,14 +30,18 @@ export class AppWizardLocationPage implements ng.OnInit {
 
     ngOnInit(): void {
       this.mapsApiLoader.load().then(() => {
-          let autocomplete = new google.maps.places.Autocomplete(this.searchElement["inputElement"]);
-          autocomplete.addListener("place_changed", () => {
+          const autocomplete = new google.maps.places.Autocomplete(this.searchElement.inputElement);
+          autocomplete.addListener('place_changed', () => {
             this.ngZone.run(() => {
               const place = autocomplete.getPlace();
-                this.wizard.data.address = place["formatted_address"];
+                this.wizard.data.address = place.formatted_address;
 
-                let postCode = place["address_components"].firstOrDefault(x => x["types"].contains("postal_code"));
-                postCode && (this.wizard.data.postalCode = postCode["long_name"]);
+                const postCode = place.address_components.firstOrDefault(x => x.types.contains('postal_code'));
+                if (postCode) {
+                    this.wizard.data.postalCode = postCode.long_name;
+                } else {
+                    this.wizard.data.postalCode = null;
+                }
             });
           });
         });

@@ -9,7 +9,7 @@ import {SalesService} from '../../services/sales.service';
     templateUrl: './wizard-surfaces.page.html',
     encapsulation: ng.ViewEncapsulation.None
 })
-@AppRoute({ menuPath: 'wizard-surfaces' })
+@AppRoute({ routerLink: 'wizard-surfaces' })
 export class AppWizardSurfacesPage {
 
     constructor(public sales: SalesService,

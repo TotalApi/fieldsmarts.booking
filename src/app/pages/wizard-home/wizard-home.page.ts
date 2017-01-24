@@ -7,7 +7,7 @@ import {AppWizardService} from "../../services/wizard.service";
     templateUrl: './wizard-home.page.html',
     encapsulation: ng.ViewEncapsulation.None
 })
-@AppRoute({ menuPath: 'home' })
+@AppRoute({ routerLink: 'home' })
 export class AppWizardHomePage {
 
     constructor(public wizard: AppWizardService) { }
@@ -31,6 +31,8 @@ export class AppWizardHomePage {
 
 
     isCurrentTimeOff() {
+        return true;
+/*
         const today = moment();
         const res = (today.day() === 0 || today.day() === 6) // check weekend
             || (today.hour() < 8 || today.hour() > 18) // check working hours
@@ -38,6 +40,7 @@ export class AppWizardHomePage {
             || (today.date() === 25 && today.month() === 12) // check XMas
             ;
         return res;
+*/
     }
 
 }

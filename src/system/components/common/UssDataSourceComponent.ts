@@ -201,7 +201,7 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
     protected wasInit: boolean;
 
 
-    protected inputElement: TElement;
+    public inputElement: TElement;
 
     // ReSharper disable once InconsistentNaming
     protected _value: TValue;

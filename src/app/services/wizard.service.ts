@@ -44,11 +44,11 @@ export class AppWizardService {
         });
     }
 
-    public next(current: string): Promise<boolean> {
+    public next(current?: string): Promise<boolean> {
         return this.go(this.getNext(current));
     }
 
-    public back(current: string): Promise<boolean> {
+    public back(current?: string): Promise<boolean> {
         return this.go(this.getBack(current));
     }
 
@@ -68,7 +68,7 @@ export class AppWizardService {
                 this.state.currentStep = 4;
                 break;
             case 'wizard-postcode':
-                this.state.currentStep = 5;
+                this.state.currentStep = this.data.callMe ? 4 : 5;
                 break;
             case 'wizard-calendar':
                 this.state.currentStep = 6;
@@ -76,12 +76,13 @@ export class AppWizardService {
         }
     }
 
-    public getNext(current: string): string {
+    public getNext(current?: string): string {
+        current = current || this.current;
         switch (current) {
             case 'home': return 'wizard-name';
             case 'wizard-name': return 'wizard-phone';
             case 'wizard-phone': return 'wizard-email';
-            case 'wizard-email': return 'wizard-location';
+            case 'wizard-email': return this.data.callMe ? 'wizard-postcode' : 'wizard-location';
             case 'wizard-location': return 'wizard-postcode';
             case 'wizard-postcode': return 'wizard-calendar';
 
@@ -89,13 +90,14 @@ export class AppWizardService {
         }
     }
 
-    public getBack(current: string): string {
+    public getBack(current?: string): string {
+        current = current || this.current;
         switch (current) {
             case 'wizard-name': return 'home';
             case 'wizard-phone': return 'wizard-name';
             case 'wizard-email': return 'wizard-phone';
             case 'wizard-location': return 'wizard-email';
-            case 'wizard-postcode': return 'wizard-location';
+            case 'wizard-postcode': return this.data.callMe ? 'wizard-email' : 'wizard-location';
             case 'wizard-calendar': return 'wizard-postcode';
 
             default: return current;

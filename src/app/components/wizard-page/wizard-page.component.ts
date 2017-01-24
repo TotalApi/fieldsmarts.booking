@@ -6,7 +6,7 @@ import {AppComponent} from 'src/system/decorators/app-component.decorator';
 import {Json} from '../../../system/utils/Json';
 import { AppWizardService } from '../../services/wizard.service';
 
-declare type WizardCommand = { caption?: string; route?: string; action?: (command: WizardCommand) => void; isHidden?: boolean };
+export declare type WizardCommand = { caption?: string; route?: string; action?: (command: WizardCommand) => rx.Observable<boolean> | Promise<boolean> | boolean | void; isHidden?: boolean };
 
 @ng.Component({
     selector: 'wizard-page',
@@ -23,8 +23,11 @@ export class WizardPageComponent implements ng.OnInit {
     @ng.Input('description') description: string;
     @ng.Input('back') back: WizardCommand | string | boolean | any;
     @ng.Input('next') next: WizardCommand | string | any;
+    @ng.Input('error') error: string;
 
     @ng.ViewChild('ussForm') ussForm: ngForms.NgForm;
+
+    public loading: boolean = false;
 
     constructor(private wizard: AppWizardService) {
         
@@ -54,18 +57,34 @@ export class WizardPageComponent implements ng.OnInit {
         if (!this.back.isHidden && !this.back.caption) {
             this.back.caption = 'BACK';
         }
-        if (!this.next.isHidden && !this.next.caption) {
+        if (!this.next.isHidden && !this.next.caption)
+        {
             this.next.caption = 'NEXT ->';
         }
         this.wizard.updateState();
     }
 
-    public execute(command: WizardCommand) {
+    public async execute(command: WizardCommand) {
+        this.loading = true;
+        await this.execute$(command);
+        this.loading = false;
+    }
+
+    private async execute$(command: WizardCommand, ignoreRoute?: boolean): Promise<void> {
         if (command) {
-            if (command.action) {
-                command.action(command);    
+            if (command.action && !ignoreRoute) {
+                let res = command.action(command);
+                if (res instanceof rx.Observable || res instanceof Promise) {
+                    if (res instanceof rx.Observable) {
+                        res = res.toPromise();
+                    }
+                    res = await res;
+                }
+                if (res) {
+                    await this.execute$(command, true);
+                }
             }
-            if (command.route) {
+            else if (command.route) {
                 this.wizard.go(command.route);
             }
             else if (command === this.back) {

@@ -7,7 +7,7 @@ import {AppWizardService} from "../../services/wizard.service";
     templateUrl: './wizard-email.page.html',
     encapsulation: ng.ViewEncapsulation.None
 })
-@AppRoute({ menuPath: 'wizard-email' })
+@AppRoute({ routerLink: 'wizard-email' })
 export class AppWizardEmailPage {
 
     constructor(public wizard: AppWizardService) { }

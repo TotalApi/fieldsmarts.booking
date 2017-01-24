@@ -9,7 +9,7 @@ import {SalesService} from '../../services/sales.service';
     templateUrl: './surface-custom.page.html',
     encapsulation: ng.ViewEncapsulation.None
 })
-@AppRoute({ menuPath: 'surface-custom' })
+@AppRoute({ routerLink: 'surface-custom' })
 export class AppSurfacesCustomPage {
 
     constructor(public sales: SalesService,

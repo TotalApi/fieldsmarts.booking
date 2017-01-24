@@ -7,7 +7,7 @@ import {AppWizardService} from "../../services/wizard.service";
     templateUrl: './wizard-name.page.html',
     encapsulation: ng.ViewEncapsulation.None
 })
-@AppRoute({ menuPath: 'wizard-name' })
+@AppRoute({ routerLink: 'wizard-name' })
 export class AppWizardNamePage {
 
     constructor(public wizard: AppWizardService) { }

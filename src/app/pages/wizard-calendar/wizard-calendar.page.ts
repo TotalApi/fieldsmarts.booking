@@ -9,7 +9,7 @@ import {TimeBookingComponent} from '../../components/time-booking/time-booking.c
     templateUrl: './wizard-calendar.page.html',
     encapsulation: ng.ViewEncapsulation.None
 })
-@AppRoute({ menuPath: 'wizard-calendar' })
+@AppRoute({ routerLink: 'wizard-calendar' })
 export class AppWizardCalendarPage {
 
     @ng.ViewChild("timeBooking")
