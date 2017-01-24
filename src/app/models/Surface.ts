@@ -6,6 +6,7 @@
 
 export class Surface {
     name: string;
-    isSelected: boolean;
-    options: Array<SurfaceOption>;
+    description: string;
+    isSelected?: boolean;
+    options?: Array<SurfaceOption> | string;
 }

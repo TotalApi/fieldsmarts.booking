@@ -11,6 +11,7 @@ import {Sales} from '../models/Sales';
 import {PostBooking} from '../models/Sales';
 import {PostCodeAssignment} from '../models/Sales';
 import {Surface} from '../models/Surface';
+import {SurfaceOption} from '../models/Surface';
 
 @Injectable()
 @ApiService("")
@@ -19,10 +20,11 @@ export class SurfacesService extends UssApiService {
 
     public getSurfaces(): Surface[] {
         return [
-            <Surface>{ name: 'Brick', options: [{ description: 'Rusted' }, { description: 'Wood' }, { description: 'None' }] },
-            <Surface>{ name: 'Windows', options: [{ description: 'Rusted' }, { description: 'Wood' }, { description: 'None' }] },
-            <Surface>{ name: 'Soffits', options: [{ description: 'Rusted' }, { description: 'Wood' }, { description: 'None' }] },
-            <Surface>{ name: 'Stucco', options: [{ description: 'Rusted' }, { description: 'Wood' }, { description: 'None' }] }
+            { name: 'brick', description: 'Brick', options: [{ description: 'Rusted' }, { description: 'Wood' }, { description: 'None' }] as SurfaceOption[] } as Surface, 
+            { name: 'windows', description: 'Windows', options: [{ description: 'Rusted' }, { description: 'Wood' }, { description: 'None' }] as SurfaceOption[] } as Surface, 
+            { name: 'soffits', description: 'Soffits', options: [] as SurfaceOption[] } as Surface, 
+            { name: 'stucco', description: 'Stucco', options: [{ description: 'Rusted' }, { description: 'Wood' }, { description: 'None' }] as SurfaceOption[] } as Surface, 
+            { name: 'not_listed', description: 'My exterior not listed' } as Surface
         ];
     }
     

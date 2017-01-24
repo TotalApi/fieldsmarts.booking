@@ -6,6 +6,7 @@ import {Sales} from '../../models/Sales';
 import {SalesService} from '../../services/sales.service';
 import {Surface} from '../../models/Surface';
 import {SurfacesService} from '../../services/surfaces.service';
+import {SurfaceOption} from '../../models/Surface';
 
 @ng.Component({
     styleUrls: ['./wizard-surfaces.page.scss'],
@@ -28,6 +29,15 @@ export class AppWizardSurfacesPage {
 
     showOptions(surface: Surface) {
         return this.router.navigate(['surface-options', surface.name]);
+    }
+
+    select(surface: Surface) {
+        surface.isSelected = !surface.isSelected;
+
+        const ifAnySelected = (surface.options as SurfaceOption[]).any(x => x.isSelected);
+        if (surface.name === 'not_listed' || !ifAnySelected) {
+            this.router.navigate(['surface-options', surface.name]);
+        }
     }
 
 }
