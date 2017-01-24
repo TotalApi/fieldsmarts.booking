@@ -13,7 +13,7 @@
         "typeRoots": [ "./node_modules/@types" ]
     },
     "exclude": [
-        "dist",
+        "wwwroot",
         "node_modules"
     ],
     "awesomeTypescriptLoaderOptions": {

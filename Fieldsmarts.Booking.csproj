@@ -27,8 +27,8 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
-	<TypeScriptEmitDecoratorMetadata>True</TypeScriptEmitDecoratorMetadata>
-	<TypeScriptExperimentalDecorators>true</TypeScriptExperimentalDecorators>
+    <TypeScriptEmitDecoratorMetadata>True</TypeScriptEmitDecoratorMetadata>
+    <TypeScriptExperimentalDecorators>true</TypeScriptExperimentalDecorators>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -91,7 +91,6 @@
     <Content Include="src\app\app.scss" />
     <Content Include="src\app\components\common\_mixins.scss" />
     <Content Include="src\app\components\common\_variables.scss" />
-    <Content Include="src\app\components\surfaces-list\surfaces-list.component.html" />
     <Content Include="src\app\components\time-booking\time-booking.component.html" />
     <Content Include="src\app\components\wizard-page\wizard-page.component.html" />
     <Content Include="src\app\pages\surface-custom\surface-custom.page.html" />
@@ -109,11 +108,9 @@
     <Content Include="package.json" />
     <Content Include="src\favicon.ico" />
     <Content Include="src\system\components\semanticui\button\button.component.html" />
-    <Content Include="src\app\components\surfaces-list\surfaces-list.component.scss" />
     <None Include="tsconfig.json" />
     <None Include="webpack.config.js" />
     <None Include="prebuild.bat" />
-    <TypeScriptCompile Include="src\app\components\surfaces-list\surfaces-list.component.ts" />
     <TypeScriptCompile Include="src\app\components\time-booking\time-booking.component.ts" />
     <TypeScriptCompile Include="src\app\models\Sales.ts" />
     <TypeScriptCompile Include="src\app\models\Surface.ts" />
@@ -262,7 +259,6 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-	
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
