@@ -1,8 +1,18 @@
-﻿<ul>
-    <li *ngFor="let surface of surfaces">
-        <button (click)="select(surface)">+</button>
-        <span *ngIf="surface.isSelected"> >>> </span>
-        {{surface.description}}
-        <a *ngIf="surface.name !== 'not_listed' && surface.options.length > 0" (click)="showOptions(surface)">Options</a>
-    </li>
-</ul>
+﻿<wizard-page title="SURFACES"
+             description="Select the surface"
+             [next]="{ action: check.bind(this), caption: 'NEXT ->'}">
+
+    <div *ngIf="forgotted">
+        OOPS!
+        You forgot to select description for your exterior surface!
+        <button (click)="closeAlert()">X</button>
+    </div>
+    <ul>
+        <li *ngFor="let surface of surfaces">
+            <button (click)="select(surface)">+</button>
+            <span *ngIf="surface.isSelected"> >>> </span>
+            {{surface.description}}
+            <a *ngIf="surface.name !== 'not_listed' && surface.options.length > 0" (click)="showOptions(surface)">Options</a>
+        </li>
+    </ul>
+</wizard-page>

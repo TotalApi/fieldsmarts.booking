@@ -37,6 +37,8 @@ export class AppSurfacesOptionsPage implements ng.OnInit, ng.OnDestroy {
     private done() {
         if (this.surface.name !== 'not_listed') {
             this.surface.isSelected = this.ifAnyChecked();
+        } else {
+            this.surface.isSelected = this.surface.options && (this.surface.options as string).length > 0;
         }
         return this.router.navigate(['wizard-surfaces']);
     }
