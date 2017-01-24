@@ -8,3 +8,5 @@ export * from './wizard-location/wizard-location.page';
 export * from './wizard-postcode/wizard-postcode.page';
 export * from './wizard-surfaces/wizard-surfaces.page';
 
+export * from './surface-options/surface-options.page';
+export * from './surface-custom/surface-custom.page';
