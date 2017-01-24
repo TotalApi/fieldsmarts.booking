@@ -1,6 +1,7 @@
 import * as ng from '@angular/core';
 import { AppRoute } from 'src/app/app.routes';
 import {AppWizardService} from "../../services/wizard.service";
+import { Router } from '@angular/router';
 import {Sales} from '../../models/Sales';
 import {SalesService} from '../../services/sales.service';
 import {Surface} from '../../models/Surface';
@@ -20,10 +21,12 @@ export class AppWizardSurfacesPage {
         <Surface>{ name: 'Stucco' } ];
 
     constructor(public sales: SalesService,
-        public wizard: AppWizardService) { }
+        public wizard: AppWizardService, public router: Router) { }
 
     showOptions(surface) {
-        
+        return this.router.navigate(['surface-options']).then((res) => {
+            return res;
+        });
     }
 
 }
