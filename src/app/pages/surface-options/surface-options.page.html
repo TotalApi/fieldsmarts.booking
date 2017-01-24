@@ -1,0 +1,21 @@
+<div *ngIf="surface.name !== 'not_listed'">
+    <div *ngFor="let option of surface.options">
+        <uss-checkbox type="toggle" [label]="option.description" [ussDataSource]="option" [fieldName]="'isSelected'">
+        </uss-checkbox>
+        <br/>
+    </div>
+</div>
+
+<div *ngIf="surface.name === 'not_listed'">
+    <div>
+        Description
+    </div>
+
+    <div>
+        <uss-textarea [placeholder]="'Add more details about your exterior'" [ussDataSource]="surface" [fieldName]="'options'"></uss-textarea>
+    </div>
+
+</div>
+
+<button (click)="cancel()">Cancel</button>
+<button (click)="done()">Done</button>
