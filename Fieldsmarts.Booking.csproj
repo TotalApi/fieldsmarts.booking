@@ -176,7 +176,6 @@
     <TypeScriptCompile Include="src\app\pages\index.ts" />
     <TypeScriptCompile Include="src\app\services\auth-guard.service.ts" />
     <TypeScriptCompile Include="src\app\services\index.ts" />
-    <TypeScriptCompile Include="src\system.browser.ts" />
     <TypeScriptCompile Include="src\app.browser.ts" />
     <TypeScriptCompile Include="src\polyfills.browser.ts" />
     <TypeScriptCompile Include="src\system\components\common\CustomValidators.ts" />

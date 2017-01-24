@@ -21,7 +21,7 @@ var BACKEND_ADDRESS = 'http://178.215.162.3:1234';
 
 var basePlugins = [
     new ExtractTextPlugin('styles.css'),
-    new webpack.optimize.CommonsChunkPlugin({ name: ['system', 'app', 'vendor', 'polyfills'], minChunks: Infinity }),
+    new webpack.optimize.CommonsChunkPlugin({ name: ['app', 'vendor', 'polyfills'], minChunks: Infinity }),
     new webpack.DefinePlugin({
         NODE_ENV: JSON.stringify(NODE_ENV),
         BACKEND_ADDRESS: JSON.stringify(BACKEND_ADDRESS)
@@ -67,7 +67,6 @@ var webpackConfig = {
     entry: {
         'polyfills': './src/polyfills.browser.ts',
         'vendor': './src/vendor.browser.ts',
-        'system': './src/system.browser.ts',
         'app': './src/app.browser.ts',
         'styles.css': './src/styles.browser.ts'
     },
@@ -122,7 +121,7 @@ var defaultConfig = {
     },
 
     resolve: {
-        modules: ['node_modules', 'src', 'src/components'],
+        modules: ['node_modules', 'src'],
         extensions: ['.ts', '.js']
     },
 
