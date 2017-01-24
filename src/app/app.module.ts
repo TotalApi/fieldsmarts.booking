@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Http, HttpModule } from '@angular/http';
-import { AppTranslateService, AppTranslateLoader, AppMissingTranslationHandler } from './services/translate.service';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 
 /*
@@ -27,6 +26,8 @@ import './services';
 import { AppComponent } from './app';
 
 import { AppRoutes } from "src/app/app.routes";
+
+import { AppTranslateService, AppTranslateLoader, AppMissingTranslationHandler } from './services/translate.service';
 
 
 @NgModule({

@@ -105,10 +105,11 @@
     <Content Include="src\assets\styles\_colors.scss" />
     <Content Include="src\assets\styles\_semantic.scss" />
     <Content Include="package.json" />
+    <Content Include="src\favicon.ico" />
     <Content Include="src\system\components\semanticui\button\button.component.html" />
-    <Content Include="tsconfig.json" />
-    <Content Include="webpack.config.js" />
-    <Content Include="prebuild.bat" />
+    <None Include="tsconfig.json" />
+    <None Include="webpack.config.js" />
+    <None Include="prebuild.bat" />
     <TypeScriptCompile Include="src\app\components\surfaces-list\surfaces-list.component.ts" />
     <TypeScriptCompile Include="src\app\components\time-booking\time-booking.component.ts" />
     <TypeScriptCompile Include="src\app\models\Sales.ts" />
@@ -123,6 +124,7 @@
     <TypeScriptCompile Include="src\app\services\geocode.service.ts" />
     <TypeScriptCompile Include="src\app\services\account.service.ts" />
     <TypeScriptCompile Include="src\app\services\sales.service.ts" />
+    <None Include="postbuild.bat" />
     <None Include="Properties\PublishProfiles\Test - Current.pubxml" />
     <None Include="Properties\PublishProfiles\Test - Production.pubxml" />
     <TypeScriptCompile Include="src\app\components\wizard-page\wizard-page.component.ts" />

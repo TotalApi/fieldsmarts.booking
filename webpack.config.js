@@ -21,7 +21,7 @@ var BACKEND_ADDRESS = 'http://178.215.162.3:1234';
 
 var basePlugins = [
     new ExtractTextPlugin('styles.css'),
-    new webpack.optimize.CommonsChunkPlugin({ name: ['app', 'system', 'vendor', 'polyfills'], minChunks: Infinity }),
+    new webpack.optimize.CommonsChunkPlugin({ name: ['system', 'app', 'vendor', 'polyfills'], minChunks: Infinity }),
     new webpack.DefinePlugin({
         NODE_ENV: JSON.stringify(NODE_ENV),
         BACKEND_ADDRESS: JSON.stringify(BACKEND_ADDRESS)
@@ -93,12 +93,12 @@ var webpackConfig = {
             { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/i, loader: "url-loader?limit=10000&mimetype=image/svg+xml" },
 
             { test: /\.css$/i, exclude: bundledStyles, loader: 'to-string-loader!css-loader' },
-            { test: /\.scss$/i, exclude: appStyles, loader: 'raw-loader!sass-loader' },
             { test: /\.less$/i, exclude: appStyles, loader: 'to-string-loader!less-loader' },
+            { test: /\.scss$/i, exclude: appStyles, loader: 'raw-loader!sass-loader' },
 
             { test: /\.css$/i, include: bundledStyles, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' }) },
-            { test: /\.scss$/i, include: appStyles, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: ['css-loader?sourceMap', 'sass-loader'] }) },
-            { test: /\.less$/i, include: appStyles, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: ['css-loader?sourceMap', 'less-loader'] }) }
+            { test: /\.less$/i, include: appStyles, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: ['css-loader?sourceMap', 'less-loader'] }) },
+            { test: /\.scss$/i, include: appStyles, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: ['css-loader?sourceMap', 'sass-loader'] }) }
         ]
     }
 };
@@ -146,4 +146,3 @@ var webpackMerge = require('webpack-merge');
 module.exports = webpackMerge(defaultConfig, webpackConfig, (process.env.NODE_ENV === 'production') ? prodWebpackConfig : devWebpackConfig);
 
 console.log(process.env.NODE_ENV);
-console.log(webpackConfig.output);

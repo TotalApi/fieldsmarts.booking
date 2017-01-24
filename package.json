@@ -4,10 +4,12 @@
     "description": "Fieldsmarts Booking",
     "scripts": {
         "postinstall": "if not exist node_modules\\src (mklink /J node_modules\\src src)",
-        "build-prod": "SET NODE_ENV=production&& webpack -p --colors",
         "prebuild-prod": "prebuild",
-        "build-dev": "SET NODE_ENV=development&& webpack --debug --output-pathinfo --colors",
         "prebuild-dev": "prebuild",
+        "postbuild-prod": "postbuild",
+        "postbuild-dev": "postbuild",
+        "build-prod": "SET NODE_ENV=production&& webpack -p --colors",
+        "build-dev": "SET NODE_ENV=development&& webpack --debug --output-pathinfo --colors",
         "watch": "npm run build-dev -- --watch",
         "server": "http-server -a localhost -p 8000 -c-1 ./wwwroot"
     },
