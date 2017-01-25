@@ -15,9 +15,31 @@ declare var google: any;
 @AppRoute({ path: 'wizard-done' })
 export class AppWizardDonePage implements ng.OnInit {
 
+//    url = 'http://aelitsoft.com';
+    url = 'http://spray-net.com';
+
     constructor(public wizard: AppWizardService) { }
 
     ngOnInit(): void {
+        this.fbLikeIframeSrc();
     }
 
+    private fbLikeIframeSrc() {
+        let likeBtn = document.getElementById('fb-like-btn');
+        if (likeBtn) {
+            likeBtn.setAttribute('data-href', this.url);
+            this.initFbSdk();
+        }
+    }
+
+    private initFbSdk() {
+        let d = document;
+        let s = 'script';
+        let id = 'facebook-jssdk';
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = `//connect.facebook.net/${this.wizard.translate.currentLang === 'fr' ? "fr_FR" : "en_US"}/sdk.js#xfbml=1&version=v2.8&appId=773528466036157`;
+        fjs.parentNode.insertBefore(js, fjs);
+    }
 }
