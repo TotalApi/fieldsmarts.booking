@@ -37,7 +37,7 @@ export class AppWizardSurfacesPage {
 
         const ifAnySelected = () => (surface.options as SurfaceOption[]).any(x => x.isSelected);
         if (surface.name === 'not_listed' || !ifAnySelected()) {
-            this.router.navigate(['surface-options', surface.name]);
+            surface.options.length > 0 && this.router.navigate(['surface-options', surface.name]);
         }
     }
 
@@ -47,6 +47,8 @@ export class AppWizardSurfacesPage {
 
     check(): boolean {
         const ifAnySelected = this.surfaces.where(x => x.isSelected).selectMany(x => x.options).any(x => x && (typeof(x) === 'string' ? x.length > 0 : (x as SurfaceOption).isSelected));
-        return this.forgotted = !ifAnySelected;
+        this.forgotted = !ifAnySelected;
+
+        return !this.forgotted;
     }
 }

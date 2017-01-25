@@ -17,4 +17,12 @@ export class AppWizardValidatePage {
         this.selectedSurfaces = wizard.data.surfaces.where(x => x.isSelected).toArray();
     }
 
+    private editBookingTime() {
+        this.wizard.go('wizard-calendar');
+    }
+
+    private editSurfaces() {
+        this.wizard.go('wizard-surfaces');
+    }
+
 }
