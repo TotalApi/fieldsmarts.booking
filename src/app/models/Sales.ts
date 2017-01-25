@@ -144,3 +144,20 @@ export class PostCodeAssignment {
         public isCommercial: boolean;
         public isOutOfBounds: boolean;
     }
+
+export class MarketingInfo {
+        public franchisee: string;
+        public salesNumber: string;
+        public heardAboutUs: string;
+    }
+
+export class LookupItem {
+    id: string;
+    value: string;
+}
+
+export class Lookup {
+    name: string;
+    values: Array<LookupItem>;
+    default: LookupItem;
+}

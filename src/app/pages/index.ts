@@ -11,3 +11,4 @@ export * from './wizard-validate/wizard-validate.page';
 export * from './wizard-done/wizard-done.page';
 
 export * from './surface-options/surface-options.page';
+export * from './recomendation-source/recomendation-source.page';

@@ -5,3 +5,4 @@ export * from './wizard.service';
 export * from './geocode.service';
 export * from './account.service';
 export * from './surfaces.service';
+export * from './lookup.service';
