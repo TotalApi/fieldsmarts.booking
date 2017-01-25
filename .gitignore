@@ -261,3 +261,8 @@ __pycache__/
 *.pyc
 /wwwroot
 /__js__/src
+/src/**/*.js
+/src/**/*.js.map
+/src/**/*.css.map
+
+!/src/assets/scripts/*.js
