@@ -22,7 +22,7 @@
         </div>
         <div class="actions">
             <button class="ui black deny button" (click)="closePopup()">Re-schedule</button>
-            <button [disabled]="!wizard.data.agreedForBook" (click)="wizard.next()">Next</button>
+            <button [disabled]="!wizard.data.agreedForBook" (click)="next()">Next</button>
         </div>
     </div>
 
