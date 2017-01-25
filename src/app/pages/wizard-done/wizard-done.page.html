@@ -1,11 +1,23 @@
 <wizard-page>               
-    <div class="thanks" i18n>THANKS</div>
+    <div class="thanks" i18n>{{ wizard.data.callMe ? 'THANKS' : 'ALL DONE' }}</div>
+
     <img src="/assets/images/logo.png"/>
-    <div class="text-small" i18n>in the meantime,</div>
-    <div class="text-bigger" i18n>like & visit us on Facebook!</div>
-    <div class="like">
-        <div id="fb-like-btn" class="fb-like" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
+    
+    <div *ngIf="wizard.data.callMe">
+        <div class="text-small" i18n>in the meantime,</div>
+        <div class="text-bigger" i18n>like & visit us on Facebook!</div>
+        <div class="like">
+            <div id="fb-like-btn" class="fb-like" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
+        </div>
     </div>
-    <div class="text-about" i18n>How did you here about us?</div>
+    
+    <div *ngIf="!wizard.data.callMe">
+            <div>Set a reminder in your calendar</div>
+            <a target="_blank" [href]="googleCal">Add to Google Cal</a>
+            <br />
+            <a target="_blank" [href]="sanitize(iCal)">Add to iCal/Outlook</a>
+        </div>
+
+        <div class="text-about" i18n>How did you here about us?</div>
 </wizard-page>
 

@@ -114,6 +114,7 @@
     <None Include="tsconfig.json" />
     <None Include="webpack.config.js" />
     <None Include="prebuild.bat" />
+    <TypeScriptCompile Include="src\app\common\AddToCalendar.ts" />
     <TypeScriptCompile Include="src\app\components\time-booking\time-booking.component.ts" />
     <TypeScriptCompile Include="src\app\models\Sales.ts" />
     <TypeScriptCompile Include="src\app\models\Surface.ts" />
@@ -261,7 +262,6 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\app\common\" />
     <Folder Include="src\system\constants\" />
   </ItemGroup>
   <PropertyGroup>
