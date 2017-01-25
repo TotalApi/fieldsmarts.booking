@@ -48,6 +48,8 @@ var AppTranslateLoader = (function (_super) {
         return _this;
     }
     AppTranslateLoader.prototype.getTranslation = function (lang) {
+        if (lang !== 'en' && lang !== 'fr')
+            lang = 'en';
         return _super.prototype.getTranslation.call(this, "lang_" + lang);
         /*
                 return this._http.get(this._prefix + "/" + `lang_${lang}` + this._suffix)

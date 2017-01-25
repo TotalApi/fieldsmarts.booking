@@ -32,6 +32,8 @@ export class AppTranslateLoader extends ng2Translate.TranslateStaticLoader {
     }
 
     getTranslation(lang: string): Observable<any> {
+        if (lang !== 'en' && lang !== 'fr')
+            lang = 'en';
         return super.getTranslation(`lang_${lang}`);
 /*
         return this._http.get(this._prefix + "/" + `lang_${lang}` + this._suffix)

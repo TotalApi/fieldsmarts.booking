@@ -73,8 +73,7 @@ export class UssHttp extends Http {
             try {
                 err = this.ExctractError(err.json()) || err;
             } catch (e) {
-                //return err.toString();
-                return "";
+                return err.toString();
             } 
         }
         let error = (err || "Fatal error").toString();

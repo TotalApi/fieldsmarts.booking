@@ -34,6 +34,13 @@ var AppWizardSurfacesPage = (function () {
             this.router.navigate(['surface-options', surface.name]);
         }
     };
+    AppWizardSurfacesPage.prototype.closeAlert = function () {
+        this.forgotted = false;
+    };
+    AppWizardSurfacesPage.prototype.check = function () {
+        var ifAnySelected = this.surfaces.where(function (x) { return x.isSelected; }).selectMany(function (x) { return x.options; }).any(function (x) { return x && (typeof (x) === 'string' ? x.length > 0 : x.isSelected); });
+        return this.forgotted = !ifAnySelected;
+    };
     return AppWizardSurfacesPage;
 }());
 AppWizardSurfacesPage = __decorate([

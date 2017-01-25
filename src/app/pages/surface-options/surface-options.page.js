@@ -33,6 +33,9 @@ var AppSurfacesOptionsPage = (function () {
         if (this.surface.name !== 'not_listed') {
             this.surface.isSelected = this.ifAnyChecked();
         }
+        else {
+            this.surface.isSelected = this.surface.options && this.surface.options.length > 0;
+        }
         return this.router.navigate(['wizard-surfaces']);
     };
     AppSurfacesOptionsPage.prototype.ngOnInit = function () {
