@@ -40,6 +40,12 @@ export class AppWizardCalendarPage {
 
     private closePopup() {
         this.model.agreedForBook = false;
+        $('.ui.modal').modal('hide');
+    }
+
+    private next() {
+        $('.ui.modal').modal('hide');
+        this.wizard.next();
     }
 
 }
