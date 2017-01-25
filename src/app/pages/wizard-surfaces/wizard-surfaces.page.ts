@@ -17,6 +17,7 @@ import {SurfaceOption} from '../../models/Surface';
 export class AppWizardSurfacesPage {
 
     private surfaces = [];
+    private forgotted: boolean;
 
     constructor(public sales: SalesService,
         public wizard: AppWizardService,
@@ -40,4 +41,12 @@ export class AppWizardSurfacesPage {
         }
     }
 
+    closeAlert() {
+        this.forgotted = false;
+    }
+
+    check(): boolean {
+        const ifAnySelected = this.surfaces.where(x => x.isSelected).selectMany(x => x.options).any(x => x && (typeof(x) === 'string' ? x.length > 0 : (x as SurfaceOption).isSelected));
+        return this.forgotted = !ifAnySelected;
+    }
 }
