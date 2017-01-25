@@ -49,10 +49,7 @@ export class AppWizardPostCodePage {
     }
 
     public async checkPostCode(): Promise<boolean> {
-
         let ass: PostCodeAssignment;
-        ass = await this.sales.getPostCodeAssignmentForSale(this.wizard.data.postalCode, false);
-
         try {
             ass = await this.sales.getPostCodeAssignmentForSale(this.wizard.data.postalCode, false);
         } catch (e) {

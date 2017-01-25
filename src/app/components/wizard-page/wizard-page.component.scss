@@ -2,6 +2,11 @@
     height: 100%;
     padding: 0;
     position: relative;
+    font-size: 16px;
+
+    .ui.form {
+        font-size: 100%;
+    }
 
     .header {
         background-color: #D1CED6;

@@ -1,0 +1,34 @@
+.wizard-done {
+    background-color: #504D57;
+    color: white;
+    
+    div, img {
+        text-align: center;
+        margin-bottom: 1em;
+    }
+
+    .thanks {
+        font-size: 300%;
+        font-weight: bold;
+        padding-top: 2em;
+        margin-bottom: 0.5em;
+    }
+
+    img {
+    }
+
+    .text-small {
+    }
+
+    .text-bigger {
+        font-size: 150%;
+    }
+
+    .text-about {
+        position: fixed;
+        bottom: 1em;
+        left: 0;
+        right: 0;
+        color: #FF6400;
+    }
+}

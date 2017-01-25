@@ -96,6 +96,9 @@ export class AppWizardService {
             case 'wizard-calendar':
                 this.state.currentStep = 6;
                 break;
+            default:
+                this.state.currentStep = 0;
+                break;
         }
         sessionStorage.setItem("@wizard.service.data", Json.toJson(this.data));
     }
@@ -108,7 +111,7 @@ export class AppWizardService {
             case 'wizard-phone': return 'wizard-email';
             case 'wizard-email': return this.data.callMe ? 'wizard-postcode' : 'wizard-location';
             case 'wizard-location': return 'wizard-postcode';
-            case 'wizard-postcode': return 'wizard-calendar';
+            case 'wizard-postcode': return this.data.callMe ? 'wizard-done' : 'wizard-calendar';
 
             default: return current;
         }

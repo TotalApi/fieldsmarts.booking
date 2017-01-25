@@ -95,6 +95,7 @@
     <Content Include="src\app\components\wizard-page\wizard-page.component.html" />
     <Content Include="src\app\pages\surface-options\surface-options.page.html" />
     <Content Include="src\app\pages\wizard-validate\wizard-validate.page.html" />
+    <Content Include="src\app\pages\wizard-done\wizard-done.page.html" />
     <Content Include="src\app\pages\wizard-postcode\wizard-postcode.page.html" />
     <Content Include="src\app\pages\wizard-location\wizard-location.page.html" />
     <Content Include="src\app\pages\wizard-email\wizard-email.page.html" />
@@ -109,6 +110,7 @@
     <Content Include="src\favicon.ico" />
     <Content Include="src\system\components\semanticui\button\button.component.html" />
     <Content Include="src\app\pages\wizard-validate\wizard-validate.page.scss" />
+    <Content Include="src\app\pages\wizard-done\wizard-done.page.scss" />
     <None Include="tsconfig.json" />
     <None Include="webpack.config.js" />
     <None Include="prebuild.bat" />
@@ -118,6 +120,7 @@
     <TypeScriptCompile Include="src\app\pages\surface-options\surface-options.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-calendar\wizard-calendar.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-validate\wizard-validate.page.ts" />
+    <TypeScriptCompile Include="src\app\pages\wizard-done\wizard-done.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-surfaces\wizard-surfaces.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-postcode\wizard-postcode.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-location\wizard-location.page.ts" />
