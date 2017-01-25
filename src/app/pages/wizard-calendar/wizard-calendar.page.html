@@ -1,8 +1,29 @@
-<wizard-page>
+<wizard-page [next]="{ action: check.bind(this), caption: 'NEXT ->'}">
+    
     <time-booking [franchise]="model.franchise" [salesNumber]="model.salesNumber" [dayTime]="selectedDayTime" #timeBooking></time-booking>
     <div class="ui buttons">
         <button class="ui button" (click)="setDayTime('morning')" [ngClass]="{ 'active': selectedDayTime === 'morning' }">{{ 'Morning' | translate }}</button>
         <button class="ui button" (click)="setDayTime('afternoon')" [ngClass]="{ 'active': selectedDayTime === 'afternoon' }">{{ 'Afternoon' | translate }}</button>
         <button class="ui button" (click)="setDayTime('evening')" [ngClass]="{ 'active': selectedDayTime === 'evening' }">{{ 'Evening' | translate }}</button>
     </div>
+
+
+    <div class="ui modal">
+        <div class="image content">
+            <div class="ui medium image">
+                <img src="/images/avatar/large/chris.jpg">
+            </div>
+            <div class="description">
+                <div>
+                    <uss-checkbox type="toggle" [label]="'Decision makers will be present'" [ussDataSource]="model" fieldName="agreedForBook">
+                    </uss-checkbox>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <button class="ui black deny button" (click)="closePopup()">Re-schedule</button>
+            <button [disabled]="!wizard.data.agreedForBook" (click)="wizard.next()">Next</button>
+        </div>
+    </div>
+
 </wizard-page>

@@ -22,6 +22,7 @@ export class AppWizardService {
         postalCode: '',
         address: '',
         wantSpam: false,
+        agreedForBook: false,
         callMe: undefined,
         bookTime: undefined,
         surfaces: undefined
