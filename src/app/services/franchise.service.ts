@@ -14,7 +14,6 @@ import {PostCodeAssignment} from '../models/Sales';
 @Injectable()
 @ApiService("api/franchise")
 export class FranchiseService extends UssApiService {
-    //constructor(http: Http) { super(http); }
 
     @ApiMethod({ method: "GET", route: "" })
     load(): Promise<IFranshise[]> {

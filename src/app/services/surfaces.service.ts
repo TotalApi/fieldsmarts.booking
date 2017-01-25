@@ -16,7 +16,6 @@ import {SurfaceOption} from '../models/Surface';
 @Injectable()
 @ApiService("")
 export class SurfacesService extends UssApiService {
-    constructor(http: Http) { super(http); }
 
     public getSurfaces(): Surface[] {
         return [

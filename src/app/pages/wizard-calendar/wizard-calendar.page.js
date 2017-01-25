@@ -16,9 +16,26 @@ var AppWizardCalendarPage = (function () {
         this.wizard = wizard;
         this.selectedDayTime = 'morning';
         this.model = wizard.data;
+        this.model.franchise = 'corporate';
+        this.model.salesNumber = '17011295915';
+        this.model.agreedForBook = false;
     }
     AppWizardCalendarPage.prototype.setDayTime = function (dayTime) {
         this.selectedDayTime = dayTime;
+    };
+    AppWizardCalendarPage.prototype.check = function () {
+        if (!this.wizard.data.agreedForBook) {
+            $('.ui.modal').modal({ blurring: true }).modal('show');
+        }
+        return this.wizard.data.agreedForBook;
+    };
+    AppWizardCalendarPage.prototype.closePopup = function () {
+        this.model.agreedForBook = false;
+        $('.ui.modal').modal('hide');
+    };
+    AppWizardCalendarPage.prototype.next = function () {
+        $('.ui.modal').modal('hide');
+        this.wizard.next();
     };
     return AppWizardCalendarPage;
 }());

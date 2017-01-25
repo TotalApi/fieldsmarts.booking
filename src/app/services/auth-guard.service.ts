@@ -8,6 +8,7 @@ import {AppService} from 'src/system';
 @Injectable()
 @AppService()
 export class AppAuthGuard implements CanActivate {
+
     constructor(
         private auth: system.UssAuthService,
         private router: Router,

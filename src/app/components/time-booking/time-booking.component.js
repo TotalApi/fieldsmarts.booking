@@ -30,6 +30,7 @@ var TimeBookingComponent = TimeBookingComponent_1 = (function () {
         this.allTimeSlots = [];
         this.hasPrevious = false;
         this.dayTime = 'morning';
+        this.selectedTime = new Date(wizard.data.bookTime);
     }
     TimeBookingComponent.prototype.ngOnInit = function () {
         var _this = this;

@@ -77,8 +77,7 @@ var UssHttp = (function (_super) {
                 err = this.ExctractError(err.json()) || err;
             }
             catch (e) {
-                //return err.toString();
-                return "";
+                return err.toString();
             }
         }
         var error = (err || "Fatal error").toString();

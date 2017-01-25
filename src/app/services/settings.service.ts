@@ -10,18 +10,30 @@ import {SalesConsultant} from '../models/Sales';
 import {Sales} from '../models/Sales';
 import {PostBooking} from '../models/Sales';
 import {PostCodeAssignment} from '../models/Sales';
-import {AppSettings} from './settings.service';
 
 @Injectable()
-@ApiService("https://maps.googleapis.com/maps/api/geocode")
-export class GeocodeService extends UssApiService {
+@AppService()
+export class AppSettings {
 
-    constructor(http: Http, private settings: AppSettings) {
+    mainCallPhone: '+1234567890';
+    siteToLike: 'http://aelitsoft.com';
+    facebookAppId: '773528466036157';
+    googleApiKey: 'AIzaSyASScrTpFyyeEruSLIaOyg_GLmPwXoHLgA';
+
+    constructor(settingsService: SettingsService) {
+        settingsService.load().then(s => _.defaults(this, s));
+    }
+}
+
+@Injectable()
+@AppService()
+export class SettingsService extends UssApiService {
+
+    constructor(http: Http) {
         super(http);
     }
 
-    @ApiMethod({ method: "GET", route: "json?address={p1}&key={p2}", useBody: false })
-    getSuggestedAddess(address: string): Promise<any> {
-        return this.request<any>({ p1: address, p2: this.settings.googleApiKey }).toPromise();
+    load(): Promise<AppSettings> {
+        return Promise.resolve({});
     }
 }

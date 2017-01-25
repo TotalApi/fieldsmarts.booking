@@ -14,7 +14,6 @@ import {PostCodeAssignment} from '../models/Sales';
 @Injectable()
 @ApiService("api/sales")
 export class SalesService extends UssApiService {
-    constructor(http: Http) { super(http); }
 
     @ApiMethod({ method: "GET", route: "{p1}/{p2}/availabletimeslots?startingDate={p3}", useBody: false })
     getAvailableTimeSlots(franchisee: string, salesNumber: string, startingDate: Date): Promise<AvailableTimeSlots> {

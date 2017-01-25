@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {AppRoute} from 'src/app/app.routes';
 import {AppWizardService} from "../../services/wizard.service";
 import * as ng2Translate from 'ng2-translate';
+import * as Settingsservice from '../../services/settings.service';
 
 @ng.Component({
     styleUrls: ['./wizard-home.page.scss'],
@@ -13,12 +14,12 @@ import * as ng2Translate from 'ng2-translate';
 @AppRoute({ path: 'home' })
 export class AppWizardHomePage {
 
-    constructor(public wizard: AppWizardService, translate: ng2Translate.TranslateService, private route: ActivatedRoute) {
-        translate.use(translate.getBrowserLang());
+    constructor(public wizard: AppWizardService, private route: ActivatedRoute, private settings: Settingsservice.AppSettings) {
+        wizard.translate.use(wizard.translate.getBrowserLang());
         this.route.params.subscribe((p: any) => {
             if (p.lang) {
                 wizard.data.language = p.lang;
-                translate.use(wizard.data.language);
+                wizard.translate.use(wizard.data.language);
             }
         });
     }
@@ -36,7 +37,7 @@ export class AppWizardHomePage {
     }
 
     call() {
-        window.location.href = 'tel:+1800229933';
+        window.location.href = `tel:${this.settings.mainCallPhone}`;
         return false;
     }
 

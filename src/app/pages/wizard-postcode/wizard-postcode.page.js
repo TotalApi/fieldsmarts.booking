@@ -93,26 +93,22 @@ var AppWizardPostCodePage = (function () {
             var ass, e_1, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0: return [4 /*yield*/, this.sales.getPostCodeAssignmentForSale(this.wizard.data.postalCode, false)];
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.sales.getPostCodeAssignmentForSale(this.wizard.data.postalCode, false)];
                     case 1:
                         ass = _b.sent();
-                        _b.label = 2;
+                        return [3 /*break*/, 3];
                     case 2:
-                        _b.trys.push([2, 4, , 5]);
-                        return [4 /*yield*/, this.sales.getPostCodeAssignmentForSale(this.wizard.data.postalCode, false)];
-                    case 3:
-                        ass = _b.sent();
-                        return [3 /*break*/, 5];
-                    case 4:
                         e_1 = _b.sent();
                         this.errorState = 'invalid_code';
                         this.error = 'Unfortunatelly we do not serve your area';
                         this.nextAction = { caption: 'Alert me instead ->', action: function () { return alert('Alert!!!!!'); } };
                         this.backAction = { isHidden: true };
                         return [2 /*return*/, false];
-                    case 5:
+                    case 3:
                         if (!ass.isOutOfBounds)
-                            return [3 /*break*/, 7];
+                            return [3 /*break*/, 5];
                         this.errorState = 'outbound_code';
                         this.error = 'You are a little outside our service area';
                         this.nextAction = {
@@ -132,7 +128,7 @@ var AppWizardPostCodePage = (function () {
                         };
                         _a = this;
                         return [4 /*yield*/, this.account.getUserInfo(ass.salesConsultant)];
-                    case 6:
+                    case 4:
                         _a.consultant = _b.sent();
                         this.franchise.get(this.consultant.franchise, this.consultant.region).then(function (fran) {
                             if (fran) {
@@ -141,8 +137,8 @@ var AppWizardPostCodePage = (function () {
                                 _this.consultant.tel = _this.consultant.tel || fran.tel;
                             }
                         });
-                        _b.label = 7;
-                    case 7: 
+                        _b.label = 5;
+                    case 5: 
                     //        return await this.saveLead();
                     return [2 /*return*/, true];
                 }

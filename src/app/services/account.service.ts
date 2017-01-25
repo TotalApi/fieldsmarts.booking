@@ -10,7 +10,6 @@ import {Http} from '@angular/http';
 @Injectable()
 @ApiService("api/account")
 export class AccountService extends UssApiService {
-    constructor(http: Http) { super(http); }
 
     @ApiMethod({ method: "GET", route: "userInfo?userName={p1}", useBody: false })
     getUserInfo(userName: string): Promise<any> {

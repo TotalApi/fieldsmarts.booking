@@ -35,16 +35,6 @@ export class AppTranslateLoader extends ng2Translate.TranslateStaticLoader {
         if (lang !== 'en' && lang !== 'fr')
             lang = 'en';
         return super.getTranslation(`lang_${lang}`);
-/*
-        return this._http.get(this._prefix + "/" + `lang_${lang}` + this._suffix)
-            .map((res: Response) => {
-                try {
-                    return res.json();    
-                } catch (e) {
-                    return undefined;
-                } 
-            });
-*/
     }
 }
 

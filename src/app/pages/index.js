@@ -11,5 +11,7 @@ __export(require("./wizard-calendar/wizard-calendar.page"));
 __export(require("./wizard-location/wizard-location.page"));
 __export(require("./wizard-postcode/wizard-postcode.page"));
 __export(require("./wizard-surfaces/wizard-surfaces.page"));
+__export(require("./wizard-validate/wizard-validate.page"));
+__export(require("./wizard-done/wizard-done.page"));
 __export(require("./surface-options/surface-options.page"));
 //# sourceMappingURL=index.js.map

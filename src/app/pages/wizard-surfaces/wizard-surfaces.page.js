@@ -31,7 +31,7 @@ var AppWizardSurfacesPage = (function () {
         surface.isSelected = !surface.isSelected;
         var ifAnySelected = function () { return surface.options.any(function (x) { return x.isSelected; }); };
         if (surface.name === 'not_listed' || !ifAnySelected()) {
-            this.router.navigate(['surface-options', surface.name]);
+            surface.options.length > 0 && this.router.navigate(['surface-options', surface.name]);
         }
     };
     AppWizardSurfacesPage.prototype.closeAlert = function () {
@@ -39,7 +39,8 @@ var AppWizardSurfacesPage = (function () {
     };
     AppWizardSurfacesPage.prototype.check = function () {
         var ifAnySelected = this.surfaces.where(function (x) { return x.isSelected; }).selectMany(function (x) { return x.options; }).any(function (x) { return x && (typeof (x) === 'string' ? x.length > 0 : x.isSelected); });
-        return this.forgotted = !ifAnySelected;
+        this.forgotted = !ifAnySelected;
+        return !this.forgotted;
     };
     return AppWizardSurfacesPage;
 }());
