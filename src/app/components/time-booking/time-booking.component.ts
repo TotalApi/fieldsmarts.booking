@@ -46,6 +46,7 @@ export class TimeBookingComponent implements OnInit, OnChanges {
         public wizard: AppWizardService,
 
     ) {
+        this.selectedTime = new Date(wizard.data.bookTime);
     }
 
     @Input() dayTime: DayTime = 'morning';
