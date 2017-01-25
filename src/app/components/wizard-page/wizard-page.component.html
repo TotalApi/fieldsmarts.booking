@@ -10,7 +10,7 @@
     </div>
 
     <div class="content">     
-        <form #ussForm="ngForm" [ussDataSource]="wizard.data" class="ui form" novalidate>
+        <form #ussForm="ngForm" [ussDataSource]="wizard.data" class="ui form" novalidate onsubmit="return false">
             <ng-content></ng-content>
         </form>
     </div>

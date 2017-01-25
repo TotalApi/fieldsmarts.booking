@@ -28,7 +28,7 @@ import { AppComponent } from './app';
 import { AppRoutes } from "src/app/app.routes";
 
 import { AppTranslateService, AppTranslateLoader, AppMissingTranslationHandler } from './services/translate.service';
-
+import {AppSettings} from './services/settings.service';
 
 @NgModule({
     declarations: [
@@ -55,8 +55,8 @@ import { AppTranslateService, AppTranslateLoader, AppMissingTranslationHandler }
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         {
             provide: ng2Translate.TranslateLoader,
-            useFactory: (http: Http) => new AppTranslateLoader(http, 'http://192.168.3.202:7202/locales', '.json'),
-            deps: [Http]
+            useFactory: (http: Http, settings: AppSettings) => new AppTranslateLoader(http, settings.translateApiUrl, '.json'),
+            deps: [Http, AppSettings]
         },
         {
             provide: ng2Translate.MissingTranslationHandler,

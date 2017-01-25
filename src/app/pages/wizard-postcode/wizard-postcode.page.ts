@@ -31,8 +31,9 @@ export class AppWizardPostCodePage {
         public franchise: FranchiseService,
     ) { }
 
-    public async saveLead(): Promise<boolean> {
+    public async saveLead(isQualifiedLead: boolean): Promise<boolean> {
         let sale = new Sales();
+        sale.isQualifiedLead = isQualifiedLead;
         sale.franchisee = this.wizard.data.franchise;
         sale.address1 = this.wizard.data.address;
         sale.contactEmail = this.wizard.data.email;
@@ -41,11 +42,11 @@ export class AppWizardPostCodePage {
         sale.contactFirstName = this.wizard.data.firstName;
         sale.contactPhone = this.wizard.data.phoneNumber;
         sale.postCode = this.wizard.data.postalCode;
-
+        sale.salesNumber = this.wizard.data.salesNumber;
         sale = await this.sales.save(sale);
         this.wizard.data.salesNumber = sale.salesNumber;
         this.wizard.data.franchise = sale.franchisee;
-        return true;
+        return isQualifiedLead;
     }
 
     public async checkPostCode(): Promise<boolean> {
@@ -57,7 +58,7 @@ export class AppWizardPostCodePage {
             this.error = 'Unfortunatelly we do not serve your area';
             this.nextAction = { caption: 'Alert me instead ->', action: () => alert('Alert!!!!!') };
             this.backAction = { isHidden: true };
-            return false;
+            return await this.saveLead(false);
         } 
 
         if (ass.isOutOfBounds) {
@@ -87,8 +88,7 @@ export class AppWizardPostCodePage {
                 }
             });
         }
-//        return await this.saveLead();
-        return true;
+        return await this.saveLead(true);
     }
 
 }
