@@ -7,5 +7,6 @@ export * from './wizard-calendar/wizard-calendar.page';
 export * from './wizard-location/wizard-location.page';
 export * from './wizard-postcode/wizard-postcode.page';
 export * from './wizard-surfaces/wizard-surfaces.page';
+export * from './wizard-done/wizard-done.page';
 
 export * from './surface-options/surface-options.page';
