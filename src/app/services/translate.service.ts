@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { AppService } from "src/system";
 import * as ng2Translate from 'ng2-translate';
@@ -27,12 +27,22 @@ export class AppTranslateService {
 
 export class AppTranslateLoader extends ng2Translate.TranslateStaticLoader {
 
-    constructor(http: Http, prefix?: string, suffix?: string) {
-        super(http, prefix, suffix);
+    constructor(private _http: Http, private _prefix?: string, private _suffix?: string) {
+        super(_http, _prefix, _suffix);
     }
 
     getTranslation(lang: string): Observable<any> {
         return super.getTranslation(`lang_${lang}`);
+/*
+        return this._http.get(this._prefix + "/" + `lang_${lang}` + this._suffix)
+            .map((res: Response) => {
+                try {
+                    return res.json();    
+                } catch (e) {
+                    return undefined;
+                } 
+            });
+*/
     }
 }
 

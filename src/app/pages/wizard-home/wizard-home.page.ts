@@ -1,16 +1,27 @@
 import * as ng from '@angular/core';
-import { AppRoute } from 'src/app/app.routes';
+import {ActivatedRoute} from '@angular/router';
+import {AppRoute} from 'src/app/app.routes';
 import {AppWizardService} from "../../services/wizard.service";
+import * as ng2Translate from 'ng2-translate';
 
 @ng.Component({
     styleUrls: ['./wizard-home.page.scss'],
     templateUrl: './wizard-home.page.html',
     encapsulation: ng.ViewEncapsulation.None
 })
-@AppRoute({ routerLink: 'home' })
+@AppRoute({ path: 'home/:lang' })
+@AppRoute({ path: 'home' })
 export class AppWizardHomePage {
 
-    constructor(public wizard: AppWizardService) { }
+    constructor(public wizard: AppWizardService, translate: ng2Translate.TranslateService, private route: ActivatedRoute) {
+        translate.use(translate.getBrowserLang());
+        this.route.params.subscribe((p: any) => {
+            if (p.lang) {
+                wizard.data.language = p.lang;
+                translate.use(wizard.data.language);
+            }
+        });
+    }
 
     callMe() {
         this.wizard.data.callMe = true;

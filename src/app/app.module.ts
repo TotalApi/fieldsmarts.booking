@@ -33,6 +33,7 @@ import { AppTranslateService, AppTranslateLoader, AppMissingTranslationHandler }
 @NgModule({
     declarations: [
         AppComponent,
+        system.appComponents,
         AppRoutes.components
     ],
     imports: [
@@ -41,7 +42,6 @@ import { AppTranslateService, AppTranslateLoader, AppMissingTranslationHandler }
         HttpModule,
         ReactiveFormsModule,
         RouterModule.forRoot(AppRoutes.config),
-//        primeng.ButtonModule, primeng.DataTableModule, primeng.InputTextModule, primeng.ProgressBarModule, primeng.FileUploadModule,
         ng2Translate.TranslateModule.forRoot(),
         system.UssSystemModule,
         system.UssComponentsModule,

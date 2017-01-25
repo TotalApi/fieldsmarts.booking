@@ -119,6 +119,7 @@
     <TypeScriptCompile Include="src\app\pages\wizard-postcode\wizard-postcode.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-location\wizard-location.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-email\wizard-email.page.ts" />
+    <TypeScriptCompile Include="src\app\services\franchise.service.ts" />
     <TypeScriptCompile Include="src\app\services\surfaces.service.ts" />
     <TypeScriptCompile Include="src\app\services\geocode.service.ts" />
     <TypeScriptCompile Include="src\app\services\account.service.ts" />
@@ -243,6 +244,9 @@
     <TypeScriptCompile Include="src\typings\legacy\linq.d.ts" />
     <TypeScriptCompile Include="src\typings\legacy\moment.d.ts" />
     <TypeScriptCompile Include="src\typings\legacy\rome.d.ts" />
+    <TypeScriptCompile Include="src\typings\models\Franshise.d.ts" />
+    <TypeScriptCompile Include="src\typings\models\User.d.ts" />
+    <TypeScriptCompile Include="src\typings\models\UserInfo.d.ts" />
     <TypeScriptCompile Include="src\typings\reflect.d.ts" />
     <TypeScriptCompile Include="src\styles.browser.ts" />
     <TypeScriptCompile Include="src\vendor.browser.ts" />

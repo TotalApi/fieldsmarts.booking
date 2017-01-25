@@ -70,7 +70,12 @@ export class UssHttp extends Http {
      */
     public static ExctractError(err: any): string {
         if (err instanceof Response) {
-            err = this.ExctractError(err.json()) || err;
+            try {
+                err = this.ExctractError(err.json()) || err;
+            } catch (e) {
+                //return err.toString();
+                return "";
+            } 
         }
         let error = (err || "Fatal error").toString();
         if (!err) return error;
@@ -126,10 +131,12 @@ export class UssHttp extends Http {
      */
     public ProcessError(err: any): string {
         const error = UssHttp.ExctractError(err);
-        if (this.msg)
-            this.msg.runtimeError(error);
-        else
-            console.error(error);
+        if (error) {
+            if (this.msg)
+                this.msg.runtimeError(error);
+            else
+                console.error(error);
+        }
         return error;
     }
 

@@ -12,7 +12,7 @@ declare var google: any;
     templateUrl: './wizard-location.page.html',
     encapsulation: ng.ViewEncapsulation.None
 })
-@AppRoute({ routerLink: 'wizard-location' })
+@AppRoute({ path: 'wizard-location' })
 export class AppWizardLocationPage implements ng.OnInit {
 
     @ng.ViewChild("search") searchElement: UssInputComponent;

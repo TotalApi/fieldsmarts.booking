@@ -8,14 +8,20 @@
     <div *ngIf="errorState==='invalid_code'">
         <div class="field uss-input uss-component">
             <label i18n>Postal code *</label>
-            <div class="ui input fluid">
-                <div class="error-code">{{wizard.data.postalCode}}</div>
-            </div>
+            <div class="error-code">{{wizard.data.postalCode}}</div>
         </div>
     </div>
     <div *ngIf="errorState==='outbound_code'">
         <div class="field uss-input uss-component">
-            <label i18n>Your closest franchise partner will be in touch within the next 24-48 hours.</label>
+            <div i18n>Your closest franchise partner will be in touch within the next 24-48 hours.</div> 
+            <div class="parner-name-fran">
+                <div class="parner-name">{{consultant?.name}}</div>
+                <div class="parner-franchise">{{consultant?.franchise}}</div>
+            </div> 
+
+            <div i18n>You can also contact him at:</div>
+            <div class="parner-phone">{{consultant?.tel}}</div>
+            <div class="parner-email">{{consultant?.userName}}</div>
         </div>
     </div>
     <uss-input [label]="'Postal code *' | translate" [hidden]="errorState"

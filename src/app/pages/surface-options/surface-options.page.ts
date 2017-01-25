@@ -13,7 +13,7 @@ import {Json} from '../../../system/utils/Json';
     templateUrl: './surface-options.page.html',
     encapsulation: ng.ViewEncapsulation.None
 })
-@AppRoute({ routerLink: 'surface-options/:surfaceName' })
+@AppRoute({ path: 'surface-options/:surfaceName' })
 export class AppSurfacesOptionsPage implements ng.OnInit, ng.OnDestroy {
 
     private surface: Surface;

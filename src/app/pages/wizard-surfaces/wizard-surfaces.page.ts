@@ -13,7 +13,7 @@ import {SurfaceOption} from '../../models/Surface';
     templateUrl: './wizard-surfaces.page.html',
     encapsulation: ng.ViewEncapsulation.None
 })
-@AppRoute({ routerLink: 'wizard-surfaces' })
+@AppRoute({ path: 'wizard-surfaces' })          
 export class AppWizardSurfacesPage {
 
     private surfaces = [];

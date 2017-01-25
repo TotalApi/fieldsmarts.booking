@@ -2,14 +2,17 @@
 import { Router } from '@angular/router';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
-import { AppService } from "src/system";
-import {Surface} from '../models/Surface';
+import { AppService, Json } from "src/system";
+import { Surface } from '../models/Surface';
+import * as ng2Translate from 'ng2-translate';
+
 
 @Injectable()
 @AppService()
 export class AppWizardService {
 
     public data = {
+        language: '',
         franchise: '',
         salesNumber: '',
         firstName: '',
@@ -19,7 +22,7 @@ export class AppWizardService {
         postalCode: '',
         address: '',
         wantSpam: false,
-        callMe: false,
+        callMe: undefined,
         bookTime: undefined,
         surfaces: undefined
     }
@@ -33,10 +36,18 @@ export class AppWizardService {
         let res = this.router.url;
         if (res && res.startsWith('/'))
             res = res.substr(1);
-        return res;
+        return res.split('/')[0];
     }
 
-    constructor(public router: Router) {
+    constructor(public router: Router, public translate: ng2Translate.TranslateService) {
+        try {
+            const data = (sessionStorage.getItem("@wizard.service.data") || '').FromJson();
+            if (data) {
+                _.defaults(data, this.data);
+                this.data = data;
+            }
+        } catch (e) {
+        } 
     }
 
     public go(url: string): Promise<boolean> {
@@ -55,8 +66,17 @@ export class AppWizardService {
     }
 
     public updateState() {
+        this.translate.use(this.data.language || this.translate.getBrowserLang());
+        if (this.data.callMe === undefined && this.current !== 'home') {
+            this.go('home');
+            return;
+        }
+
         this.state.totalSteps = this.data.callMe ? 4 : 6;
         switch (this.current) {
+            case 'home':
+                this.state.currentStep = 0;
+                break;
             case 'wizard-name':
                 this.state.currentStep = 1;
                 break;
@@ -76,6 +96,7 @@ export class AppWizardService {
                 this.state.currentStep = 6;
                 break;
         }
+        sessionStorage.setItem("@wizard.service.data", Json.toJson(this.data));
     }
 
     public getNext(current?: string): string {

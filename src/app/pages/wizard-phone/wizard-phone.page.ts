@@ -7,7 +7,7 @@ import {AppWizardService} from "../../services/wizard.service";
     templateUrl: './wizard-phone.page.html',
     encapsulation: ng.ViewEncapsulation.None
 })
-@AppRoute({ routerLink: 'wizard-phone' })
+@AppRoute({ path: 'wizard-phone' })
 export class AppWizardPhonePage {
 
     constructor(public wizard: AppWizardService) { }

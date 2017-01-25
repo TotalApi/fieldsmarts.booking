@@ -37,16 +37,9 @@ declare type DateTime = string | Date | moment.Moment;
 declare const NODE_ENV: 'development' | 'production';
 declare const BACKEND_ADDRESS: string;
 
-declare var $: any;
+declare const $: any;
+declare const _: _.LoDashStatic;
 
-declare var linq: linqjs.Enumerable;
+declare const linq: linqjs.Enumerable;
 
 declare function require(name: string): any;
-
-
-declare type TUserRole = 'Admin' | '';
-
-interface User {
-    userName: string;
-    role: TUserRole;
-}

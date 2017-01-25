@@ -137,6 +137,7 @@ export class UssMessagesService implements IUssMessagesService {
 
     logMessage(message: string | Object, type: MessageType = MessageType.Info, closeAfter?: number | boolean): void {
 
+        if (message === '' || message === undefined) return;
         let me = this;
 
         function errorHtml(logMessage: string, errorType?: string): string {

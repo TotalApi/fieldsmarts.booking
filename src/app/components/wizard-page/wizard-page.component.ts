@@ -66,11 +66,15 @@ export class WizardPageComponent implements ng.OnInit {
 
     public async execute(command: WizardCommand) {
         this.loading = true;
-        await this.execute$(command);
-        this.loading = false;
+        try {
+            await this.execute$(command);
+        } finally {
+            this.loading = false;
+        } 
     }
 
     private async execute$(command: WizardCommand, ignoreRoute?: boolean): Promise<void> {
+        this.wizard.updateState();
         if (command) {
             if (command.action && !ignoreRoute) {
                 let res = command.action(command);

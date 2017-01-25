@@ -1,5 +1,21 @@
-div.error-code {
+.error-code {
     font-size: 250%;
     color: red;
     margin-top: 8px;
+}
+
+.parner-name-fran {
+
+    margin: 3em 0;
+
+    .parner-name {
+        font-size: 200%;
+        color: #003966;
+    }
+}
+
+.parner-franchise, .parner-phone, .parner-email {
+    font-size: 150%;
+    color: #4A4457;
+    margin-top: .5em;
 }

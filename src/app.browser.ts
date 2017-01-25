@@ -8,8 +8,6 @@ if (NODE_ENV === 'production') {
     enableProdMode();
 }
 
-AppRoutes.updateRoutes();
-
 platformBrowserDynamic()
     .bootstrapModule(AppModule)
     .catch(err => system.UssMessagesService.error(err));
