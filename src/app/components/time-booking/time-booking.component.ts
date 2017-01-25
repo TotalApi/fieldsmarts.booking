@@ -202,18 +202,4 @@ export class TimeBookingComponent implements OnInit, OnChanges {
             this.configurateTimeSlots();
         }
     }
-
-    public saveBookTime() {
-        let b = new PostBooking();
-        b.franchisee = this.franchise;
-        b.salesNumber = this.salesNumber;
-        b.timeSlot = this.selectedTime;
-
-        this.sales.book(b).catch(e => {
-            
-        });
-    }
-
-    
-
 }
