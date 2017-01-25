@@ -93,6 +93,7 @@
     <Content Include="src\app\components\common\_variables.scss" />
     <Content Include="src\app\components\time-booking\time-booking.component.html" />
     <Content Include="src\app\components\wizard-page\wizard-page.component.html" />
+    <Content Include="src\app\pages\recomendation-source\recomendation-source.page.html" />
     <Content Include="src\app\pages\surface-options\surface-options.page.html" />
     <Content Include="src\app\pages\wizard-validate\wizard-validate.page.html" />
     <Content Include="src\app\pages\wizard-done\wizard-done.page.html" />
@@ -111,12 +112,15 @@
     <Content Include="src\system\components\semanticui\button\button.component.html" />
     <Content Include="src\app\pages\wizard-validate\wizard-validate.page.scss" />
     <Content Include="src\app\pages\wizard-done\wizard-done.page.scss" />
+    <Content Include="src\app\pages\recomendation-source\recomendation-source.page.scss" />
     <None Include="tsconfig.json" />
     <None Include="webpack.config.js" />
     <None Include="prebuild.bat" />
+    <TypeScriptCompile Include="src\app\common\AddToCalendar.ts" />
     <TypeScriptCompile Include="src\app\components\time-booking\time-booking.component.ts" />
     <TypeScriptCompile Include="src\app\models\Sales.ts" />
     <TypeScriptCompile Include="src\app\models\Surface.ts" />
+    <TypeScriptCompile Include="src\app\pages\recomendation-source\recomendation-source.page.ts" />
     <TypeScriptCompile Include="src\app\pages\surface-options\surface-options.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-calendar\wizard-calendar.page.ts" />
     <TypeScriptCompile Include="src\app\pages\wizard-validate\wizard-validate.page.ts" />
@@ -127,6 +131,7 @@
     <TypeScriptCompile Include="src\app\pages\wizard-email\wizard-email.page.ts" />
     <TypeScriptCompile Include="src\app\services\franchise.service.ts" />
     <TypeScriptCompile Include="src\app\services\settings.service.ts" />
+    <TypeScriptCompile Include="src\app\services\lookup.service.ts" />
     <TypeScriptCompile Include="src\app\services\surfaces.service.ts" />
     <TypeScriptCompile Include="src\app\services\geocode.service.ts" />
     <TypeScriptCompile Include="src\app\services\account.service.ts" />
@@ -262,7 +267,6 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\app\common\" />
     <Folder Include="src\system\constants\" />
   </ItemGroup>
   <PropertyGroup>

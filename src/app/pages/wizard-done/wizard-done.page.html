@@ -1,11 +1,27 @@
 <wizard-page>               
-    <div class="thanks" i18n>THANKS</div>
+    <div class="thanks" i18n>{{ wizard.data.callMe ? 'THANKS' : 'ALL DONE' }}</div>
+
     <img src="/assets/images/logo.png"/>
-    <div class="text-small" i18n>in the meantime,</div>
-    <div class="text-bigger" i18n>like & visit us on Facebook!</div>
-    <div class="like">
-        <div id="fb-like-btn" class="fb-like" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
+    
+    <div *ngIf="wizard.data.callMe">
+        <div class="text-small" i18n>in the meantime,</div>
+        <div class="text-bigger" i18n>like & visit us on Facebook!</div>
+        <div class="like">
+            <div id="fb-like-btn" class="fb-like" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
+        </div>
+        <a class="text-about" (click)="wizard.go('recomendation-source')" i18n>How did you here about us?</a>
     </div>
-    <a class="text-about" i18n (click)>How did you here about us?</a>
+    
+    <div *ngIf="!wizard.data.callMe">
+            <div>Set a reminder in your calendar</div>
+            <a target="_blank" [href]="googleCal">Add to Google Cal</a>
+            <br />
+        <a target="_blank" [href]="sanitize(iCal)">Add to iCal/Outlook</a>
+        <br /><br /><br />
+        <a href="https://www.spray-net.com">Go to SPRAY-NET.COM</a>
+
+    </div>
+        
+    <a class="text-about" (click)="wizard.go('recomendation-source')" i18n>How did you here about us?</a>
 </wizard-page>
 

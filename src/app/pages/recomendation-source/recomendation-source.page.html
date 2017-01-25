@@ -1,0 +1,14 @@
+<wizard-page 
+    title="JUST IN CASE..."
+    description="We'll email you if we can't reach you by phone."
+>    
+    
+        <div *ngFor="let source of options.values">
+            <div (click)="select(source)" [ngClass]="{ 'highlighted': selectedSource && (source.id === selectedSource.id) }">
+                {{source.value}}    
+            </div>
+        </div>
+    <br/>
+    <button (click)="save()">Ok</button>
+
+</wizard-page>

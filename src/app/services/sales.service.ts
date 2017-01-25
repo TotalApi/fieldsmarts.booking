@@ -10,6 +10,7 @@ import {SalesConsultant} from '../models/Sales';
 import {Sales} from '../models/Sales';
 import {PostBooking} from '../models/Sales';
 import {PostCodeAssignment} from '../models/Sales';
+import {MarketingInfo} from '../models/Sales';
 
 @Injectable()
 @ApiService("api/sales")
@@ -35,8 +36,14 @@ export class SalesService extends UssApiService {
         return this.request<PostBooking>(bookingModel).toPromise();
     }
 
-    @ApiMethod({ method: "GET", route: "postcodeassignment/{p1}/{p2}", useBody: true })
+    @ApiMethod({ method: "GET", route: "postcodeassignment/{p1}/{p2}", useBody: false })
     getPostCodeAssignmentForSale(postcode: string, isCommercial: boolean): Promise<PostCodeAssignment> {
         return this.request<PostCodeAssignment>({ p1: postcode, p2: isCommercial }).toPromise();
     }
+
+    @ApiMethod({ method: "POST", route: "marketinginfo", useBody: true })
+    saveMarkeingInfo(marketingInfo: MarketingInfo): Promise<any> {
+        return this.request<MarketingInfo>(marketingInfo).toPromise();
+    }
+
 }

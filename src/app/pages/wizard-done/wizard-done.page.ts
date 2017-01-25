@@ -1,10 +1,13 @@
 import * as ng from '@angular/core';
 import { AppRoute } from 'src/app/app.routes';
+import {DomSanitizer} from '@angular/platform-browser';
 import {AppWizardService} from "../../services/wizard.service";
 import {GeocodeService} from '../../services/geocode.service';
 import { AgmCoreModule, MapsAPILoader } from 'angular2-google-maps/core';
 import {UssInputComponent} from '../../../system/components/semanticui/input/inputs.component';
+import {CalendarEvent} from '../../common/AddToCalendar';
 import {AppSettings} from '../../services/settings.service';
+import {AddToCalendar} from '../../common/AddToCalendar';
 declare var google: any;
 
 @ng.Component({
@@ -15,10 +18,18 @@ declare var google: any;
 @AppRoute({ path: 'wizard-done' })
 export class AppWizardDonePage implements ng.OnInit {
 
-    constructor(public wizard: AppWizardService, private settings: AppSettings) { }
+    private googleCal: string;
+    private iCal: string;
+
+    constructor(public wizard: AppWizardService, private settings: AppSettings, private sanitizer: DomSanitizer) { }
 
     ngOnInit(): void {
         this.fbLikeIframeSrc();
+        this.generateEvent();
+    }
+
+    sanitize(url: string) {
+        return this.sanitizer.bypassSecurityTrustUrl(url);
     }
 
     private fbLikeIframeSrc() {
@@ -37,5 +48,17 @@ export class AppWizardDonePage implements ng.OnInit {
         js.id = id;
         js.src = `//connect.facebook.net/${this.wizard.translate.currentLang === 'fr' ? "fr_FR" : "en_US"}/sdk.js#xfbml=1&version=v2.8&appId=${this.settings.facebookAppId}`;
         fjs.parentNode.insertBefore(js, fjs);
+    }
+
+    private generateEvent() {
+        let event = new CalendarEvent();
+        event.title = "Spray Net Consultation";
+        event.address = this.wizard.data.address;
+        event.description = "Spray Net Consultation";
+        event.start = new Date(this.wizard.data.bookTime);
+        event.end = moment(this.wizard.data.bookTime).add(30, 'minutes').toDate();
+
+        this.googleCal = AddToCalendar.google(event);
+        this.iCal = AddToCalendar.ical(event);
     }
 }
