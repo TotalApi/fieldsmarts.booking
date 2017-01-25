@@ -1,9 +1,12 @@
 /// <binding />
 var webpack = require('webpack');
 var path = require('path');
+var glob = require('glob');
+
 var WebpackShellPlugin = require('webpack-shell-plugin');
 var WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var PurifyCSSPlugin = require('purifycss-webpack-plugin');
 
 function root(__path) {
     return path.resolve(__path);
@@ -34,7 +37,7 @@ var basePlugins = [
     new WebpackShellPlugin({
         onBuildStart: ['echo Build started at %time%'],
         onBuildExit: ['echo Build finished at %time%']
-    })
+    }),
 ];
 
 var devPlugins = [
@@ -57,6 +60,9 @@ var prodPlugins = [
     new webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: false
+    }),
+    new PurifyCSSPlugin({
+        paths: glob.sync(path.join(__dirname, 'src/*.html'))
     })
 ];
 

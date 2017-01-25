@@ -21,9 +21,25 @@ export class AppWizardCalendarPage {
 
     constructor(public wizard: AppWizardService) {
         this.model = wizard.data;
+        this.model.franchise = 'corporate';
+        this.model.salesNumber = '17011295915';
+        this.model.agreedForBook = false;
     }
 
     private setDayTime(dayTime: DayTime) {
         this.selectedDayTime = dayTime;
     }
+
+    private check(): boolean {
+        if (!this.wizard.data.agreedForBook) {
+            $('.ui.modal').modal({blurring: true}).modal('show');
+        }
+
+        return this.wizard.data.agreedForBook;
+    }
+
+    private closePopup() {
+        this.model.agreedForBook = false;
+    }
+
 }
