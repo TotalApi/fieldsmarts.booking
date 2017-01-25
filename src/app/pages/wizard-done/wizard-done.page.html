@@ -9,15 +9,18 @@
         <div class="like">
             <div id="fb-like-btn" class="fb-like" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
         </div>
+        <div class="text-about" i18n>How did you here about us?</div>
     </div>
     
     <div *ngIf="!wizard.data.callMe">
             <div>Set a reminder in your calendar</div>
             <a target="_blank" [href]="googleCal">Add to Google Cal</a>
             <br />
-            <a target="_blank" [href]="sanitize(iCal)">Add to iCal/Outlook</a>
-        </div>
+        <a target="_blank" [href]="sanitize(iCal)">Add to iCal/Outlook</a>
+        <br /><br /><br />
+        <a href="https://www.spray-net.com">Go to SPRAY-NET.COM</a>
 
-        <div class="text-about" i18n>How did you here about us?</div>
+    </div>
+        
 </wizard-page>
 
