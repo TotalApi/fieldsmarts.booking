@@ -113,6 +113,8 @@
     <Content Include="src\app\pages\wizard-validate\wizard-validate.page.scss" />
     <Content Include="src\app\pages\wizard-done\wizard-done.page.scss" />
     <Content Include="src\app\pages\recomendation-source\recomendation-source.page.scss" />
+    <Content Include="src\assets\i18n\en.json" />
+    <Content Include="src\assets\i18n\fr.json" />
     <None Include="tsconfig.json" />
     <None Include="webpack.config.js" />
     <None Include="prebuild.bat" />

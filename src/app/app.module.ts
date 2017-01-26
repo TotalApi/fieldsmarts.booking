@@ -13,7 +13,7 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
     3rd party
 */
 import * as ng2Translate from 'ng2-translate';
-//import * as primeng from 'primeng/primeng';
+
 /*
     App
 */
@@ -55,8 +55,8 @@ import {AppSettings} from './services/settings.service';
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         {
             provide: ng2Translate.TranslateLoader,
-            useFactory: (http: Http, settings: AppSettings) => new AppTranslateLoader(http, settings.translateApiUrl, '.json'),
-            deps: [Http, AppSettings]
+            useFactory: () => new AppTranslateLoader(),
+            deps: []
         },
         {
             provide: ng2Translate.MissingTranslationHandler,
