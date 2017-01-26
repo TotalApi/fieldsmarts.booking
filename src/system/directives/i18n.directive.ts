@@ -24,11 +24,22 @@ export class i18nDirective implements AfterViewInit, OnDestroy {
     ngAfterViewInit() {
         // if there is a subscription to onLangChange, clean it
         this.dispose();
-
-        this.translateElements = this.el.nativeElement.querySelectorAll("[i18n]");
-        if (!this.translateElements || this.translateElements.length === 0) {
-            this.translateElements = [this.el.nativeElement];
+        this.translateElements = [];
+        let _translateElements = this.el.nativeElement.querySelectorAll("[i18n]");
+        if (!_translateElements || _translateElements.length === 0) {
+            _translateElements = [this.el.nativeElement];
         }
+
+        for (let i = 0; i < _translateElements.length; i++) {
+            const el = _translateElements[i];
+            const subElements = el.querySelectorAll(".i18n-content");
+            if (subElements && subElements.length > 0) {
+                this.translateElements.push(...subElements);
+            } else {
+                this.translateElements.push(el);
+            }
+        }
+
         if (this.translate()) {
             // subscribe to onTranslationChange event, in case the translations change
             if (!this.onTranslationChange) {
@@ -77,6 +88,12 @@ export class i18nDirective implements AfterViewInit, OnDestroy {
     private translateElement(el: HTMLElement) {
         const key = el['__i18n__key__'] || this.key || (el['__i18n__key__'] = el.innerHTML);
         if (key) {
+            const res = this.translateService.instant(key);
+            if (res) {
+                el.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, res);
+                this.cdRef.markForCheck();
+            }
+/*
             this.translateService.get(key)
                 .subscribe(res => {
                     if (res) {
@@ -84,6 +101,7 @@ export class i18nDirective implements AfterViewInit, OnDestroy {
                         this.cdRef.markForCheck();
                     }
                 });
+*/
         }
         return !!key;
     }

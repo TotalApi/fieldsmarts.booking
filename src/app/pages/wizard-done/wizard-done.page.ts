@@ -3,12 +3,13 @@ import { AppRoute } from 'src/app/app.routes';
 import {DomSanitizer} from '@angular/platform-browser';
 import {AppWizardService} from "../../services/wizard.service";
 import {GeocodeService} from '../../services/geocode.service';
-import { AgmCoreModule, MapsAPILoader } from 'angular2-google-maps/core';
+import {AgmCoreModule, MapsAPILoader} from 'angular2-google-maps/core';
 import {UssInputComponent} from '../../../system/components/semanticui/input/inputs.component';
 import {CalendarEvent} from '../../common/AddToCalendar';
 import {AppSettings} from '../../services/settings.service';
-import {AddToCalendar} from '../../common/AddToCalendar';
-declare var google: any;
+import { AddToCalendar } from '../../common/AddToCalendar';
+import * as system from 'src/system';
+
 
 @ng.Component({
     styleUrls: ['./wizard-done.page.scss'],
@@ -24,8 +25,12 @@ export class AppWizardDonePage implements ng.OnInit {
     constructor(public wizard: AppWizardService, private settings: AppSettings, private sanitizer: DomSanitizer) { }
 
     ngOnInit(): void {
-        this.fbLikeIframeSrc();
-        this.generateEvent();
+        if (this.wizard.data.callMe) {
+            this.fbLikeIframeSrc();    
+        }
+        else if (this.wizard.data.bookTime) {
+            this.generateEvent();    
+        }
     }
 
     sanitize(url: string) {
@@ -37,6 +42,8 @@ export class AppWizardDonePage implements ng.OnInit {
         if (likeBtn) {
             likeBtn.setAttribute('data-href', this.settings.siteToLike);
             this.initFbSdk();
+        } else {
+            setTimeout(() => this.fbLikeIframeSrc());
         }
     }
 
@@ -46,19 +53,23 @@ export class AppWizardDonePage implements ng.OnInit {
         if (document.getElementById(id)) return;
         const js = document.createElement('script');
         js.id = id;
-        js.src = `//connect.facebook.net/${this.wizard.translate.currentLang === 'fr' ? "fr_FR" : "en_US"}/sdk.js#xfbml=1&version=v2.8&appId=${this.settings.facebookAppId}`;
+        js.src = `//connect.facebook.net/${this.wizard.translate.currentCulture}/sdk.js#xfbml=1&version=v2.8&appId=${this.settings.facebookAppId}`;
         fjs.parentNode.insertBefore(js, fjs);
     }
 
     private generateEvent() {
-        let event = new CalendarEvent();
-        event.title = "Spray Net Consultation";
-        event.address = this.wizard.data.address;
-        event.description = "Spray Net Consultation";
-        event.start = new Date(this.wizard.data.bookTime);
-        event.end = moment(this.wizard.data.bookTime).add(30, 'minutes').toDate();
+        try {
+            const event = new CalendarEvent();
+            event.title = "Spray Net Consultation";
+            event.address = this.wizard.data.address;
+            event.description = "Spray Net Consultation";
+            event.start = new Date(this.wizard.data.bookTime);
+            event.end = moment(this.wizard.data.bookTime).add(30, 'minutes').toDate();
 
-        this.googleCal = AddToCalendar.google(event);
-        this.iCal = AddToCalendar.ical(event);
+            this.googleCal = AddToCalendar.google(event);
+            this.iCal = AddToCalendar.ical(event);
+        } catch (e) {
+            system.error(e);
+        } 
     }
 }

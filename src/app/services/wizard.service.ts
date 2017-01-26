@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AppService, Json } from "src/system";
 import { Surface } from '../models/Surface';
 import * as ng2Translate from 'ng2-translate';
-
+import {AppTranslateService} from './translate.service';
 
 @Injectable()
 @AppService()
@@ -40,7 +40,7 @@ export class AppWizardService {
         return res.split('/')[0];
     }
 
-    constructor(public router: Router, public translate: ng2Translate.TranslateService) {
+    constructor(public router: Router, public translate: AppTranslateService) {
         try {
             const data = (sessionStorage.getItem("@wizard.service.data") || '').FromJson();
             if (data) {

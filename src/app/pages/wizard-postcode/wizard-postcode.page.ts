@@ -67,7 +67,7 @@ export class AppWizardPostCodePage {
             this.nextAction = {
                 caption: 'Go to SPRAY-NET.COM',
                 action: () => {
-                    window.location.href = 'http://spray-net.com';
+                    window.location.href = 'https://www.spray-net.com';
                 }
             };
             this.backAction = {

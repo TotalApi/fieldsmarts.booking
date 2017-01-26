@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable, isDevMode } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { AppService } from "src/system";
@@ -8,7 +8,7 @@ import * as ng2Translate from 'ng2-translate';
 @AppService()
 export class AppTranslateService {
 
-    constructor(private translate: ng2Translate.TranslateService) {
+    constructor(public translate: ng2Translate.TranslateService) {
         // this language will be used as a fallback when a translation isn't found in the current language
         translate.setDefaultLang('en');
 
@@ -18,10 +18,31 @@ export class AppTranslateService {
         translate.onLangChange.subscribe(e => this.langChanged(e));
     }
 
-    langChanged(e: ng2Translate.LangChangeEvent) {
+    init() {
     }
 
-    init() {
+    use(lang: string): Observable<any> {
+        return this.translate.use(lang);
+    }
+
+    getBrowserLang(): string {
+        return this.translate.getBrowserLang();
+    }
+
+    get currentLang() {
+        return this.translate.currentLang;
+    }
+
+    get currentCulture() {
+        switch (this.currentLang) {
+            case 'en': return 'en_US';
+            case 'fr': return 'fr_FR';
+            default: return `${this.currentLang}_${this.currentLang.toUpperCase()}`;
+        }
+    }
+
+    langChanged(e: ng2Translate.LangChangeEvent) {
+        moment.locale(e.lang);
     }
 }
 
@@ -40,12 +61,24 @@ export class AppTranslateLoader extends ng2Translate.TranslateStaticLoader {
 
 
 export class AppMissingTranslationHandler extends ng2Translate.MissingTranslationHandler {
+    private _testMode: boolean;
+
     constructor(private http: Http) {
         super();
     }    
 
     handle(params: ng2Translate.MissingTranslationHandlerParams) {
-        //return `[${params.key}]`;
-        return params.key;
+        if (this._testMode) return '';
+        const pair = params.key.split('|');
+        let value = pair[0];
+        if (pair.length > 1) {
+            this._testMode = true;
+            value = params.translateService.instant(pair[0]) || pair[1];
+            this._testMode = false;
+        } else if (isDevMode) {
+            value = `[${value}]`;
+        }
+        return isDevMode ? `[${value}]` : value;
+        //return value;
     }
 }

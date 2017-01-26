@@ -11,9 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ng = require("@angular/core");
 var app_routes_1 = require("src/app/app.routes");
 var wizard_service_1 = require("../../services/wizard.service");
+var Sales_1 = require("../../models/Sales");
+var sales_service_1 = require("../../services/sales.service");
 var AppWizardValidatePage = (function () {
-    function AppWizardValidatePage(wizard) {
+    function AppWizardValidatePage(wizard, sales) {
         this.wizard = wizard;
+        this.sales = sales;
         this.selectedSurfaces = wizard.data.surfaces.where(function (x) { return x.isSelected; }).toArray();
     }
     AppWizardValidatePage.prototype.editBookingTime = function () {
@@ -21,6 +24,16 @@ var AppWizardValidatePage = (function () {
     };
     AppWizardValidatePage.prototype.editSurfaces = function () {
         this.wizard.go('wizard-surfaces');
+    };
+    AppWizardValidatePage.prototype.saveBookTime = function () {
+        var b = new Sales_1.PostBooking();
+        b.franchisee = this.wizard.data.franchise;
+        b.salesNumber = this.wizard.data.salesNumber;
+        b.timeSlot = new Date(this.wizard.data.bookTime);
+        return this.sales.book(b);
+    };
+    AppWizardValidatePage.prototype.check = function () {
+        return this.saveBookTime();
     };
     return AppWizardValidatePage;
 }());
@@ -31,7 +44,7 @@ AppWizardValidatePage = __decorate([
         encapsulation: ng.ViewEncapsulation.None
     }),
     app_routes_1.AppRoute({ path: 'wizard-validate' }),
-    __metadata("design:paramtypes", [wizard_service_1.AppWizardService])
+    __metadata("design:paramtypes", [wizard_service_1.AppWizardService, sales_service_1.SalesService])
 ], AppWizardValidatePage);
 exports.AppWizardValidatePage = AppWizardValidatePage;
 //# sourceMappingURL=wizard-validate.page.js.map

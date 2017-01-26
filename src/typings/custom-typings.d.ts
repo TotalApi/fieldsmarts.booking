@@ -39,6 +39,7 @@ declare const BACKEND_ADDRESS: string;
 
 declare const $: any;
 declare const _: _.LoDashStatic;
+declare const google: any;
 
 declare const linq: linqjs.Enumerable;
 

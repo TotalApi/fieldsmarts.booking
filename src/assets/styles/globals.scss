@@ -3,10 +3,13 @@
 
 .uss {
     &.row { 
-        margin-bottom: 1em;
+        margin-bottom: 1em !important;
     }
 }
 
+a {
+    cursor: pointer;
+}
 
 .pointer {
     cursor: pointer!important;

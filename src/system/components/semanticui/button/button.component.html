@@ -5,5 +5,5 @@
 >
     <i *ngIf="icon" class="{{icon}} icon"></i>
     <div class="uss-button-content" *ngIf="!content.innerText">{{defaultContent}}</div>
-    <div class="uss-button-content" #content><ng-content></ng-content></div>
+    <div class="uss-button-content i18n-content" #content><ng-content></ng-content></div>
 </button>
