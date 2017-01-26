@@ -73,7 +73,7 @@ export class AppMissingTranslationHandler extends ng2Translate.MissingTranslatio
         let value = pair[0];
         if (pair.length > 1) {
             this._testMode = true;
-            value = params.translateService.instant(pair[0]) || pair[1];
+            value = params.translateService.instant(pair[0]) || pair[1] || pair[0];
             this._testMode = false;
         } else if (isDevMode) {
             value = `[${value}]`;

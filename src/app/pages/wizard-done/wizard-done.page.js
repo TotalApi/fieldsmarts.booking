@@ -15,6 +15,7 @@ var wizard_service_1 = require("../../services/wizard.service");
 var AddToCalendar_1 = require("../../common/AddToCalendar");
 var settings_service_1 = require("../../services/settings.service");
 var AddToCalendar_2 = require("../../common/AddToCalendar");
+var system = require("src/system");
 var AppWizardDonePage = (function () {
     function AppWizardDonePage(wizard, settings, sanitizer) {
         this.wizard = wizard;
@@ -22,17 +23,25 @@ var AppWizardDonePage = (function () {
         this.sanitizer = sanitizer;
     }
     AppWizardDonePage.prototype.ngOnInit = function () {
-        this.fbLikeIframeSrc();
-        this.generateEvent();
+        if (this.wizard.data.callMe) {
+            this.fbLikeIframeSrc();
+        }
+        else if (this.wizard.data.bookTime) {
+            this.generateEvent();
+        }
     };
     AppWizardDonePage.prototype.sanitize = function (url) {
         return this.sanitizer.bypassSecurityTrustUrl(url);
     };
     AppWizardDonePage.prototype.fbLikeIframeSrc = function () {
+        var _this = this;
         var likeBtn = document.getElementById('fb-like-btn');
         if (likeBtn) {
             likeBtn.setAttribute('data-href', this.settings.siteToLike);
             this.initFbSdk();
+        }
+        else {
+            setTimeout(function () { return _this.fbLikeIframeSrc(); });
         }
     };
     AppWizardDonePage.prototype.initFbSdk = function () {
@@ -42,18 +51,23 @@ var AppWizardDonePage = (function () {
             return;
         var js = document.createElement('script');
         js.id = id;
-        js.src = "//connect.facebook.net/" + (this.wizard.translate.currentLang === 'fr' ? "fr_FR" : "en_US") + "/sdk.js#xfbml=1&version=v2.8&appId=" + this.settings.facebookAppId;
+        js.src = "//connect.facebook.net/" + this.wizard.translate.currentCulture + "/sdk.js#xfbml=1&version=v2.8&appId=" + this.settings.facebookAppId;
         fjs.parentNode.insertBefore(js, fjs);
     };
     AppWizardDonePage.prototype.generateEvent = function () {
-        var event = new AddToCalendar_1.CalendarEvent();
-        event.title = "Spray Net Consultation";
-        event.address = this.wizard.data.address;
-        event.description = "Spray Net Consultation";
-        event.start = new Date(this.wizard.data.bookTime);
-        event.end = moment(this.wizard.data.bookTime).add(30, 'minutes').toDate();
-        this.googleCal = AddToCalendar_2.AddToCalendar.google(event);
-        this.iCal = AddToCalendar_2.AddToCalendar.ical(event);
+        try {
+            var event_1 = new AddToCalendar_1.CalendarEvent();
+            event_1.title = "Spray Net Consultation";
+            event_1.address = this.wizard.data.address;
+            event_1.description = "Spray Net Consultation";
+            event_1.start = new Date(this.wizard.data.bookTime);
+            event_1.end = moment(this.wizard.data.bookTime).add(30, 'minutes').toDate();
+            this.googleCal = AddToCalendar_2.AddToCalendar.google(event_1);
+            this.iCal = AddToCalendar_2.AddToCalendar.ical(event_1);
+        }
+        catch (e) {
+            system.error(e);
+        }
     };
     return AppWizardDonePage;
 }());

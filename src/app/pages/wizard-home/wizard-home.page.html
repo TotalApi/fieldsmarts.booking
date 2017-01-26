@@ -1,10 +1,10 @@
 <wizard-page>
-    <h1 i18n>Book a FREE estimate</h1>
+    <h1 i18n="WIZARD.HOME.TITLE">Book a FREE estimate</h1>
 
     <div class="button-group">
-        <uss-button i18n type="ok" (click)="callMe()" *ngIf="isCurrentTimeOff()">Call Me</uss-button>    
-        <uss-button i18n type="ok" (click)="call()" *ngIf="!isCurrentTimeOff()">Call</uss-button>
-        <uss-button i18n type="ok" (click)="bookOnline()">Book Online -></uss-button>
+        <uss-button i18n="WIZARD.HOME.CALLME" type="ok" (click)="callMe()" *ngIf="isCurrentTimeOff()">Call Me</uss-button>    
+        <uss-button i18n="WIZARD.HOME.CALL" type="ok" (click)="call()" *ngIf="!isCurrentTimeOff()">Call</uss-button>
+        <uss-button i18n="WIZARD.HOME.BOOK_ONLINE" type="ok" (click)="bookOnline()">Book Online -></uss-button>
     </div>
 
 </wizard-page>

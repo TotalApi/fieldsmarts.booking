@@ -86,7 +86,16 @@ export class i18nDirective implements AfterViewInit, OnDestroy {
     }
 
     private translateElement(el: HTMLElement) {
-        const key = el['__i18n__key__'] || this.key || (el['__i18n__key__'] = el.innerHTML);
+        let key = el['__i18n__key__'];
+        if (!key) {
+            key = this.key;
+            if (key) {
+                key = `${key}|${(el.innerText || '').trim()}`;
+            } else {
+                key = (el.innerText || '').trim();
+            }
+            el['__i18n__key__'] = key;
+        }
         if (key) {
             const res = this.translateService.instant(key);
             if (res) {
