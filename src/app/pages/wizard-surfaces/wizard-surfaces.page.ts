@@ -67,7 +67,7 @@ export class AppWizardSurfacesPage {
         if (this.wizard.data.isQualifiedLead && 
             this.surfaces.where(x => x.isSelected && x.name !== 'not_listed')
                 .selectMany(x => x.options as SurfaceOption[])
-                .where(x => x && x.isSelected)
+                .where((x: SurfaceOption) => x && x.isSelected)
                 .all((x: SurfaceOption) => ['wood', 'rusted', 'painted'].contains(x.name))) {
             
             $('.ui.modal').modal({blurring: true}).modal('show');
