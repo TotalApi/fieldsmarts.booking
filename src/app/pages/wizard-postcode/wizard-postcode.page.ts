@@ -24,6 +24,7 @@ export class AppWizardPostCodePage {
     public nextAction: WizardCommand = this.defaultNextAction;
     public error: string;
     public consultant: IUserInfo;
+    public partner: IUserInfo;
 
     constructor(public sales: SalesService,
         public wizard: AppWizardService,
@@ -80,6 +81,7 @@ export class AppWizardPostCodePage {
                 }
             };
             this.consultant = await this.account.getUserInfo(ass.salesConsultant);
+            this.partner = await this.account.getFirstFranchisePartner(this.consultant.franchise);
             this.franchise.get(this.consultant.franchise, this.consultant.region).then(fran => {
                 if (fran) {
                     this.consultant.franchise = fran.displayName;

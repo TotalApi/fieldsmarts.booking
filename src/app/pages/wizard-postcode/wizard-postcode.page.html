@@ -14,9 +14,20 @@
     <div *ngIf="errorState==='outbound_code'">
         <div class="field uss-input uss-component">
             <div i18n>Your closest franchise partner will be in touch within the next 24-48 hours.</div> 
+            
+            <div class="parner-name-fran">
+                <div class="parner-name">{{partner?.name}}</div>
+                <div class="parner-franchise">{{partner?.franchise}}</div>
+            </div>
+
+            <div i18n>You can also contact him at:</div>
+            <div class="parner-phone">{{partner?.tel}}</div>
+            <div class="parner-email">{{partner?.userName}}</div>
+            
+            <div i18n>Or you can call to sales consultant.</div> 
+
             <div class="parner-name-fran">
                 <div class="parner-name">{{consultant?.name}}</div>
-                <div class="parner-franchise">{{consultant?.franchise}}</div>
             </div> 
 
             <div i18n>You can also contact him at:</div>
