@@ -19,13 +19,11 @@ export class SurfacesService extends UssApiService {
 
     public getSurfaces(): Surface[] {
         return [
-            { name: 'brick', description: 'Brick', options: [{ description: 'Rusted' }, { description: 'Wood' }, { description: 'None' }] as SurfaceOption[] } as Surface, 
-            { name: 'windows', description: 'Windows', options: [{ description: 'Rusted' }, { description: 'Wood' }, { description: 'None' }] as SurfaceOption[] } as Surface, 
+            { name: 'brick', description: 'Brick', options: [{ name: 'ok', description: 'Normal' }, { name: 'rusted', description: 'Rusted' }, { name: 'wood', description: 'Wood' }, {name: 'repainted', description: 'Repainted' }] as SurfaceOption[] } as Surface, 
+            { name: 'windows', description: 'Windows', options: [{ name: 'ok', description: 'Normal' },{ name: 'rusted', description: 'Rusted' }, { name: 'wood', description: 'Wood' }, {name: 'repainted', description: 'Repainted' }] as SurfaceOption[] } as Surface, 
             { name: 'soffits', description: 'Soffits', options: [] as SurfaceOption[] } as Surface, 
-            { name: 'stucco', description: 'Stucco', options: [{ description: 'Rusted' }, { description: 'Wood' }, { description: 'None' }] as SurfaceOption[] } as Surface, 
-            { name: 'wood', description: 'Wood' } as Surface,
-            { name: 'rusted', description: 'Rusted' } as Surface,
-            { name: 'repainted', description: 'Repainted' } as Surface,
+            { name: 'stucco', description: 'Stucco', options: [{ name: 'ok', description: 'Normal' },{ name: 'rusted', description: 'Rusted' }, { name: 'wood', description: 'Wood' }, {name: 'repainted', description: 'Repainted' }] as SurfaceOption[] } as Surface, 
+
             { name: 'not_listed', description: 'My exterior not listed' } as Surface,
 
         ];

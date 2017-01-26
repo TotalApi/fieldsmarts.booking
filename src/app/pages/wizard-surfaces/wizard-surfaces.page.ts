@@ -34,11 +34,11 @@ export class AppWizardSurfacesPage {
     }
 
     private checkIfSurfaceSelected(surface: Surface) {
-        if (surface.options) {
+        if (surface.options && surface.options.length > 0) {
             if (typeof(surface.options) === 'string') {
-                return surface.options.length > 0;
+                return true;
             } else {
-                return surface.options.length === 0 || (surface.options as SurfaceOption[]).any(x => x.isSelected);
+                return (surface.options as SurfaceOption[]).any(x => x.isSelected);
             }
         } else {
             return surface.isSelected;
@@ -61,7 +61,7 @@ export class AppWizardSurfacesPage {
         const ifAnySelected = this.surfaces.any(x => this.checkIfSurfaceSelected(x));
         this.forgotted = !ifAnySelected;
 
-        if (!this.allowWithBadSurfaces && this.surfaces.where(x => x.isSelected).any(x => ['wood', 'rusted', 'repainted'].contains(x.name))) {
+        if (!this.allowWithBadSurfaces && this.surfaces.where(x => x.isSelected).selectMany(x => x.options as SurfaceOption[]).any(x => x.isSelected && ['wood', 'rusted', 'repainted'].contains(x.name))) {
             $('.ui.modal').modal({blurring: true}).modal('show');
             return false;
         }
