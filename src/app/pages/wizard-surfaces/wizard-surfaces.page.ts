@@ -16,8 +16,9 @@ import {SurfaceOption} from '../../models/Surface';
 @AppRoute({ path: 'wizard-surfaces' })          
 export class AppWizardSurfacesPage {
 
-    private surfaces = [];
+    private surfaces: Surface[] = [];
     private forgotted: boolean;
+    private allowWithBadSurfaces: boolean;
 
     constructor(public sales: SalesService,
         public wizard: AppWizardService,
@@ -32,12 +33,23 @@ export class AppWizardSurfacesPage {
         return this.router.navigate(['surface-options', surface.name]);
     }
 
+    private checkIfSurfaceSelected(surface: Surface) {
+        if (surface.isSelected && surface.options && surface.options.length > 0) {
+            if (typeof(surface.options) === 'string') {
+                return true;
+            } else {
+                return (surface.options as SurfaceOption[]).any(x => x.isSelected);
+            }
+        } else {
+            return surface.isSelected;
+        }
+    }
+
     select(surface: Surface) {
         surface.isSelected = !surface.isSelected;
 
-        const ifAnySelected = () => (surface.options as SurfaceOption[]).any(x => x.isSelected);
-        if (surface.name === 'not_listed' || !ifAnySelected()) {
-            surface.options.length > 0 && this.router.navigate(['surface-options', surface.name]);
+        if (surface.name === 'not_listed' || !this.checkIfSurfaceSelected(surface)) {
+            (surface.options && surface.options.length > 0) && this.router.navigate(['surface-options', surface.name]);
         }
     }
 
@@ -46,9 +58,24 @@ export class AppWizardSurfacesPage {
     }
 
     check(): boolean {
-        const ifAnySelected = this.surfaces.where(x => x.isSelected).selectMany(x => x.options).any(x => x && (typeof(x) === 'string' ? x.length > 0 : (x as SurfaceOption).isSelected));
+        const ifAnySelected = this.surfaces.any(x => this.checkIfSurfaceSelected(x));
         this.forgotted = !ifAnySelected;
 
+        if (!this.allowWithBadSurfaces && this.surfaces.where(x => x.isSelected && x.name !== 'not_listed').selectMany(x => x.options as SurfaceOption[]).any((x: SurfaceOption) => x && x.isSelected && ['wood', 'rusted', 'repainted'].contains(x.name))) {
+            $('.ui.modal').modal({blurring: true}).modal('show');
+            return false;
+        }
+
         return !this.forgotted;
+    }
+
+    closePopup() {
+        $('.ui.modal').modal('hide');
+    }
+
+    next() {
+        $('.ui.modal').modal('hide');
+        this.allowWithBadSurfaces = true;
+        this.wizard.next();
     }
 }

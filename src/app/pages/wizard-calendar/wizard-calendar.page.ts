@@ -10,7 +10,8 @@ import {TimeBookingComponent} from '../../components/time-booking/time-booking.c
     encapsulation: ng.ViewEncapsulation.None
 })
 @AppRoute({ path: 'wizard-calendar' })
-export class AppWizardCalendarPage {
+export class AppWizardCalendarPage implements ng.OnInit {
+    
 
     @ng.ViewChild("timeBooking")
     timeBooking: ng.ComponentRef<TimeBookingComponent>;
@@ -18,12 +19,18 @@ export class AppWizardCalendarPage {
     public selectedDayTime: DayTime = 'morning';
 
     public model: any;
+    private loading: boolean = true;
+
+    private loaded(x) {
+        this.loading = !x;
+    }
 
     constructor(public wizard: AppWizardService) {
         this.model = wizard.data;
         //this.model.franchise = 'corporate';
         //this.model.salesNumber = '17011295915';
         this.model.agreedForBook = false;
+
     }
 
     private setDayTime(dayTime: DayTime) {
@@ -31,6 +38,10 @@ export class AppWizardCalendarPage {
     }
 
     private check(): boolean {
+        if (!this.selectedDayTime) {
+            return false;
+        }
+
         if (!this.wizard.data.agreedForBook) {
             $('.ui.modal').modal({blurring: true}).modal('show');
         }
@@ -46,6 +57,9 @@ export class AppWizardCalendarPage {
     private next() {
         $('.ui.modal').modal('hide');
         this.wizard.next();
+    }
+
+    ngOnInit(): void {
     }
 
 }
