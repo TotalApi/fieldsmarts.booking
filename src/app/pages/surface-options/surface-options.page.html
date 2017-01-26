@@ -1,6 +1,6 @@
 <div *ngIf="surface.name !== 'not_listed'">
     <div *ngFor="let option of surface.options">
-        <uss-checkbox type="toggle" [label]="option.description" [ussDataSource]="option" [fieldName]="'isSelected'">
+        <uss-checkbox type="toggle" [label]="option.description" [ussDataSource]="option" [fieldName]="'isSelected'" (modelChange)="modelChanged(option)">
         </uss-checkbox>
         <br/>
     </div>

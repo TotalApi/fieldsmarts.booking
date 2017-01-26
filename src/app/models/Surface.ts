@@ -1,7 +1,7 @@
 ﻿export class SurfaceOption {
     name: string;
     description: string;
-    isSelected: boolean;
+    isSelected?: boolean;
 }
 
 export class Surface {

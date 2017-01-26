@@ -61,7 +61,7 @@ export class AppWizardSurfacesPage {
         const ifAnySelected = this.surfaces.any(x => this.checkIfSurfaceSelected(x));
         this.forgotted = !ifAnySelected;
 
-        if (!this.allowWithBadSurfaces && this.surfaces.where(x => x.isSelected && x.name !== 'not_listed').selectMany(x => x.options as SurfaceOption[]).any((x: SurfaceOption) => x && x.isSelected && ['wood', 'rusted', 'repainted'].contains(x.name))) {
+        if (!this.allowWithBadSurfaces && this.surfaces.where(x => x.isSelected && x.name !== 'not_listed').selectMany(x => x.options as SurfaceOption[]).any((x: SurfaceOption) => x && x.isSelected && ['wood', 'rusted', 'painted'].contains(x.name))) {
             $('.ui.modal').modal({blurring: true}).modal('show');
             return false;
         }
