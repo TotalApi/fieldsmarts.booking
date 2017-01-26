@@ -25,7 +25,8 @@ export class AppWizardService {
         agreedForBook: false,
         callMe: undefined,
         bookTime: undefined,
-        surfaces: undefined
+        surfaces: undefined,
+        leadRejected: false
     }
 
     public state = {
