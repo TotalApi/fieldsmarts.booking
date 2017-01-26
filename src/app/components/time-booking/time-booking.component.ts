@@ -53,11 +53,14 @@ export class TimeBookingComponent implements OnInit, OnChanges {
     @Input() franchise: string;
     @Input() salesNumber: string;
 
+    @Output() loaded = new EventEmitter<boolean>();
+
     ngOnInit() {
         this.populateMonthList('en');
         this.getSalesAvailableSlots(moment().toDate()).then(() => {
             this.configurateTimeSlots();
-        });
+            this.loaded.emit(true);
+        }).catch(() => this.loaded.emit(true));
     }
 
     public configurateTimeSlots() {
