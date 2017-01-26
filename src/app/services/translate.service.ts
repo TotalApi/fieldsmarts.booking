@@ -1,7 +1,7 @@
 ﻿import { Injectable, isDevMode } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
-import { AppService } from "src/system";
+import { AppService, Json } from "src/system";
 import * as ng2Translate from 'ng2-translate';
 
 @Injectable()
@@ -46,16 +46,19 @@ export class AppTranslateService {
     }
 }
 
-export class AppTranslateLoader extends ng2Translate.TranslateStaticLoader {
-
-    constructor(private _http: Http, private _prefix?: string, private _suffix?: string) {
-        super(_http, _prefix, _suffix);
-    }
+export class AppTranslateLoader extends ng2Translate.TranslateLoader {
 
     getTranslation(lang: string): Observable<any> {
+/*
         if (lang !== 'en' && lang !== 'fr')
             lang = 'en';
-        return super.getTranslation(`lang_${lang}`);
+*/
+        let translation = {};
+        try {
+            translation = require(`../../assets/i18n/${lang}.json`);
+        } catch (e) {
+        } 
+        return Observable.fromPromise(Promise.resolve(translation));
     }
 }
 
@@ -73,12 +76,14 @@ export class AppMissingTranslationHandler extends ng2Translate.MissingTranslatio
         let value = pair[0];
         if (pair.length > 1) {
             this._testMode = true;
-            value = params.translateService.instant(pair[0]) || pair[1] || pair[0];
+            value = params.translateService.instant(pair[0]);
+            if (!value) {
+                value = `[${pair[1] || pair[0]}]`;
+            }
             this._testMode = false;
         } else if (isDevMode) {
-            value = `[${value}]`;
+            value = `[[${value}]]`;
         }
-        return isDevMode ? `[${value}]` : value;
-        //return value;
+        return value;
     }
 }
