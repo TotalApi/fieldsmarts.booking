@@ -23,7 +23,11 @@ export class SurfacesService extends UssApiService {
             { name: 'windows', description: 'Windows', options: [{ description: 'Rusted' }, { description: 'Wood' }, { description: 'None' }] as SurfaceOption[] } as Surface, 
             { name: 'soffits', description: 'Soffits', options: [] as SurfaceOption[] } as Surface, 
             { name: 'stucco', description: 'Stucco', options: [{ description: 'Rusted' }, { description: 'Wood' }, { description: 'None' }] as SurfaceOption[] } as Surface, 
-            { name: 'not_listed', description: 'My exterior not listed' } as Surface
+            { name: 'wood', description: 'Wood' } as Surface,
+            { name: 'rusted', description: 'Rusted' } as Surface,
+            { name: 'repainted', description: 'Repainted' } as Surface,
+            { name: 'not_listed', description: 'My exterior not listed' } as Surface,
+
         ];
     }
     

@@ -134,7 +134,7 @@ export class AppWizardService {
             case 'wizard-email': return 'wizard-phone';
             case 'wizard-location': return 'wizard-email';
             case 'wizard-postcode': return this.data.callMe ? 'wizard-email' : 'wizard-location';
-            case 'wizard-calendar': return 'wizard-postcode';
+            case 'wizard-calendar': return 'wizard-surfaces';
             case 'wizard-surfaces': return 'wizard-postcode';
             case 'wizard-validate': return 'wizard-calendar';
 

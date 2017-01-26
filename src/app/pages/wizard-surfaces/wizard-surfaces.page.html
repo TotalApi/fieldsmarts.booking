@@ -12,7 +12,26 @@
             <button (click)="select(surface)">+</button>
             <span *ngIf="surface.isSelected"> >>> </span>
             {{surface.description}}
-            <a *ngIf="surface.name !== 'not_listed' && surface.options.length > 0" (click)="showOptions(surface)">Options</a>
+            <a *ngIf="surface.name !== 'not_listed' && surface.options && surface.options.length > 0" (click)="showOptions(surface)">Options</a>
         </li>
     </ul>
+    
+    <div class="ui modal">
+        <div class="image content">
+            
+            <div class="description">
+                <div>
+                    Unfortunatelly, we dont paint wood or previously painted surfaces. 
+                </div>
+                <div>
+                    Is there another exterior surface you'd like to paint?.
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <button class="ui deny button" (click)="closePopup()">Yes</button>
+            <button class="ui deny button" (click)="next()">No</button>
+        </div>
+    </div>
+
 </wizard-page>
