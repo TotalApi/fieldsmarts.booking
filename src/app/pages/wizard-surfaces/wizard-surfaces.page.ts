@@ -16,7 +16,7 @@ import {SurfaceOption} from '../../models/Surface';
 @AppRoute({ path: 'wizard-surfaces' })          
 export class AppWizardSurfacesPage {
 
-    private surfaces = [];
+    private surfaces: Surface[] = [];
     private forgotted: boolean;
     private allowWithBadSurfaces: boolean;
 
@@ -34,7 +34,7 @@ export class AppWizardSurfacesPage {
     }
 
     private checkIfSurfaceSelected(surface: Surface) {
-        if (surface.options && surface.options.length > 0) {
+        if (surface.isSelected && surface.options && surface.options.length > 0) {
             if (typeof(surface.options) === 'string') {
                 return true;
             } else {
@@ -61,7 +61,7 @@ export class AppWizardSurfacesPage {
         const ifAnySelected = this.surfaces.any(x => this.checkIfSurfaceSelected(x));
         this.forgotted = !ifAnySelected;
 
-        if (!this.allowWithBadSurfaces && this.surfaces.where(x => x.isSelected).selectMany(x => x.options as SurfaceOption[]).any(x => x.isSelected && ['wood', 'rusted', 'repainted'].contains(x.name))) {
+        if (!this.allowWithBadSurfaces && this.surfaces.where(x => x.isSelected && x.name !== 'not_listed').selectMany(x => x.options as SurfaceOption[]).any(x => x.isSelected && ['wood', 'rusted', 'repainted'].contains(x.name))) {
             $('.ui.modal').modal({blurring: true}).modal('show');
             return false;
         }
