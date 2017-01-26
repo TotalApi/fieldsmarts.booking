@@ -19,6 +19,8 @@ export class AppWizardSurfacesPage {
     private surfaces: Surface[] = [];
     private forgotted: boolean;
 
+    public nextAction = { action: () => this.check(), caption: 'NEXT ->'};
+
     constructor(public sales: SalesService,
         public wizard: AppWizardService,
         public router: Router,
@@ -62,7 +64,7 @@ export class AppWizardSurfacesPage {
         const ifAnySelected = this.surfaces.any(x => this.checkIfSurfaceSelected(x));
         this.forgotted = !ifAnySelected;
 
-        if (!this.wizard.data.leadRejected && 
+        if (this.wizard.data.isQualifiedLead && 
             this.surfaces.where(x => x.isSelected && x.name !== 'not_listed')
                 .selectMany(x => x.options as SurfaceOption[])
                 .where(x => x && x.isSelected)
@@ -81,7 +83,7 @@ export class AppWizardSurfacesPage {
 
     next() {
         $('.ui.modal').modal('hide');
-        this.wizard.data.leadRejected = true;
+        this.wizard.data.isQualifiedLead = false;
         this.wizard.next();
     }
 }

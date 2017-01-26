@@ -15,6 +15,8 @@ export class AppWizardValidatePage {
 
     private selectedSurfaces: Surface[];
 
+    public nextAction = { action: () => this.check(), caption: 'NEXT ->'};
+
     constructor(public wizard: AppWizardService, public sales: SalesService) {
         this.selectedSurfaces = wizard.data.surfaces.where(x => x.isSelected).toArray();
     }
@@ -27,17 +29,11 @@ export class AppWizardValidatePage {
         this.wizard.go('wizard-surfaces');
     }
 
-    public saveBookTime(): Promise<any> {
-        let b = new PostBooking();
-        b.franchisee = this.wizard.data.franchise;
-        b.salesNumber = this.wizard.data.salesNumber;
-        b.timeSlot = new Date(this.wizard.data.bookTime);
+    public async check(): Promise<boolean> {
+        await this.sales.saveLead();
+        await this.sales.saveBookTime();
 
-        return this.sales.book(b);
-    }
-
-    private check(): Promise<any> {
-        return this.saveBookTime();
+        return true;
     }
 
 }

@@ -21,6 +21,8 @@ export class AppWizardCalendarPage implements ng.OnInit {
     public model: any;
     private loading: boolean = true;
 
+    public nextAction = { action: () => this.check(), caption: 'NEXT ->'};
+
     private loaded(x) {
         this.loading = !x;
     }
