@@ -3,7 +3,7 @@ import { TranslateService, TranslationChangeEvent, LangChangeEvent } from "ng2-t
 import {SystemComponent} from '../decorators/system-component.decorator';
 
 @Directive({
-    selector: '[i18n]',
+    selector: '[i18n], .i18n',
     host: {
         '(click)': 'onClick()'
     }
@@ -25,18 +25,20 @@ export class i18nDirective implements AfterViewInit, OnDestroy {
         // if there is a subscription to onLangChange, clean it
         this.dispose();
         this.translateElements = [];
-        let _translateElements = this.el.nativeElement.querySelectorAll("[i18n]");
+        let _translateElements = this.el.nativeElement.querySelectorAll('[i18n], .i18n');
         if (!_translateElements || _translateElements.length === 0) {
             _translateElements = [this.el.nativeElement];
         }
 
         for (let i = 0; i < _translateElements.length; i++) {
             const el = _translateElements[i];
-            const subElements = el.querySelectorAll(".i18n-content");
+            const subElements = _.filter(el.querySelectorAll('[i18n-content], .i18n-content'), (x: HTMLElement) => x.innerHTML.trim() === x.innerText.trim());
             if (subElements && subElements.length > 0) {
                 this.translateElements.push(...subElements);
             } else {
-                this.translateElements.push(el);
+                if (el.innerHTML.trim() === el.innerText.trim()) {
+                    this.translateElements.push(el);                    
+                }
             }
         }
 

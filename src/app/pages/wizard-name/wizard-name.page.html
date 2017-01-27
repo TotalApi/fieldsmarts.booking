@@ -2,15 +2,15 @@
     title="WIZARD-NAME.TITLE|No Problem!"
     description="WIZARD-NAME.DESCRIPTION|Send us your info & we'll be in touch within the next 24-48 hours."
 >               
-    <uss-input [label]="'WIZARD-NAME.FIRST_NAME_LABEL|First Name *' | translate"
-               placeholder="WIZARD-NAME.FIRST_NAME_PLACEHOLDER|Your First Name"
+    <uss-input i18n="WIZARD-NAME.FIRST_NAME_LABEL" label="First Name *"
+               [placeholder]="'WIZARD-NAME.FIRST_NAME_PLACEHOLDER|Your First Name' | translate"
                fieldName="firstName"
                class="uss row"
                required>
     </uss-input>
 
-    <uss-input [label]="'WIZARD-LAST.FIRST_NAME_LABEL|Last Name *' | translate"
-               placeholder="WIZARD-NAME.LAST_NAME_LABEL|Your Last Name"
+    <uss-input i18n="WIZARD-NAME.LAST_NAME_LABEL" label="Last Name *"
+               [placeholder]="'WIZARD-NAME.LAST_NAME_PLACEHOLDER|Your Last Name' | translate"
                fieldName="lastName"
                required>                 
     </uss-input>

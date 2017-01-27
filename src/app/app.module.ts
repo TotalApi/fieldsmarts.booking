@@ -55,8 +55,8 @@ import {AppSettings} from './services/settings.service';
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         {
             provide: ng2Translate.TranslateLoader,
-            useFactory: () => new AppTranslateLoader(),
-            deps: []
+            useFactory: (http: Http) => new AppTranslateLoader(http),
+            deps: [Http]
         },
         {
             provide: ng2Translate.MissingTranslationHandler,
