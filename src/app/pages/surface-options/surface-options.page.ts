@@ -35,7 +35,7 @@ export class AppSurfacesOptionsPage implements ng.OnInit, ng.OnDestroy, ng.OnCha
     }
 
     private done() {
-        if (this.surface.name !== 'not_listed') {
+        if (this.surface.name !== 'isOther') {
             this.surface.isSelected = this.ifAnyChecked();
         } else {
             this.surface.isSelected = this.surface.options && (this.surface.options as string).length > 0;

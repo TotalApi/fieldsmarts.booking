@@ -47,7 +47,7 @@ export class AppWizardSurfacesPage {
     }
 
     select(surface: Surface) {
-        if (surface.name === 'not_listed') {
+        if (surface.name === 'isOther') {
             this.router.navigate(['surface-options', surface.name]);
         } else if (!this.checkIfSurfaceSelected(surface)) {
             (surface.options && surface.options.length > 0) && this.router.navigate(['surface-options', surface.name]);
@@ -63,14 +63,15 @@ export class AppWizardSurfacesPage {
     check(): boolean {
         const ifAnySelected = this.surfaces.any(x => this.checkIfSurfaceSelected(x));
         this.forgotted = !ifAnySelected;
+        this.wizard.data.isQualifiedLead = true;
 
-        if (this.wizard.data.isQualifiedLead && 
-            this.surfaces.where(x => x.isSelected && x.name !== 'not_listed')
+        if (this.surfaces.where(x => x.isSelected && x.name !== 'isOther')
                 .selectMany(x => x.options as SurfaceOption[])
                 .where((x: SurfaceOption) => x && x.isSelected)
                 .all((x: SurfaceOption) => ['wood', 'rusted', 'painted'].contains(x.name))) {
             
             $('.ui.modal').modal({blurring: true}).modal('show');
+            this.wizard.data.isQualifiedLead = false;
             return false;
         }
 
@@ -83,7 +84,7 @@ export class AppWizardSurfacesPage {
 
     next() {
         $('.ui.modal').modal('hide');
-        this.wizard.data.isQualifiedLead = false;
+        
         this.wizard.next();
     }
 }

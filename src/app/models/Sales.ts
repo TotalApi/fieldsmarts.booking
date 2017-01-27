@@ -89,6 +89,17 @@ export class SalesConsultant {
         public isRustedSurface: boolean;
         public contractNumber: string;
 
+        public isOutOfBounds: boolean;
+
+        public isAluminiumSiding: boolean;
+        public isVinylSiding : boolean;
+        public isStucco : boolean;
+        public isAggregate : boolean;
+        public isBrick : boolean;
+        public isFrontDoor : boolean;
+        public isGarageDoor : boolean;
+        public isSoffits : boolean;
+        public otherSurfacesNotes: string;
 
         public validateContactFirstName = (value: any, model: Sales): string => {
             if (!value || value.toString().trim().length == 0) {
@@ -133,9 +144,6 @@ export class PostBooking {
     }
 
 export class PostCodeAssignment {
-        constructor() {
-        }
-
         public postCode: string;
         public region: string;
         public salesConsultant: string;
