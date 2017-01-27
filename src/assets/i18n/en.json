@@ -1,4 +1,7 @@
 ﻿{
+    "BACK":  "Back" ,
+    "NEXT": "Next ->",
+
     "WIZARD-HOME": {
         "CALL_ME": "Call Me"
     },
