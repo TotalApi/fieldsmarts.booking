@@ -1,6 +1,9 @@
 ﻿@import './_colors.scss';
 @import './_semantic.scss';
-
+@import './_toggle-checkbox.scss';
+@import '../../app/components/common/_variables.scss';
+@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 .uss {
     &.row { 
         margin-bottom: 1em !important;
@@ -9,6 +12,10 @@
 
 a {
     cursor: pointer;
+}
+
+h1{
+    font-family: 'Roboto', sans-serif;
 }
 
 .pointer {
@@ -56,4 +63,17 @@ a {
 
 .scrollHidden{
     overflow: hidden !important;
+}
+
+.home{
+    /*background: url(../images/PaintGuy.png) no-repeat;*/
+    
+}
+
+.fix-margin{
+    margin: 0!important;
+}
+
+.fix-padding{
+    padding: 0!important;
 }

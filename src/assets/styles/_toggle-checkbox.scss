@@ -1,0 +1,117 @@
+﻿@import '../../app/components/common/_variables.scss';
+
+/*--------------
+     Toggle
+---------------*/
+
+.ui.toggle.checkbox {
+  min-height: 1.5rem;
+}
+
+/* Input */
+
+.ui.toggle.checkbox input {
+    width: 44.5px;
+    height: 25px;
+}
+
+/* Label */
+
+.ui.toggle.checkbox .box,
+.ui.toggle.checkbox label {
+  min-height: 1.5rem;
+  padding-left: 4.5rem;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.ui.toggle.checkbox label {
+  padding-top: 0.15em;
+}
+
+/* Switch */
+
+.ui.toggle.checkbox .box:before,
+.ui.toggle.checkbox label:before {
+  display: block;
+  position: absolute;
+  content: '';
+  z-index: 1;
+  -webkit-transform: none;
+  transform: none;
+  border: none;
+  top: 5px;
+  box-shadow: none;
+  width: 44.5px;
+  height: 25px;
+  background-color: #D1CED6 !important;
+  border-radius: 500rem;
+}
+
+/* Handle */
+
+.ui.toggle.checkbox .box:after,
+.ui.toggle.checkbox label:after {
+  background: $orange;
+  position: absolute;
+  content: '' !important;
+  opacity: 1;
+  z-index: 2;
+  border: none;
+  box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15), 0px 0px 0px 1px rgba(34, 36, 38, 0.15) inset;
+  width: 21px;
+  height: 21px;
+  top: 7px;
+
+}
+
+.ui.toggle.checkbox input ~ .box:after,
+.ui.toggle.checkbox input ~ label:after {
+  left: 3px;
+  box-shadow: none;
+}
+
+/* Focus */
+
+.ui.toggle.checkbox input:focus ~ .box:before,
+.ui.toggle.checkbox input:focus ~ label:before {
+  background-color: rgba(0, 0, 0, 0.15);
+  border: none;
+}
+
+/* Hover */
+
+.ui.toggle.checkbox .box:hover::before,
+.ui.toggle.checkbox label:hover::before {
+  background-color: rgba(0, 0, 0, 0.15);
+  border: none;
+}
+
+/* Active */
+
+.ui.toggle.checkbox input:checked ~ .box,
+.ui.toggle.checkbox input:checked ~ label {
+  color: rgba(0, 0, 0, 0.95) !important;
+}
+
+.ui.toggle.checkbox input:checked ~ .box:before,
+.ui.toggle.checkbox input:checked ~ label:before {
+  background-color: #D1CED6!important;
+}
+
+.ui.toggle.checkbox input:checked ~ .box:after,
+.ui.toggle.checkbox input:checked ~ label:after {
+  left: 21px;
+  box-shadow: none;
+}
+
+/* Active Focus */
+
+.ui.toggle.checkbox input:focus:checked ~ .box,
+.ui.toggle.checkbox input:focus:checked ~ label {
+  color: rgba(0, 0, 0, 0.95) !important;
+}
+
+.ui.toggle.checkbox input:focus:checked ~ .box:before,
+.ui.toggle.checkbox input:focus:checked ~ label:before {
+  background-color: #D1CED6!important;
+}
