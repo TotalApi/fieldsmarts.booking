@@ -78,7 +78,7 @@ export interface IUssValidateComponent {
  */
 export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implements ng.OnInit, ng.AfterViewInit, ng.OnChanges, IUssValidateComponent {
 
-    public static Inputs = ['value: model', 'required', 'control', 'placeholder', 'metadata', 'disabled', 'ussDataSource', '_fieldName: fieldName', 'class', 'label', 'defaultValue'];
+    public static Inputs = ['value: model', 'required', 'control', 'placeholder', 'metadata', 'disabled', 'ussDataSource', '_fieldName: fieldName', 'class', 'label', 'defaultValue', 'i18n'];
     public static Outputs = ['modelChange'];
 
     constructor(protected viewContainer: ng.ViewContainerRef, protected changeDetector: ng.ChangeDetectorRef) {
@@ -89,6 +89,8 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
             throw new Error(`${this.constructor.name} pass changeDetector: ng.ChangeDetectorRef to constructor.`);
         }
     }
+
+    @ng.Input('i18n') i18n: string;
 
     @ng.Input('label') label: string;
 

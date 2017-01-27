@@ -107,8 +107,32 @@ export namespace Json {
                 : json;
         }
 
-        export function toJson(obj: any): string {
-            return JSON.stringify(obj);
+        export function toJson(obj: any, format?: boolean, sort?: boolean, indent?: string): string {
+            if (obj && typeof obj === 'object' && (sort || format)) {
+                let res = '';
+                let propSeparator = '';
+                let propStart = '';
+                let propEnd = '';
+                if (format) {
+                    propSeparator = ' ';
+                    indent = indent || '';
+                    propEnd = '\r\n' + indent;
+                    indent += '    ';
+                    propStart = '\r\n' + indent;
+                }
+                const keys = Object.keys(obj);
+                if (sort) keys.sort();
+                for (let i = 0; i < keys.length; i++) {
+                    const propName = keys[i];
+                    let propValue = obj[propName];
+                    propValue = toJson(propValue, format, sort, indent);
+                    res += `${propStart}"${propName}":${propSeparator}${propValue}`;
+                }
+                res = `{${res}${propEnd}}`;
+                return res;
+            } else {
+                return JSON.stringify(obj);    
+            }
         }
 
         export function clone<T>(obj: T): T {
