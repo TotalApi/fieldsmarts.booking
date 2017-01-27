@@ -46,6 +46,7 @@ export class AppWizardPostCodePage {
         } 
 
         if (ass.isOutOfBounds) {
+            this.wizard.data.isOutOfBounds = true;
             this.errorState = 'outbound_code';
             this.error = 'You are a little outside our service area';
             this.nextAction = {

@@ -89,6 +89,8 @@ export class SalesConsultant {
         public isRustedSurface: boolean;
         public contractNumber: string;
 
+        public isOutOfBounds: boolean;
+
         public isAluminiumSiding: boolean;
         public isVinylSiding : boolean;
         public isStucco : boolean;
