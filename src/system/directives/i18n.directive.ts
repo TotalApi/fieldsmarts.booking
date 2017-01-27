@@ -3,7 +3,7 @@ import { TranslateService, TranslationChangeEvent, LangChangeEvent } from "ng2-t
 import {SystemComponent} from '../decorators/system-component.decorator';
 
 @Directive({
-    selector: '[i18n], .i18n',
+    selector: '[i18n], .i18n, [i18n-placeholder]',
     host: {
         '(click)': 'onClick()'
     }
@@ -84,35 +84,37 @@ export class i18nDirective implements AfterViewInit, OnDestroy {
         for (let i = 0; i < this.translateElements.length; i++) {
             res = this.translateElement(this.translateElements[i]) || res;
         }
+        if (this.el.nativeElement.hasAttribute('i18n-placeholder')) {
+            this.translateElement(this.el.nativeElement, 'placeholder');
+        }
+            
         return res;
     }
 
-    private translateElement(el: HTMLElement) {
-        let key = el['__i18n__key__'];
+    private translateElement(el: HTMLElement, attrName?: string) {
+        attrName = attrName || '';
+        let key = el['__i18n__key__' + attrName];
         if (!key) {
             key = this.key;
+            const value = ((attrName ? el.getAttribute(attrName) : el.innerText) || '').trim();
             if (key) {
-                key = `${key}|${(el.innerText || '').trim()}`;
+                key = `${key}|${value}`;
             } else {
-                key = (el.innerText || '').trim();
+                key = value;
             }
-            el['__i18n__key__'] = key;
+            el['__i18n__key__' + attrName] = key;
         }
         if (key) {
             const res = this.translateService.instant(key);
             if (res) {
-                el.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, res);
+                const value = this.sanitizer.sanitize(SecurityContext.HTML, res);
+                if (attrName) {
+                    el.setAttribute(attrName, value);
+                } else {
+                    el.innerHTML = value;
+                }
                 this.cdRef.markForCheck();
             }
-/*
-            this.translateService.get(key)
-                .subscribe(res => {
-                    if (res) {
-                        el.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, res);
-                        this.cdRef.markForCheck();
-                    }
-                });
-*/
         }
         return !!key;
     }

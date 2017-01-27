@@ -21,7 +21,8 @@ import { UssDataSourceComponent } from '../../common/UssDataSourceComponent';
     <div class="ui input {{class}}" [ngClass]="{ icon: icon, error: (markAsInvalid && !isFluid), fluid: isFluid }">
         <label *ngIf="label && !isFluid && i18n === undefined" class="ui label">{{label}}</label>
         <label *ngIf="label && !isFluid && i18n !== undefined" [i18n]="i18n" class="ui label">{{label}}</label>
-        <input [type]="type" [placeholder]="placeholder">
+        <input *ngIf="i18n === undefined" [type]="type" [placeholder]="placeholder">
+        <input *ngIf="i18n !== undefined" [type]="type" i18n-placeholder [placeholder]="placeholder">
         <i *ngIf="icon" class="{{icon}} icon"></i>
     </div>
 </div>`,
@@ -52,7 +53,8 @@ export class UssInputComponent extends UssDataSourceComponent<string, HTMLInputE
     <label *ngIf="label && i18n === undefined">{{label}}</label>
     <label *ngIf="label && i18n !== undefined" [i18n]="i18n">{{label}}</label>
     <div class="ui input fluid {{class}}" [ngClass]="{ error: (markAsInvalid && !isInsideForm) }">
-        <textarea rows="{{rows}}" [placeholder]="placeholder"></textarea>
+        <textarea *ngIf="i18n === undefined" rows="{{rows}}" [placeholder]="placeholder"></textarea>
+        <textarea *ngIf="i18n !== undefined" rows="{{rows}}" i18n-placeholder [placeholder]="placeholder"></textarea>
     </div>
 </div>`,
     inputs: UssDataSourceComponent.Inputs,
