@@ -47,7 +47,7 @@ export class AppWizardSurfacesPage {
     }
 
     select(surface: Surface) {
-        if (surface.name === 'not_listed') {
+        if (surface.name === 'isOther') {
             this.router.navigate(['surface-options', surface.name]);
         } else if (!this.checkIfSurfaceSelected(surface)) {
             (surface.options && surface.options.length > 0) && this.router.navigate(['surface-options', surface.name]);
@@ -65,7 +65,7 @@ export class AppWizardSurfacesPage {
         this.forgotted = !ifAnySelected;
 
         if (this.wizard.data.isQualifiedLead && 
-            this.surfaces.where(x => x.isSelected && x.name !== 'not_listed')
+            this.surfaces.where(x => x.isSelected && x.name !== 'isOther')
                 .selectMany(x => x.options as SurfaceOption[])
                 .where((x: SurfaceOption) => x && x.isSelected)
                 .all((x: SurfaceOption) => ['wood', 'rusted', 'painted'].contains(x.name))) {

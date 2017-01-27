@@ -12,29 +12,40 @@ import {PostBooking} from '../models/Sales';
 import {PostCodeAssignment} from '../models/Sales';
 import {Surface} from '../models/Surface';
 import {SurfaceOption} from '../models/Surface';
+import {AppWizardService} from './wizard.service';
 
 @Injectable()
 @ApiService("")
 export class SurfacesService extends UssApiService {
 
+    constructor(http: Http, public wizard: AppWizardService) {
+        super(http);
+    }
+
     public getSurfaces(): Surface[] {
 
         const options: SurfaceOption[] = [
-            { name: 'rusted', description: 'Rusted' },
-            { name: 'wood', description: 'Wood' }, 
-            { name: 'painted', description: 'Repainted' },
+            { name: 'isRusted', description: 'Rusted' },
+            { name: 'isWood', description: 'Wood' }, 
+            { name: 'isPainted', description: 'Repainted' },
             { name: 'none', description: 'None of above' }
         ];
 
         return [
-            { name: 'brick', description: 'Brick', options: options } as Surface, 
-            { name: 'windows', description: 'Windows', options: options } as Surface, 
-            { name: 'soffits', description: 'Soffits', options: [] as SurfaceOption[] } as Surface, 
-            { name: 'stucco', description: 'Stucco', options: options } as Surface, 
+            { name: 'isAluminiumSiding', options: options } as Surface, 
+            { name: 'isVinylSiding', options: options } as Surface, 
+            { name: 'isStucco', options: options } as Surface, 
+            { name: 'isAggregate', options: options } as Surface, 
+            { name: 'isBrick', options: options } as Surface, 
+            { name: 'isFrontDoor', options: options } as Surface, 
+            { name: 'isGarageDoor', options: options } as Surface, 
+            { name: 'isWindows', options: options } as Surface, 
+            { name: 'isSoffits', options: options } as Surface, 
 
-            { name: 'not_listed', description: 'My exterior not listed' } as Surface
+            { name: 'isOther', description: 'My exterior not listed' } as Surface
 
         ];
     }
+    
     
 }

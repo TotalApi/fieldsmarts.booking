@@ -11,8 +11,8 @@
         <li *ngFor="let surface of surfaces">
             <button (click)="select(surface)">+</button>
             <span *ngIf="surface.isSelected"> >>> </span>
-            {{surface.description}}
-            <a *ngIf="surface.name !== 'not_listed' && surface.options && surface.options.length > 0" (click)="showOptions(surface)">Options</a>
+            {{surface.name | translate}}
+            <a *ngIf="surface.name !== 'isOther' && surface.options && surface.options.length > 0" (click)="showOptions(surface)">Options</a>
         </li>
     </ul>
     

@@ -12,6 +12,7 @@ import {PostBooking} from '../models/Sales';
 import {PostCodeAssignment} from '../models/Sales';
 import {MarketingInfo} from '../models/Sales';
 import {AppWizardService} from './wizard.service';
+import {Surface, TSurfaceType} from '../models/Surface';
 
 @Injectable()
 @ApiService("api/sales")
@@ -51,6 +52,26 @@ export class SalesService extends UssApiService {
         return this.request<MarketingInfo>(marketingInfo).toPromise();
     }
 
+    private getSurface(surfaceType: TSurfaceType): Surface {
+        return this.wizard.data.surfaces.first((x: Surface) => x.name === surfaceType);
+    }
+
+    public fillSaleWithSurfaces(sale: Sales) {
+        sale.isAluminiumSiding = this.getSurface('isAluminiumSiding').isSelected;
+        sale.isVinylSiding = this.getSurface('isVinylSiding').isSelected;
+        sale.isStucco = this.getSurface('isStucco').isSelected;
+        sale.isAggregate = this.getSurface('isAggregate').isSelected;
+        sale.isBrick = this.getSurface('isBrick').isSelected;
+        sale.isFrontDoor = this.getSurface('isFrontDoor').isSelected;
+        sale.isGarageDoor = this.getSurface('isGarageDoor').isSelected;
+        sale.isWindows = this.getSurface('isWindows').isSelected;
+        sale.isSoffits = this.getSurface('isSoffits').isSelected;
+        sale.isOther = this.getSurface('isOther').isSelected;
+
+        const isOther = this.getSurface('isOther');
+        sale.otherSurfacesNotes = isOther.isSelected ? isOther.options as string : "";
+    }
+
     public async saveLead(): Promise<boolean> {
         let sale = new Sales();
         sale.isQualifiedLead = this.wizard.data.isQualifiedLead;
@@ -63,6 +84,9 @@ export class SalesService extends UssApiService {
         sale.contactPhone = this.wizard.data.phoneNumber;
         sale.postCode = this.wizard.data.postalCode;
         sale.salesNumber = this.wizard.data.salesNumber;
+
+        this.fillSaleWithSurfaces(sale);
+
         sale = await this.save(sale);
         this.wizard.data.salesNumber = sale.salesNumber;
         this.wizard.data.franchise = sale.franchisee;
