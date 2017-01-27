@@ -59,7 +59,7 @@ export class WizardPageComponent implements ng.OnInit {
         }
         if (!this.next.isHidden && !this.next.caption)
         {
-            this.next.caption = 'NEXT|Next ->';
+            this.next.caption = 'NEXT|Next';
         }
         this.wizard.updateState();
     }

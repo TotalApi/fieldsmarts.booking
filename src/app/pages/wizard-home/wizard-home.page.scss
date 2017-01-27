@@ -4,11 +4,20 @@
     background-color: $orange!important;
     background-image: url(../../../assets/images/PaintGuy.png);
     background-repeat: no-repeat;
-    background-position: center 5em;
     position: relative;
+    height: 100%;
+
+    @media only screen and (min-width: 361px) {
+        background-position: center 5em;
+    }
+    @media only screen and (max-width: 360px) {
+        background-position: center 2em;
+    }
 
     .content, form{
+        margin-top: 0!important;
         height: 100%;
+        padding: 0!important;
     }
     h2{
         font-size: 40px;
@@ -28,11 +37,19 @@
         white-space: nowrap;
         margin: 0;
         letter-spacing: -1px;
+
+        @media only screen and (min-width: 361px) {
+            font-size: 50px;
+        }
+        @media only screen and (max-width: 360px) {
+            font-size: 40px;
+        }
     }
 
     .title-app{
         padding-top: 4.4em;
     }
+
     button.btn-round{
         height: 42px;
         line-height: 38px;
@@ -45,7 +62,15 @@
         padding: 0 20px;
 
         &.btn-call{
-             width: 145px;
+            @media only screen and (min-width: 361px) {
+                width: 145px;
+                font-size: 20px;
+            }
+            @media only screen and (max-width: 360px) {
+                width: auto;
+                font-size: 16px;
+            }
+            
              padding-left: 26px;
              margin-left: 0!important;
              background-color: $greyLite!important;
@@ -73,9 +98,17 @@
         }
 
         &.btn-next{
+            @media only screen and (min-width: 361px) {
+                font-size: 20px;
+            }
+            @media only screen and (max-width: 360px) {
+                font-size: 16px;
+            }
+
              .uss-button-content{
+                 color: $greyLite;
                  padding-right: 29px;
-                 background-image: url(../../../assets/images/arrow-next-orange.png);
+                 background-image: url(../../../assets/images/arrow-next-white.png);
                  background-position: center right;
                  background-repeat: no-repeat;
              }
@@ -84,8 +117,9 @@
              &:active,
              &:focus{
                  .uss-button-content{
+                     color: $orange;
                      padding-right: 29px;
-                     background-image: url(../../../assets/images/arrow-next-white.png);
+                     background-image: url(../../../assets/images/arrow-next-orange.png);
                      background-position: center right;
                      background-repeat: no-repeat;
                  }
@@ -106,7 +140,14 @@
     .title-screen{
         width: 100%;
         position: absolute;
-        bottom: 5em;
+       
         text-align: center;
+
+        @media only screen and (min-width: 361px) {
+             bottom: 5em;
+        }
+        @media only screen and (max-width: 360px) {
+             bottom: 4em;
+        }
     }
 }

@@ -104,12 +104,13 @@
     <Content Include="src\app\pages\wizard-name\wizard-name.page.html" />
     <Content Include="src\app\pages\wizard-home\wizard-home.page.scss" />
     <Content Include="src\app\pages\wizard-surfaces\wizard-surfaces.page.html" />
-    <Content Include="src\assets\images\-%28.png" />
     <Content Include="src\assets\images\arrow-next-orange.png" />
     <Content Include="src\assets\images\arrow-next-white.png" />
+    <Content Include="src\assets\images\check.png" />
     <Content Include="src\assets\images\PaintGuy.png" />
     <Content Include="src\assets\images\phone-orange.png" />
     <Content Include="src\assets\images\phone-white.png" />
+    <Content Include="src\assets\images\sorry.png" />
     <Content Include="src\assets\styles\globals.scss" />
     <Content Include="src\assets\styles\_colors.scss" />
     <Content Include="src\assets\styles\_semantic.scss" />

@@ -19,7 +19,7 @@ export class AppWizardPostCodePage {
     private errorState: 'invalid_code' | 'outbound_code' | '';
 
     private defaultBackAction: WizardCommand = { action: () => this.wizard.back(), caption: 'BACK' };
-    private defaultNextAction: WizardCommand = { action: () => this.checkPostCode(), caption: 'NEXT ->' };
+    private defaultNextAction: WizardCommand = { action: () => this.checkPostCode(), caption: 'NEXT' };
     public backAction: WizardCommand = this.defaultBackAction;
     public nextAction: WizardCommand = this.defaultNextAction;
     public error: string;
@@ -43,7 +43,7 @@ export class AppWizardPostCodePage {
         } catch (e) {
             this.errorState = 'invalid_code';
             this.error = 'Unfortunatelly we do not serve your area';
-            this.nextAction = { caption: 'Alert me instead ->', action: () => alert('Alert!!!!!') };
+            this.nextAction = { caption: 'Alert me instead', action: () => alert('Alert!!!!!') };
             this.backAction = { isHidden: true };
             this.wizard.data.isQualifiedLead = false;
             return await this.sales.saveLead();

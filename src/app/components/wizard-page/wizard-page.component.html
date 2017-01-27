@@ -4,7 +4,7 @@
         <h3>{{description|translate}}</h3>
     </div>
     <div class="header error" *ngIf="error">
-        <h1>:(</h1>
+        <div class="sorry"></div>
         <h2>{{'SORRY'|translate}}</h2>
         <h3>{{error|translate}}</h3>
     </div>
@@ -29,7 +29,7 @@
         </div> 
         <div class="buttons" [ngClass]="{error: error}" *ngIf="wizard.state.currentStep > 0">
             <uss-button #backBtn class="back" type="empty" [hidden]="back.isHidden" [disabled]="loading" (click)="backBtn.execute(execute, this, back)">{{back.caption|translate}}</uss-button>
-            <uss-button #nextBtn class="next" type="empty" [hidden]="next.isHidden" [disabled]="ussForm.invalid || loading" (click)="nextBtn.execute(execute, this, next)">{{next.caption|translate}}</uss-button>
+            <uss-button #nextBtn class="next btn-next" [ngClass]="{finish: error}" type="empty" [hidden]="next.isHidden" [disabled]="ussForm.invalid || loading" (click)="nextBtn.execute(execute, this, next)">{{next.caption|translate}}</uss-button>
         </div>
     </div>
 

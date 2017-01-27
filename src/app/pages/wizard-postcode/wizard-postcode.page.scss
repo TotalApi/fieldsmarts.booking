@@ -6,16 +6,31 @@
 
 .parner-name-fran {
 
-    margin: 1em 0;
+    margin: 2em 0;
 
     .parner-name {
-        font-size: 200%;
+        font-family: 'Roboto', sans-serif;
+        font-size: 32px;
+        font-weight: bold;
+        line-height: 43px;
         color: #003966;
     }
 }
 
 .parner-franchise, .parner-phone, .parner-email {
-    font-size: 150%;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 24px;
     color: #4A4457;
-    margin-top: .5em;
 }
+
+.parner-email{
+    margin-bottom: 20px;
+}
+
+.parner-comment-main,
+.parner-comment{
+    padding: 4% 0;
+}
+

@@ -1,20 +1,31 @@
 .wizard-done {
     background-color: #504D57;
     color: white;
+    height: 100%;
     
+    .content{
+        margin-top: 0!important;
+
+    }
     div, img {
         text-align: center;
         margin-bottom: 1em;
     }
 
     .thanks {
-        font-size: 300%;
-        font-weight: bold;
-        padding-top: 2em;
-        margin-bottom: 0.5em;
+        padding-top: 1em;
+        margin-bottom: 0.2em;
+        font-family: 'Roboto', sans-serif;
+        font-size: 50px;
+        font-weight: 900;
+        text-align: center;
+        line-height: 66px;
+        letter-spacing: -1px;
+        color: #FFFFFF;
     }
 
     img {
+        margin: 40px 0;
     }
 
     .text-small {
@@ -26,7 +37,7 @@
 
     .text-about {
         position: fixed;
-        bottom: 1em;
+        bottom: 2em;
         left: 0;
         right: 0;
         color: #FF6400;

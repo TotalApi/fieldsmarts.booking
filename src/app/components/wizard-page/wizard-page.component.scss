@@ -1,11 +1,9 @@
 @import '../../components/common/_variables.scss';
 
 .wizard-page {
-    height: 100%;
     padding: 0;
     position: relative;
     font-size: 16px;
-    background-color: $greyLite;
 
     .ui.form {
         font-size: 100%;
@@ -16,6 +14,11 @@
         color: #003966;
         height: 118px;
         padding: 20px 25px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index:1000;
+
 
         h1, h2, h3 {
             margin: 0;
@@ -29,15 +32,26 @@
         }
 
         h3 {
-            padding-top: 10px;
+            padding-top: 12px;
             font-family: 'Lato', sans-serif;
             font-size: 16px;
             font-weight: 400;
+            line-height: 19px;
         }
 
         &.error {
-            background-color: red;
+            background-color: $red;
             color: white;
+
+            .sorry{
+                float: left;
+                width: 54px;
+                height: 93px;
+                background-image: url(../../../assets/images/sorry.png);
+                background-position: center right;
+                background-repeat: no-repeat;
+                margin-right: 45px;
+            }
 
             h1 {
                 float: left;
@@ -47,9 +61,11 @@
         }
     }
 
-    .content {
-        padding: 30px 25px 0;
 
+    .content {
+        margin-top: 118px;
+        padding: 30px 25px 92px;
+        
         .field{
             label{
                 font-size: 16px;
@@ -58,7 +74,8 @@
                 font-weight: 400;
             }
 
-            input[type=text]{
+            input[type=text],
+            textarea{
                 border: 0;
                 background-color: inherit;
                 font-size: 32px;
@@ -68,6 +85,9 @@
                 letter-spacing: -1px;
                 font-weight: 100;
             }
+            textarea{
+                height: 25vh;
+            }
         }
         .input{
             margin-bottom: 0!important;
@@ -75,9 +95,11 @@
     }
 
     .footer {
-        position: absolute;
+        position: fixed;
         bottom: 0;
         width: 100%;
+        z-index: 1000;
+        background-color: $greyLite;
 
         .progress {
             margin: 2em .5em 1em;
@@ -109,7 +131,7 @@
             }
 
             .back, .next {
-                min-width: 33%;
+                min-width: 15%;
                 color: white !important;
                 box-shadow: none;
                 height: 50px;
@@ -123,6 +145,8 @@
             .next {
                 float: right;
                 font-size: 100%;
+                
+
             }
 
             button:hover, button:focus, button:active {
@@ -130,4 +154,35 @@
             }
         }
     }
+
+    button.btn-next{
+        padding: 0 15px;
+             .uss-button-content{
+                 color: $greyLite;
+                 padding-right: 29px;
+                 background-image: url(../../../assets/images/arrow-next-white.png);
+                 background-position: center right;
+                 background-repeat: no-repeat;
+             }
+        }
+
+    .finish{
+
+        .btn-next{
+            padding: 0!important;
+
+            .uss-button-content{
+                padding-right: 20px;
+                background: none!important;
+
+                @media only screen and (min-width: 361px) {
+                    font-size: 20px;
+                }
+                @media only screen and (max-width: 360px) {
+                    font-size: 16px;
+                }
+             }
+        }
+    }
+    
 }
