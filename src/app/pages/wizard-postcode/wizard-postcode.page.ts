@@ -24,30 +24,13 @@ export class AppWizardPostCodePage {
     public nextAction: WizardCommand = this.defaultNextAction;
     public error: string;
     public consultant: IUserInfo;
+    public partner: IUserInfo;
 
     constructor(public sales: SalesService,
         public wizard: AppWizardService,
         public account: AccountService,
         public franchise: FranchiseService,
     ) { }
-
-    public async saveLead(isQualifiedLead: boolean): Promise<boolean> {
-        let sale = new Sales();
-        sale.isQualifiedLead = isQualifiedLead;
-        sale.franchisee = this.wizard.data.franchise;
-        sale.address1 = this.wizard.data.address;
-        sale.contactEmail = this.wizard.data.email;
-        sale.contactFirstName = this.wizard.data.firstName;
-        sale.contactLastName = this.wizard.data.lastName;
-        sale.contactFirstName = this.wizard.data.firstName;
-        sale.contactPhone = this.wizard.data.phoneNumber;
-        sale.postCode = this.wizard.data.postalCode;
-        sale.salesNumber = this.wizard.data.salesNumber;
-        sale = await this.sales.save(sale);
-        this.wizard.data.salesNumber = sale.salesNumber;
-        this.wizard.data.franchise = sale.franchisee;
-        return isQualifiedLead;
-    }
 
     public async checkPostCode(): Promise<boolean> {
         let ass: PostCodeAssignment;
@@ -58,7 +41,8 @@ export class AppWizardPostCodePage {
             this.error = 'Unfortunatelly we do not serve your area';
             this.nextAction = { caption: 'Alert me instead ->', action: () => alert('Alert!!!!!') };
             this.backAction = { isHidden: true };
-            return await this.saveLead(false);
+            this.wizard.data.isQualifiedLead = false;
+            return await this.sales.saveLead();
         } 
 
         if (ass.isOutOfBounds) {
@@ -80,6 +64,7 @@ export class AppWizardPostCodePage {
                 }
             };
             this.consultant = await this.account.getUserInfo(ass.salesConsultant);
+            this.partner = await this.account.getFirstFranchisePartner(this.consultant.franchise);
             this.franchise.get(this.consultant.franchise, this.consultant.region).then(fran => {
                 if (fran) {
                     this.consultant.franchise = fran.displayName;
@@ -88,7 +73,7 @@ export class AppWizardPostCodePage {
                 }
             });
         }
-        return await this.saveLead(true);
+        return await this.sales.saveLead();
     }
 
 }

@@ -91,10 +91,10 @@ export class WizardPageComponent implements ng.OnInit {
             else if (command.route) {
                 this.wizard.go(command.route);
             }
-            else if (command === this.back) {
+            else if (command.caption === this.back.caption) {
                 this.wizard.back(this.id);
             }
-            else if (command === this.next) {
+            else if (command.caption === this.next.caption) {
                 this.wizard.next(this.id);
             }
         }

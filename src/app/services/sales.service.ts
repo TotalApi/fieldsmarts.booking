@@ -11,10 +11,15 @@ import {Sales} from '../models/Sales';
 import {PostBooking} from '../models/Sales';
 import {PostCodeAssignment} from '../models/Sales';
 import {MarketingInfo} from '../models/Sales';
+import {AppWizardService} from './wizard.service';
 
 @Injectable()
 @ApiService("api/sales")
 export class SalesService extends UssApiService {
+
+    constructor(http: Http, public wizard: AppWizardService) {
+        super(http);
+    }
 
     @ApiMethod({ method: "GET", route: "{p1}/{p2}/availabletimeslots?startingDate={p3}", useBody: false })
     getAvailableTimeSlots(franchisee: string, salesNumber: string, startingDate: Date): Promise<AvailableTimeSlots> {
@@ -46,4 +51,31 @@ export class SalesService extends UssApiService {
         return this.request<MarketingInfo>(marketingInfo).toPromise();
     }
 
+    public async saveLead(): Promise<boolean> {
+        let sale = new Sales();
+        sale.isQualifiedLead = this.wizard.data.isQualifiedLead;
+        sale.franchisee = this.wizard.data.franchise;
+        sale.address1 = this.wizard.data.address;
+        sale.contactEmail = this.wizard.data.email;
+        sale.contactFirstName = this.wizard.data.firstName;
+        sale.contactLastName = this.wizard.data.lastName;
+        sale.contactFirstName = this.wizard.data.firstName;
+        sale.contactPhone = this.wizard.data.phoneNumber;
+        sale.postCode = this.wizard.data.postalCode;
+        sale.salesNumber = this.wizard.data.salesNumber;
+        sale = await this.save(sale);
+        this.wizard.data.salesNumber = sale.salesNumber;
+        this.wizard.data.franchise = sale.franchisee;
+        return this.wizard.data.isQualifiedLead;
+    }
+
+    public async saveBookTime(): Promise<PostBooking> {
+        let b = new PostBooking();
+        b.franchisee = this.wizard.data.franchise;
+        b.salesNumber = this.wizard.data.salesNumber;
+        b.timeSlot = new Date(this.wizard.data.bookTime);
+
+        b = await this.book(b);
+        return b;
+    }
 }

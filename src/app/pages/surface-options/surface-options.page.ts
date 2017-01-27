@@ -14,7 +14,7 @@ import {Json} from '../../../system/utils/Json';
     encapsulation: ng.ViewEncapsulation.None
 })
 @AppRoute({ path: 'surface-options/:surfaceName' })
-export class AppSurfacesOptionsPage implements ng.OnInit, ng.OnDestroy {
+export class AppSurfacesOptionsPage implements ng.OnInit, ng.OnDestroy, ng.OnChanges {
 
     private surface: Surface;
     private sub: any;
@@ -43,6 +43,20 @@ export class AppSurfacesOptionsPage implements ng.OnInit, ng.OnDestroy {
         return this.router.navigate(['wizard-surfaces']);
     }
 
+    private modelChanged(option: SurfaceOption) {
+        let opts = this.surface.options as SurfaceOption[];
+
+        if (option.name === 'none' && option.isSelected) {
+            opts.where(x => x.name !== 'none').forEach(x => {
+                x.isSelected = false;
+            });
+        }
+
+        if (opts.where(x => x.name !== 'none').any(x => x.isSelected)) {
+            opts.find(x => x.name === 'none').isSelected = false;
+        }
+    }
+
     ngOnInit(): void {
         this.sub = this.route.params.subscribe(params => {
             this.surface = this.wizard.data.surfaces.first(x => x.name === params['surfaceName']);
@@ -52,5 +66,9 @@ export class AppSurfacesOptionsPage implements ng.OnInit, ng.OnDestroy {
 
     ngOnDestroy() {
         this.sub.unsubscribe();
+    }
+
+    ngOnChanges(changes: Object): void {
+        
     }
 }

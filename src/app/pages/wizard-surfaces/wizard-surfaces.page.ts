@@ -18,7 +18,8 @@ export class AppWizardSurfacesPage {
 
     private surfaces: Surface[] = [];
     private forgotted: boolean;
-    private allowWithBadSurfaces: boolean;
+
+    public nextAction = { action: () => this.check(), caption: 'NEXT ->'};
 
     constructor(public sales: SalesService,
         public wizard: AppWizardService,
@@ -46,11 +47,13 @@ export class AppWizardSurfacesPage {
     }
 
     select(surface: Surface) {
-        surface.isSelected = !surface.isSelected;
-
-        if (surface.name === 'not_listed' || !this.checkIfSurfaceSelected(surface)) {
+        if (surface.name === 'not_listed') {
+            this.router.navigate(['surface-options', surface.name]);
+        } else if (!this.checkIfSurfaceSelected(surface)) {
             (surface.options && surface.options.length > 0) && this.router.navigate(['surface-options', surface.name]);
         }
+
+        surface.isSelected = !surface.isSelected;
     }
 
     closeAlert() {
@@ -61,7 +64,12 @@ export class AppWizardSurfacesPage {
         const ifAnySelected = this.surfaces.any(x => this.checkIfSurfaceSelected(x));
         this.forgotted = !ifAnySelected;
 
-        if (!this.allowWithBadSurfaces && this.surfaces.where(x => x.isSelected && x.name !== 'not_listed').selectMany(x => x.options as SurfaceOption[]).any((x: SurfaceOption) => x && x.isSelected && ['wood', 'rusted', 'repainted'].contains(x.name))) {
+        if (this.wizard.data.isQualifiedLead && 
+            this.surfaces.where(x => x.isSelected && x.name !== 'not_listed')
+                .selectMany(x => x.options as SurfaceOption[])
+                .where((x: SurfaceOption) => x && x.isSelected)
+                .all((x: SurfaceOption) => ['wood', 'rusted', 'painted'].contains(x.name))) {
+            
             $('.ui.modal').modal({blurring: true}).modal('show');
             return false;
         }
@@ -75,7 +83,7 @@ export class AppWizardSurfacesPage {
 
     next() {
         $('.ui.modal').modal('hide');
-        this.allowWithBadSurfaces = true;
+        this.wizard.data.isQualifiedLead = false;
         this.wizard.next();
     }
 }
