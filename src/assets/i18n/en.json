@@ -7,6 +7,8 @@
         "TITLE": "No Problem!",
         "DESCRIPTION": "Send us your info & we'll be in touch within the next 24-48 hours.",
         "FIRST_NAME_LABEL": "First Name *",
-        "LAST_NAME_LABEL": "Last Name *"
+        "LAST_NAME_LABEL": "Last Name *",
+        "FIRST_NAME_PLACEHOLDER": "Enter your first name",
+        "LAST_NAME_PLACEHOLDER": "Enter your last name"
     }
 }

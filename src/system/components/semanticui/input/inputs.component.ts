@@ -83,7 +83,7 @@ export class UssTextAreaComponent extends UssDataSourceComponent<string, HTMLTex
         [attr.type]="inputType" tabindex="0" [attr.name]="name" [attr.disabled]="disabled" />
         <label [attr.for]='id'>
             <span *ngIf="label && i18n === undefined">{{label}}</span>
-            <span *ngIf="label && i18n !== undefined" i18n="i18n">{{label}}</span>
+            <span *ngIf="label && i18n !== undefined" [i18n]="i18n">{{label}}</span>
             <ng-content></ng-content>
         </label>
     </div>
