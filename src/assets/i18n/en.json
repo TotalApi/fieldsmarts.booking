@@ -3,10 +3,14 @@
         "CALL_ME": "Call Me"
     },
 
-    "WIZARD-NAME": {
-        "TITLE": "No Problem!",
-        "DESCRIPTION": "Send us your info & we'll be in touch within the next 24-48 hours.",
-        "FIRST_NAME_LABEL": "First Name *",
-        "LAST_NAME_LABEL": "Last Name *"
-    }
+  "WIZARD-NAME": {
+    "TITLE": "No Problem!",
+    "DESCRIPTION": "Send us your info & we'll be in touch within the next 24-48 hours.",
+    "FIRST_NAME_LABEL": "First Name *",
+    "LAST_NAME_LABEL": "Last Name *"
+  },
+
+  "WIZARD-SURFACES": {
+    "isAluminiumSiding": "Aluminium siding" 
+  }
 }
