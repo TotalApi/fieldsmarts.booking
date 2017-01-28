@@ -3,15 +3,16 @@
     description="WIZARD-NAME.DESCRIPTION|Send us your info & we'll be in touch within the next 24-48 hours."
 >               
     <uss-input i18n="WIZARD-NAME.FIRST_NAME_LABEL" label="First Name *"
-               placeholder="WIZARD-NAME.FIRST_NAME_PLACEHOLDER|Your First Name"
+               [placeholder]="'WIZARD-NAME.FIRST_NAME_PLACEHOLDER|Your First Name'|translate"
                fieldName="firstName"
                class="uss row"
                required>
     </uss-input>
 
     <uss-input i18n="WIZARD-NAME.LAST_NAME_LABEL" label="Last Name *"
-               placeholder="WIZARD-NAME.LAST_NAME_PLACEHOLDER|Your Last Name"
+               [placeholder]="'WIZARD-NAME.LAST_NAME_PLACEHOLDER|Your Last Name'|translate"
                fieldName="lastName"
                required>                 
     </uss-input>
+    
 </wizard-page>

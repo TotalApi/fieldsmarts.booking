@@ -1,9 +1,9 @@
 <wizard-page 
-    title="NO COLD CALLS"
-    description="Promise, we respect your privacy."
+    title="WIZARD-PHONE.TITLE|NO COLD CALLS"
+    description="WIZARD-PHONE.DESCRIPTION|Promise, we respect your privacy."
 >                              
-    <uss-input [label]="'Phone Number *' | translate"
-               placeholder="Your Phone Number"
+    <uss-input i18n="WIZARD-PHONE.PHONE_LABEL" label="Phone Number *"
+               [placeholder]="'WIZARD-PHONE.PHONE_PLACEHOLDER|Your Phone Number'|translate"
                fieldName="phoneNumber"
                required>
     </uss-input>

@@ -21,8 +21,7 @@ import { UssDataSourceComponent } from '../../common/UssDataSourceComponent';
     <div class="ui input {{class}}" [ngClass]="{ icon: icon, error: (markAsInvalid && !isFluid), fluid: isFluid }">
         <label *ngIf="label && !isFluid && i18n === undefined" class="ui label">{{label}}</label>
         <label *ngIf="label && !isFluid && i18n !== undefined" [i18n]="i18n" class="ui label">{{label}}</label>
-        <input *ngIf="i18n === undefined" [type]="type" [placeholder]="placeholder">
-        <input *ngIf="i18n !== undefined" [type]="type" i18n-placeholder [placeholder]="placeholder">
+        <input [type]="type" [placeholder]="placeholder">
         <i *ngIf="icon" class="{{icon}} icon"></i>
     </div>
 </div>`,
@@ -53,8 +52,7 @@ export class UssInputComponent extends UssDataSourceComponent<string, HTMLInputE
     <label *ngIf="label && i18n === undefined">{{label}}</label>
     <label *ngIf="label && i18n !== undefined" [i18n]="i18n">{{label}}</label>
     <div class="ui input fluid {{class}}" [ngClass]="{ error: (markAsInvalid && !isInsideForm) }">
-        <textarea *ngIf="i18n === undefined" rows="{{rows}}" [placeholder]="placeholder"></textarea>
-        <textarea *ngIf="i18n !== undefined" rows="{{rows}}" i18n-placeholder [placeholder]="placeholder"></textarea>
+        <textarea rows="{{rows}}" [placeholder]="placeholder"></textarea>
     </div>
 </div>`,
     inputs: UssDataSourceComponent.Inputs,
@@ -83,8 +81,8 @@ export class UssTextAreaComponent extends UssDataSourceComponent<string, HTMLTex
         [attr.type]="inputType" tabindex="0" [attr.name]="name" [attr.disabled]="disabled" />
         <label [attr.for]='id'>
             <span *ngIf="label && i18n === undefined">{{label}}</span>
-            <span *ngIf="label && i18n !== undefined" i18n="i18n">{{label}}</span>
-            <ng-content></ng-content>
+            <span *ngIf="label && i18n !== undefined" [i18n]="i18n">{{label}}</span>
+            <span><ng-content></ng-content></span>
         </label>
     </div>
 </div>`,

@@ -36,7 +36,7 @@ export class i18nDirective implements AfterViewInit, OnDestroy {
             if (subElements && subElements.length > 0) {
                 this.translateElements.push(...subElements);
             } else {
-                if (el.innerHTML.trim() === el.innerText.trim()) {
+                if (el.children.length === 0) {
                     this.translateElements.push(el);                    
                 }
             }

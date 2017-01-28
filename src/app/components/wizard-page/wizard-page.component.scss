@@ -1,8 +1,11 @@
+@import '../../components/common/_variables.scss';
+
 .wizard-page {
     height: 100%;
     padding: 0;
     position: relative;
     font-size: 16px;
+    background-color: $greyLite;
 
     .ui.form {
         font-size: 100%;
@@ -11,18 +14,25 @@
     .header {
         background-color: #D1CED6;
         color: #003966;
-        margin-bottom: 2em;
+        height: 118px;
+        padding: 20px 25px;
 
         h1, h2, h3 {
             margin: 0;
         }
 
         h2 {
-            padding: 16px 16px 0;
+            padding: 0;
+            text-transform: uppercase;
+            font-weight: 900;
+            font-family: 'Roboto', sans-serif;
         }
 
         h3 {
-            padding: 8px 16px 16px;
+            padding-top: 10px;
+            font-family: 'Lato', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
         }
 
         &.error {
@@ -38,7 +48,30 @@
     }
 
     .content {
-        padding: 0 16px;
+        padding: 30px 25px 0;
+
+        .field{
+            label{
+                font-size: 16px;
+                line-height: 19px;
+                color: $greyText;
+                font-weight: 400;
+            }
+
+            input[type=text]{
+                border: 0;
+                background-color: inherit;
+                font-size: 32px;
+                line-height: 43px;
+                font-family: 'Roboto', sans-serif;
+                padding: 5px 0 25px;
+                letter-spacing: -1px;
+                font-weight: 100;
+            }
+        }
+        .input{
+            margin-bottom: 0!important;
+        }
     }
 
     .footer {
@@ -49,6 +82,7 @@
         .progress {
             margin: 2em .5em 1em;
             position: relative;
+            background: #fff;
 
             &.ui {
                 .bar {
@@ -58,7 +92,9 @@
 
                 .label {
                     text-align: right;
-                    top: -350%;
+                    top: -500%;
+                    font-size: 16px;
+                    font-weight: 400;
                 }
             }
         }
