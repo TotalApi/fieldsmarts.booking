@@ -1,4 +1,5 @@
-﻿import {Injectable} from '@angular/core';
+﻿import { RouterModule, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot, Router } from '@angular/router';
+import {Injectable} from '@angular/core';
 import * as system from 'src/system';
 import {AppService} from 'src/system';
 import {AvailableTimeSlots} from '../models/Sales';
@@ -8,6 +9,8 @@ import {ApiService} from '../../system/decorators/api-service.decorator';
 import {Http} from '@angular/http';
 import {WorkingHours} from '../models/WorkingHours';
 import {WeekWorkingHours} from '../models/WorkingHours';
+
+
 
 @Injectable()
 @ApiService("api/admin")
@@ -48,4 +51,13 @@ export class AppSettings extends UssApiService {
     load(): Promise<Settings[]> {
         return this.request<Settings[]>().toPromise();
     }
+}
+
+
+@Injectable()
+export class AppSettingsResolver implements Resolve<Settings[]> {
+  constructor(private cs: AppSettings) {}
+  resolve(): Promise<Settings[]> {
+      return this.cs.load();
+  }
 }

@@ -1,17 +1,18 @@
 import * as ng from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { RouterModule, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot, Router, ActivatedRoute } from '@angular/router';
 import {AppRoute} from 'src/app/app.routes';
 import {AppWizardService} from "../../services/wizard.service";
 import * as ng2Translate from 'ng2-translate';
 import * as Settingsservice from '../../services/settings.service';
+import AppSettingsResolver = Settingsservice.AppSettingsResolver;
 
 @ng.Component({
     styleUrls: ['./wizard-home.page.scss'],
     templateUrl: './wizard-home.page.html',
     encapsulation: ng.ViewEncapsulation.None
 })
-@AppRoute({ path: 'home/:lang' })
-@AppRoute({ path: 'home' })
+//@AppRoute({ path: 'home/:lang' })
+@AppRoute({ path: 'home', resolve: { home: AppSettingsResolver } })
 export class AppWizardHomePage {
 
     constructor(public wizard: AppWizardService, private route: ActivatedRoute, private settings: Settingsservice.AppSettings) {

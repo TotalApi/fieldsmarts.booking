@@ -8,6 +8,7 @@ export var AppRoute = (route?: Route) => target => {
     route = route || {};
     route.component = route.component || target;
     route.path = route.path || route.component.name;
+
     AppRoutes.config.push(route);
     if (!AppRoutes.components.contains(route.component))
         AppRoutes.components.push(route.component);
