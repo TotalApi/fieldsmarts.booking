@@ -43,7 +43,10 @@ export class AppWizardHomePage {
 
 
     isCurrentTimeOff() {
-        return true;
+
+        return this.settings.weekWorkingHours && !this.settings.weekWorkingHours.isCallAvaliableForNow();
+
+        //return true;
 /*
         const today = moment();
         const res = (today.day() === 0 || today.day() === 6) // check weekend

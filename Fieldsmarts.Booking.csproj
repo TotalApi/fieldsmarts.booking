@@ -127,6 +127,7 @@
     <None Include="prebuild.bat" />
     <TypeScriptCompile Include="src\app\common\AddToCalendar.ts" />
     <TypeScriptCompile Include="src\app\components\time-booking\time-booking.component.ts" />
+    <TypeScriptCompile Include="src\app\models\WorkingHours.ts" />
     <TypeScriptCompile Include="src\app\models\Sales.ts" />
     <TypeScriptCompile Include="src\app\models\Surface.ts" />
     <TypeScriptCompile Include="src\app\pages\recomendation-source\recomendation-source.page.ts" />

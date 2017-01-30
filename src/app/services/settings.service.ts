@@ -6,6 +6,8 @@ import {UssApiService} from '../../system/services/api.service';
 import {ApiMethod} from '../../system/decorators/api-method.decorator';
 import {ApiService} from '../../system/decorators/api-service.decorator';
 import {Http} from '@angular/http';
+import {WorkingHours} from '../models/WorkingHours';
+import {WeekWorkingHours} from '../models/WorkingHours';
 
 @Injectable()
 @ApiService("api/admin")
@@ -17,6 +19,11 @@ export class AppSettings extends UssApiService {
     googleApiKey: string;
     translateApiUrl: string;
 
+    workingHours: WorkingHours[];
+    nonWorkingDays: string[];
+
+    weekWorkingHours: WeekWorkingHours;
+
     constructor(http: Http) {
         super(http);
 
@@ -27,7 +34,13 @@ export class AppSettings extends UssApiService {
         this.translateApiUrl = 'http://192.168.3.202:7202/locales';
 
         this.load().then((s: Settings[]) => {
-            s.forEach(x => this[x.key] = x.value);
+            s.forEach(x => {
+                this[x.key] = x.isJson ? JSON.parse(x.value) : x.value;
+            });
+
+            if (this.workingHours) {
+                this.weekWorkingHours = new WeekWorkingHours(this.workingHours, this.nonWorkingDays);
+            }
         });
     }
 
