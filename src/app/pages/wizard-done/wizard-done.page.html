@@ -1,27 +1,27 @@
 <wizard-page>               
-    <div class="thanks" i18n>{{ wizard.data.callMe ? 'WIZARD.DONE.THANKS|Thanks' : 'WIZARD.DONE.ALLDONE|All Done' }}</div>
+    <div class="thanks" i18n="">{{ wizard.data.callMe ? 'WIZARD-DONE.THANKS|Thanks' : 'WIZARD-DONE.ALLDONE|All Done' }}</div>
 
     <img src="/assets/images/logo.png"/>
     
     <div *ngIf="wizard.data.callMe">
-        <div class="text-small" i18n>WIZARD.DONE.MEANTIME|in the meantime,</div>
-        <div class="text-bigger" i18n>WIZARD.DONE.LIKE|like & visit us on Facebook!</div>
+        <div class="text-small" i18n="WIZARD-DONE.MEANTIME">in the meantime,</div>
+        <div class="text-bigger" i18n="WIZARD-DONE.LIKE">like & visit us on Facebook!</div>
         <div class="like">
             <div id="fb-like-btn" class="fb-like" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
         </div>
-        <a class="text-about" (click)="wizard.go('recomendation-source')" i18n>WIZARD.DONE.HEARABOUT|How did you here about us?</a>
+        <a class="text-about" (click)="wizard.go('recomendation-source')" i18n="WIZARD-DONE.HEAR_ABOUT">How did you here about us?</a>
     </div>
     
     <div *ngIf="!wizard.data.callMe">
-            <div i18n>WIZARD.DONE.REMINDER|Set a reminder in your calendar</div>
-            <a target="_blank" [href]="googleCal" i18n>WIZARD.DONE.GOOGLE|Add to Google Cal</a>
+            <div i18n="WIZARD-DONE.REMINDER">Set a reminder in your calendar</div>
+            <a target="_blank" [href]="googleCal" i18n="WIZARD-DONE.GOOGLE">Add to Google Cal</a>
             <br />
-        <a target="_blank" [href]="sanitize(iCal)" i18n>WIZARD.DONE.ICAL|Add to iCal/Outlook</a>
+        <a target="_blank" [href]="sanitize(iCal)" i18n="WIZARD-DONE.ICAL">Add to iCal/Outlook</a>
         <br /><br /><br />
-        <a href="https://www.spray-net.com" i18n>WIZARD.GOTOSITE|Go to SPRAY-NET.COM</a>
+        <a href="https://www.spray-net.com" i18n="GOTO_SITE">Go to SPRAY-NET.COM</a>
 
     </div>
         
-    <a class="text-about" (click)="wizard.go('recomendation-source')" i18n>WIZARD.DONE.HEARABOUT|How did you here about us?</a>
+    <a class="text-about" (click)="wizard.go('recomendation-source')" i18n="WIZARD-DONE.HEAR_ABOUT">How did you here about us?</a>
 </wizard-page>
 

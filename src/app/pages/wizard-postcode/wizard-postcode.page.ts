@@ -55,7 +55,7 @@ export class AppWizardPostCodePage {
             this.errorState = 'outbound_code';
             this.error = 'WIZARD-POSTCODE.OUTSIDE|You are a little outside our service area';
             this.nextAction = {
-                caption: 'WIZARD-POSTCODE.GOTO_SITE|Go to SPRAY-NET.COM',
+                caption: 'GOTO_SITE|Go to SPRAY-NET.COM',
                 action: () => {
                     window.location.href = 'https://www.spray-net.com';
                 }
