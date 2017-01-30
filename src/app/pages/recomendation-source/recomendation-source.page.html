@@ -1,6 +1,6 @@
 <wizard-page 
-    title="JUST IN CASE..."
-    description="We'll email you if we can't reach you by phone."
+    title="WIZARD-RECOMENDATION.TITLE|Just In Case..."
+    description="WIZARD-RECOMENDATION.DESCRIPTION|We'll email you if we can't reach you by phone."
 >    
     
         <div *ngFor="let source of options.values">
@@ -9,6 +9,6 @@
             </div>
         </div>
     <br/>
-    <button (click)="save()">Ok</button>
+    <uss-button #ok type="ok" (click)="ok.execute(save, this)"></uss-button>
 
 </wizard-page>

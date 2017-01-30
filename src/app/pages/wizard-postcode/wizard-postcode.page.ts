@@ -19,7 +19,7 @@ export class AppWizardPostCodePage {
     private errorState: 'invalid_code' | 'outbound_code' | '';
 
     private defaultBackAction: WizardCommand = { action: () => this.wizard.back(), caption: 'BACK' };
-    private defaultNextAction: WizardCommand = { action: () => this.checkPostCode(), caption: 'NEXT ->' };
+    private defaultNextAction: WizardCommand = { action: () => this.checkPostCode(), caption: 'NEXT' };
     public backAction: WizardCommand = this.defaultBackAction;
     public nextAction: WizardCommand = this.defaultNextAction;
     public error: string;
@@ -42,8 +42,8 @@ export class AppWizardPostCodePage {
             ass = await this.sales.getPostCodeAssignmentForSale(this.wizard.data.postalCode, false);
         } catch (e) {
             this.errorState = 'invalid_code';
-            this.error = 'Unfortunatelly we do not serve your area';
-            this.nextAction = { caption: 'Alert me instead ->', action: () => alert('Alert!!!!!') };
+            this.error = 'WIZARD-POSTCODE.NOT_SERVE|Unfortunatelly we do not serve your area';
+            this.nextAction = { caption: 'WIZARD-POSTCODE.ALERT_ME|Alert me instead ->', action: () => alert('Alert!!!!!') };
             this.backAction = { isHidden: true };
             this.wizard.data.isQualifiedLead = false;
             return await this.sales.saveLead();
@@ -53,9 +53,9 @@ export class AppWizardPostCodePage {
             this.wizard.data.isOutOfBounds = true;
 
             this.errorState = 'outbound_code';
-            this.error = 'You are a little outside our service area';
+            this.error = 'WIZARD-POSTCODE.OUTSIDE|You are a little outside our service area';
             this.nextAction = {
-                caption: 'Go to SPRAY-NET.COM',
+                caption: 'WIZARD-POSTCODE.GOTO_SITE|Go to SPRAY-NET.COM',
                 action: () => {
                     window.location.href = 'https://www.spray-net.com';
                 }
