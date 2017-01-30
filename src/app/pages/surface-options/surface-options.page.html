@@ -1,21 +1,19 @@
 <div *ngIf="surface.name !== 'isOther'">
     <div *ngFor="let option of surface.options">
-        <uss-checkbox type="toggle" [label]="option.name | translate" [ussDataSource]="option" [fieldName]="'isSelected'" (modelChange)="modelChanged(option)">
+        <uss-checkbox type="toggle" [label]="'WIZARD-SURFACE-OPTIONS.OPTION.' + option.name | translate" [ussDataSource]="option" [fieldName]="'isSelected'" (modelChange)="modelChanged(option)">
         </uss-checkbox>
         <br/>
     </div>
 </div>
 
 <div *ngIf="surface.name === 'isOther'">
-    <div>
-        Description
-    </div>
+    <div i18n="WIZARD-SURFACE-OPTIONS.DESCRIPTION">Description</div>
 
     <div>
-        <uss-textarea [placeholder]="'Add more details about your exterior'" [ussDataSource]="surface" [fieldName]="'options'"></uss-textarea>
+        <uss-textarea [placeholder]="'WIZARD-SURFACE-OPTIONS.PLACEHOLDER|Add more details about your exterior'|translate" [ussDataSource]="surface" [fieldName]="'options'"></uss-textarea>
     </div>
 
 </div>
 
-<button (click)="cancel()">Cancel</button>
-<button (click)="done()">Done</button>
+<uss-button type="cancel" (click)="cancel()"></uss-button>
+<uss-button type="ok" i18n="DONE" (click)="done()">Done</uss-button>

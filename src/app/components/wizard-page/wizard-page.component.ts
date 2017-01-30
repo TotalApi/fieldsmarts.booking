@@ -24,6 +24,7 @@ export class WizardPageComponent implements ng.OnInit {
     @ng.Input('back') back: WizardCommand | string | boolean | any;
     @ng.Input('next') next: WizardCommand | string | any;
     @ng.Input('error') error: string;
+    @ng.Input('oops') oops: string;
 
     @ng.ViewChild('ussForm') ussForm: ngForms.NgForm;
 

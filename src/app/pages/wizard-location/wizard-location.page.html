@@ -1,9 +1,9 @@
 <wizard-page 
-    title="WIZARD-LOCATION.TITLE|YOUR ADDRESS"
+    title="WIZARD-LOCATION.TITLE|Your Address"
     description="WIZARD-LOCATION.DESCRIPTION|Let's verify we work on your area"
 >               
-    <uss-input #search [label]="'WIZARD-LOCATION.ADDRESS_LABEL|Address *' | translate"
-                placeholder="WIZARD-LOCATION.ADDRESS_PLACEHOLDER|Your address"
+    <uss-input #search i18n="WIZARD-LOCATION.ADDRESS_LABEL" label="Address *"
+                [placeholder]="'WIZARD-LOCATION.ADDRESS_PLACEHOLDER|Your Address'|translate"
                 fieldName="address"
                 required>
     </uss-input>

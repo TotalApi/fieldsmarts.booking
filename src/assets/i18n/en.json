@@ -1,10 +1,10 @@
 ﻿{
     "BACK": "Back",
-    "ERROR_SALES_1": "ERROR_SALES_1",
-    "GOTO_SITE": "Go to SPRAY-NET.COM",
+    "DONE": "Done",
     "NEXT": "Next ->",
     "OF": "of",
-    "SORRY": "SORRY",
+    "OOPS": "OOPS!",
+    "OPTIONS": "Options",
     "WIZARD-DONE": {
         "HEAR_ABOUT": "How did you here about us?",
         "LIKE": "like & visit us on Facebook!",
@@ -24,6 +24,12 @@
         "CALL_ME": "Call Me",
         "DESCRIPTION": "FREE estimate",
         "TITLE": "Book a"
+    },
+    "WIZARD-LOCATION": {
+        "ADDRESS_LABEL": "Address *",
+        "ADDRESS_PLACEHOLDER": "Your Address",
+        "DESCRIPTION": "Let's verify we work on your area",
+        "TITLE": "Your Address"
     },
     "WIZARD-NAME": {
         "DESCRIPTION": "Send us your info & we'll be in touch within the next 24-48 hours.",
@@ -55,16 +61,35 @@
         "DESCRIPTION": "We'll email you if we can't reach you by phone.",
         "TITLE": "Just In Case..."
     },
+    "WIZARD-SURFACE-OPTIONS": {
+        "DESCRIPTION": "Description",
+        "OPTION": {
+            "isPainted": "Painted",
+            "isRusted": "Rusted",
+            "isWood": "Wood",
+            "none": "None"
+        },
+        "PLACEHOLDER": "Add more details about your exterior"
+    },
     "WIZARD-SURFACES": {
-        "isAggregate": "Aggreegate",
-        "isAluminiumSiding": "Aluminium siding",
-        "isBrick": "Brick",
-        "isFrontDoor": "Front door",
-        "isGarageDoor": "Garage door",
-        "isOther": "My exterior is not listed",
-        "isSoffits": "Soffits",
-        "isStucco": "Stucco",
-        "isVinylSiding": "Vinyl siding",
-        "isWindows": "Windows"
+        "DESCRIPTION": "Select the surface",
+        "FORGOTTED": "You forgot to select description for your exterior surface!",
+        "MODAL": {
+            "1": "Unfortunatelly, we dont paint wood or previously painted surfaces.",
+            "2": "Is there another exterior surface you'd like to paint?"
+        },
+        "SURFACE": {
+            "isAggregate": "Aggregate",
+            "isAluminiumSiding": "Aluminium Siding",
+            "isBrick": "Brick",
+            "isFrontDoor": "Front Door",
+            "isGarageDoor": "Garage Door",
+            "isOther": "Other",
+            "isSoffits": "Soffits",
+            "isStucco": "Stucco",
+            "isVinylSiding": "Vinyl Siding",
+            "isWindows": "Windows"
+        },
+        "TITLE": "Surfaces"
     }
 }
