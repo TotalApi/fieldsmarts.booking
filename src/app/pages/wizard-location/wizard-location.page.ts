@@ -4,7 +4,7 @@ import {AppWizardService} from "../../services/wizard.service";
 import {GeocodeService} from '../../services/geocode.service';
 import { AgmCoreModule, MapsAPILoader } from 'angular2-google-maps/core';
 import {UssInputComponent} from '../../../system/components/semanticui/input/inputs.component';
-
+import {AppSettings} from '../../services/settings.service';
 declare var google: any;
 
 @ng.Component({
@@ -17,8 +17,14 @@ export class AppWizardLocationPage implements ng.OnInit {
 
     @ng.ViewChild("search") searchElement: UssInputComponent;
 
-    constructor(public wizard: AppWizardService, public geocode: GeocodeService, private mapsApiLoader: MapsAPILoader,
-    private ngZone: ng.NgZone) { }
+    constructor(public wizard: AppWizardService,
+        public geocode: GeocodeService,
+        private mapsApiLoader: MapsAPILoader,
+        private ngZone: ng.NgZone,
+        private settings: AppSettings) {
+
+        this.mapsApiLoader['_config']['apiKey'] = this.settings.googleApiKey;
+    }
 
     /*private checkAddress() {
         this.geocode.getSuggestedAddess(this.wizard.data.address).then((addr) => {

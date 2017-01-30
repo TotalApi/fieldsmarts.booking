@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Http, HttpModule } from '@angular/http';
-import { AgmCoreModule } from 'angular2-google-maps/core';
+import { AgmCoreModule} from 'angular2-google-maps/core';
 
 /*
     3rd party
@@ -46,8 +46,7 @@ import {AppSettings} from './services/settings.service';
         system.UssSystemModule,
         system.UssComponentsModule,
         AgmCoreModule.forRoot({
-          libraries: ["places"],
-          apiKey: 'AIzaSyASScrTpFyyeEruSLIaOyg_GLmPwXoHLgA'
+            libraries: ["places"]
         })
     ],
     providers: [
@@ -65,7 +64,7 @@ import {AppSettings} from './services/settings.service';
         }
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 

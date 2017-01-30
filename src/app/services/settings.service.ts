@@ -6,13 +6,9 @@ import {UssApiService} from '../../system/services/api.service';
 import {ApiMethod} from '../../system/decorators/api-method.decorator';
 import {ApiService} from '../../system/decorators/api-service.decorator';
 import {Http} from '@angular/http';
-import {SalesConsultant} from '../models/Sales';
-import {Sales} from '../models/Sales';
-import {PostBooking} from '../models/Sales';
-import {PostCodeAssignment} from '../models/Sales';
 
 @Injectable()
-@AppService()
+@ApiService("api/admin")
 export class AppSettings extends UssApiService {
 
     mainCallPhone: string;
@@ -30,10 +26,13 @@ export class AppSettings extends UssApiService {
         this.googleApiKey = 'AIzaSyASScrTpFyyeEruSLIaOyg_GLmPwXoHLgA';
         this.translateApiUrl = 'http://192.168.3.202:7202/locales';
 
-        this.load().then(s => _.defaults(this, s));
+        this.load().then((s: Settings[]) => {
+            s.forEach(x => this[x.key] = x.value);
+        });
     }
 
-    load(): Promise<AppSettings> {
-        return Promise.resolve({});
+    @ApiMethod({ method: "GET", route: "settings", useBody: false })
+    load(): Promise<Settings[]> {
+        return this.request<Settings[]>().toPromise();
     }
 }
