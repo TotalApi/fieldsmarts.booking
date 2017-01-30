@@ -1,9 +1,9 @@
 <wizard-page 
-    [title]="'VALIDATE'"
-    [description]="'Tap finish to validate your selection'"
+    title="WIZARD-VALIDATE.TITLE|Validate"
+    description="WIZARD-VALIDATE.DESCRIPTION|Tap finish to validate your selection"
     [next]="nextAction">               
     
-    <div>ONLINE BOOKING</div>
+    <div i18n="WIZARD-VALIDATE.ONLINE_BOOKING">Online Booking</div>
     
     <div>
         <span>{{ wizard.data.bookTime | date: 'dd' }}</span>
@@ -11,13 +11,13 @@
         <span>{{ wizard.data.bookTime | date: 'EEEE' }}</span>
         <span>{{ wizard.data.bookTime | date: 'HH:mm' }}</span>
         
-        <button (click)="editBookingTime()">Edit</button>
+        <uss-button i18n="EDIT" (click)="editBookingTime()">Edit</uss-button>
         
         <div *ngFor="let surf of selectedSurfaces">
             <span>{{surf.description}}</span>
         </div>
         
-        <button (click)="editSurfaces()">Edit</button>
+        <uss-button i18n="EDIT" (click)="editSurfaces()">Edit</uss-button>
 
     </div>
 

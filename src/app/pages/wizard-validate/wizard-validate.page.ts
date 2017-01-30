@@ -15,7 +15,7 @@ export class AppWizardValidatePage {
 
     private selectedSurfaces: Surface[];
 
-    public nextAction = { action: () => this.check(), caption: 'Finish ->'};
+    public nextAction = { action: () => this.check(), caption: 'FINISH'};
 
     constructor(public wizard: AppWizardService, public sales: SalesService) {
         this.selectedSurfaces = wizard.data.surfaces.where(x => x.isSelected).toArray();

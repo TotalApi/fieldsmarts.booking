@@ -19,7 +19,7 @@ export class AppWizardSurfacesPage {
     private surfaces: Surface[] = [];
     private forgotted: boolean;
 
-    public nextAction = { action: () => this.check(), caption: 'NEXT ->'};
+    public nextAction = { action: () => this.check(), caption: 'NEXT'};
 
     constructor(public sales: SalesService,
         public wizard: AppWizardService,

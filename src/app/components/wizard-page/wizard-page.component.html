@@ -1,5 +1,5 @@
 <div class="wizard-page {{class}} {{id}}">
-    <div class="header" *ngIf="title && description && !error">
+    <div class="header" *ngIf="title && description && !error && !oops">
         <h2>{{title|translate}}</h2>
         <h3>{{description|translate}}</h3>
     </div>
@@ -7,6 +7,11 @@
         <h1>:(</h1>
         <h2 i18n="SORRY">Sorry</h2>
         <h3 i18n>{{error}}</h3>
+    </div>
+    <div class="header error oops" *ngIf="oops">
+        <uss-button type="empty" (click)="oops=''">X</uss-button>
+        <h2 i18n="OOPS">OOPS!</h2>
+        <h3 i18n>{{oops}}</h3>
     </div>
 
     <div class="content">     
