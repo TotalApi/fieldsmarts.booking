@@ -1,9 +1,10 @@
-<wizard-page 
+<wizard-page #wp
     title="WIZARD-NAME.TITLE|No Problem!"
     description="WIZARD-NAME.DESCRIPTION|Send us your info & we'll be in touch within the next 24-48 hours."
 >               
     <uss-input i18n="WIZARD-NAME.FIRST_NAME_LABEL" label="First Name *"
-               [placeholder]="'WIZARD-NAME.FIRST_NAME_PLACEHOLDER|Your First Name'|translate"
+               [placeholder]="'WIZARD-NAME.FIRST_NAME_PLACEHOLDER|Your First Name'|translate" 
+               [ussDataSource]="wp.ussForm"
                fieldName="firstName"
                class="uss row"
                required>
@@ -13,6 +14,6 @@
                [placeholder]="'WIZARD-NAME.LAST_NAME_PLACEHOLDER|Your Last Name'|translate"
                fieldName="lastName"
                required>                 
-    </uss-input>
+    </uss-input> 
     
 </wizard-page>

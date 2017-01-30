@@ -267,7 +267,18 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
 
     protected initForm() {
         if (this.ussDataSource) {
-            this.ussFormGroup = null;
+            if (this.ussDataSource instanceof ngForms.NgForm) {
+                this.formGroup = this.ussDataSource.form;
+                if (this.formGroup instanceof UssFormGroup) {
+                    this.ussFormGroup = this.formGroup;
+                }
+            }
+            else if (this.ussDataSource instanceof UssFormGroup) {
+                this.ussFormGroup = this.ussDataSource;
+                this.formGroup = this.ussDataSource;
+            } else {
+                this.ussFormGroup = null;
+            }    
         } else {
             this.formGroup = this.searchForm(this.viewContainer.parentInjector['_view']);
             if (this.formGroup) {
