@@ -65,6 +65,10 @@ export class AppWizardSurfacesPage {
         this.forgotted = !ifAnySelected;
         this.wizard.data.isQualifiedLead = true;
 
+        if (this.forgotted) {
+            return false;
+        }
+
         if (this.surfaces.where(x => x.isSelected && x.name !== 'isOther')
                 .selectMany(x => x.options as SurfaceOption[])
                 .where((x: SurfaceOption) => x && x.isSelected)
