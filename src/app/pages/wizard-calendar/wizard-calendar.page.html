@@ -2,16 +2,16 @@
     
     <div *ngIf="loading" class="ui">
         <div class="ui active inverted dimmer">
-            <div class="ui large text loader">Loading</div>
+            <div i18n="LOADING" class="ui large text loader">Loading</div>
         </div>
         <div id="messages-content" style="position: absolute; left: 2em; right: 2em; top: 1em; z-index: 99999"></div>
     </div>
 
     <time-booking [franchise]="model.franchise" (loaded)="loaded($event)" [salesNumber]="model.salesNumber" [dayTime]="selectedDayTime" #timeBooking></time-booking>
     <div class="ui buttons">
-        <button class="ui button" (click)="setDayTime('morning')" [ngClass]="{ 'active': selectedDayTime === 'morning' }">{{ 'Morning' | translate }}</button>
-        <button class="ui button" (click)="setDayTime('afternoon')" [ngClass]="{ 'active': selectedDayTime === 'afternoon' }">{{ 'Afternoon' | translate }}</button>
-        <button class="ui button" (click)="setDayTime('evening')" [ngClass]="{ 'active': selectedDayTime === 'evening' }">{{ 'Evening' | translate }}</button>
+        <button class="ui button" (click)="setDayTime('morning')" [ngClass]="{ 'active': selectedDayTime === 'morning' }">{{ 'WIZARD-CALENDAR.MORNING|Morning' | translate }}</button>
+        <button class="ui button" (click)="setDayTime('afternoon')" [ngClass]="{ 'active': selectedDayTime === 'afternoon' }">{{ 'WIZARD-CALENDAR.AFTERNOON|Afternoon' | translate }}</button>
+        <button class="ui button" (click)="setDayTime('evening')" [ngClass]="{ 'active': selectedDayTime === 'evening' }">{{ 'WIZARD-CALENDAR.EVENING|Evening' | translate }}</button>
     </div>
 
 
@@ -22,14 +22,13 @@
             </div>
             <div class="description">
                 <div>
-                    <uss-checkbox type="toggle" [label]="'Decision makers will be present'" [ussDataSource]="model" fieldName="agreedForBook">
-                    </uss-checkbox>
+                    <uss-checkbox i18n="WIZARD-CALENDAR.DECISION_MARKER" type="toggle" label="Decision makers will be present" [ussDataSource]="model" fieldName="agreedForBook"></uss-checkbox>
                 </div>
             </div>
         </div>
         <div class="actions">
-            <button class="ui black deny button" (click)="closePopup()">Re-schedule</button>
-            <button [disabled]="!wizard.data.agreedForBook" (click)="next()">Next</button>
+            <uss-button i18n="WIZARD-CALENDAR.RESCHEDULE" class="black" (click)="closePopup()">Re-schedule</uss-button>
+            <uss-button i18n="WIZARD-CALENDAR.NEXT" type="ok" [disabled]="!wizard.data.agreedForBook" (click)="next()">Next</uss-button>
         </div>
     </div>
 

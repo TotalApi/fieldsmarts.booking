@@ -1,10 +1,21 @@
 ﻿{
     "BACK": "Back",
     "DONE": "Done",
+    "EDIT": "Edit",
+    "FINISH": "FINISH",
+    "LOADING": "Loading...",
     "NEXT": "Next ->",
     "OF": "of",
     "OOPS": "OOPS!",
     "OPTIONS": "Options",
+    "WIZARD-CALENDAR": {
+        "AFTERNOON": "Afternoon",
+        "DECISION_MARKER": "Decision makers will be present",
+        "EVENING": "Evening",
+        "MORNING": "Morning",
+        "NEXT": "Next",
+        "RESCHEDULE": "Re-schedule"
+    },
     "WIZARD-DONE": {
         "HEAR_ABOUT": "How did you here about us?",
         "LIKE": "like & visit us on Facebook!",
@@ -91,5 +102,10 @@
             "isWindows": "Windows"
         },
         "TITLE": "Surfaces"
+    },
+    "WIZARD-VALIDATE": {
+        "DESCRIPTION": "Tap finish to validate your selection",
+        "ONLINE_BOOKING": "Online Booking",
+        "TITLE": "Validate"
     }
 }
