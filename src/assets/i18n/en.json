@@ -1,32 +1,70 @@
 ﻿{
-  "BACK": "Back",
-  "NEXT": "Next ->",
-
-  "WIZARD-HOME": {
-    "CALL_ME": "Call Me"
-  },
-
-  "WIZARD-NAME": {
-    "TITLE": "No Problem!",
-    "DESCRIPTION": "Send us your info & we'll be in touch within the next 24-48 hours.",
-    "FIRST_NAME_LABEL": "First Name *",
-    "LAST_NAME_LABEL": "Last Name *",
-    "FIRST_NAME_PLACEHOLDER": "Enter your first name",
-    "LAST_NAME_PLACEHOLDER": "Enter your last name"
-  },
-  "WIZARD-SURFACES": {
-
-
-
-    "isAluminiumSiding": "Aluminium siding",
-    "isVinylSiding": "Vinyl siding",
-    "isStucco": "Stucco",
-    "isAggregate": "Aggreegate",
-    "isBrick": "Brick",
-    "isFrontDoor": "Front door",
-    "isGarageDoor": "Garage door",
-    "isSoffits": "Soffits",
-    "isWindows": "Windows",
-    "isOther": "My exterior is not listed"
-  }
+    "BACK": "Back",
+    "ERROR_SALES_1": "ERROR_SALES_1",
+    "GOTO_SITE": "Go to SPRAY-NET.COM",
+    "NEXT": "Next ->",
+    "OF": "of",
+    "SORRY": "SORRY",
+    "WIZARD-DONE": {
+        "HEAR_ABOUT": "How did you here about us?",
+        "LIKE": "like & visit us on Facebook!",
+        "MEANTIME": "in the meantime,",
+        "THANKS": "Thanks"
+    },
+    "WIZARD-EMAIL": {
+        "DESCRIPTION": "We'll email you if we can't reach you by phone.",
+        "EMAIL_LABEL": "Email *",
+        "EMAIL_PLACEHOLDER": "Your Email",
+        "TITLE": "Just in case...",
+        "WANT_SPAM": "YES! Keep me updated on Spray-Net's latest contests, blogs, events & other fun stuff!"
+    },
+    "WIZARD-HOME": {
+        "BOOK_ONLINE": "Book Online",
+        "CALL": "Call",
+        "CALL_ME": "Call Me",
+        "DESCRIPTION": "FREE estimate",
+        "TITLE": "Book a"
+    },
+    "WIZARD-NAME": {
+        "DESCRIPTION": "Send us your info & we'll be in touch within the next 24-48 hours.",
+        "FIRST_NAME_LABEL": "First Name *",
+        "FIRST_NAME_PLACEHOLDER": "Enter your first name",
+        "LAST_NAME_LABEL": "Last Name *",
+        "LAST_NAME_PLACEHOLDER": "Enter your last name",
+        "TITLE": "No Problem!"
+    },
+    "WIZARD-PHONE": {
+        "DESCRIPTION": "Promise, we respect your privacy.",
+        "PHONE_LABEL": "Phone Number *",
+        "PHONE_PLACEHOLDER": "Your Phone Number",
+        "TITLE": "No Cold Calls"
+    },
+    "WIZARD-POSTCODE": {
+        "1": "Your closest franchise partner will be in touch within the next 24-48 hours.",
+        "2": "You can also contact him at:",
+        "3": "Or you can call to sales consultant.",
+        "ALERT_ME": "Alert me instead ->",
+        "DESCRIPTION": "Let's verify we work on your area",
+        "LABEL": "Postal code *",
+        "NOT_SERVE": "Unfortunatelly we do not serve your area",
+        "OUTSIDE": "You are a little outside our service area",
+        "PLACEHOLDER": "Your Postal Code",
+        "TITLE": "Your Location"
+    },
+    "WIZARD-RECOMENDATION": {
+        "DESCRIPTION": "We'll email you if we can't reach you by phone.",
+        "TITLE": "Just In Case..."
+    },
+    "WIZARD-SURFACES": {
+        "isAggregate": "Aggreegate",
+        "isAluminiumSiding": "Aluminium siding",
+        "isBrick": "Brick",
+        "isFrontDoor": "Front door",
+        "isGarageDoor": "Garage door",
+        "isOther": "My exterior is not listed",
+        "isSoffits": "Soffits",
+        "isStucco": "Stucco",
+        "isVinylSiding": "Vinyl siding",
+        "isWindows": "Windows"
+    }
 }

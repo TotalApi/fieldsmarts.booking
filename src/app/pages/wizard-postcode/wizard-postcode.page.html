@@ -1,42 +1,42 @@
 <wizard-page
-    title="YOUR LOCATION"
-    description="Let's verify we work on your area"
+    title="WIZARD-POSTCODE.TITLE|Your Location"
+    description="WIZARD-POSTCODE.DESCRIPTION|Let's verify we work on your area"
     [back]="backAction"
     [next]="nextAction"
     [error]="error"
 >
     <div *ngIf="errorState==='invalid_code'">
         <div class="field uss-input uss-component">
-            <label i18n class="uss row">Postal code *</label>
+            <label i18n="WIZARD-POSTCODE.LABEL" class="uss row">Postal code *</label>
             <div class="error-code">{{wizard.data.postalCode}}</div>
         </div>
     </div>
     <div *ngIf="errorState==='outbound_code'">
         <div class="field uss-input uss-component">
-            <div i18n>Your closest franchise partner will be in touch within the next 24-48 hours.</div> 
+            <div i18n="WIZARD-POSTCODE.1">Your closest franchise partner will be in touch within the next 24-48 hours.</div> 
             
             <div class="parner-name-fran">
                 <div class="parner-name">{{partner?.name}}</div>
                 <div class="parner-franchise">{{partner?.franchise}}</div>
             </div>
 
-            <div i18n>You can also contact him at:</div>
+            <div i18n="WIZARD-POSTCODE.2">You can also contact him at:</div>
             <div class="parner-phone">{{partner?.tel}}</div>
             <div class="parner-email">{{partner?.userName}}</div>
             
-            <div i18n>Or you can call to sales consultant.</div> 
+            <div i18n="WIZARD-POSTCODE.3">Or you can call to sales consultant.</div> 
 
             <div class="parner-name-fran">
                 <div class="parner-name">{{consultant?.name}}</div>
             </div> 
 
-            <div i18n>You can also contact him at:</div>
+            <div i18n="WIZARD-POSTCODE.2">You can also contact him at:</div>
             <div class="parner-phone">{{consultant?.tel}}</div>
             <div class="parner-email">{{consultant?.userName}}</div>
         </div>
     </div>
-    <uss-input [label]="'Postal code *' | translate" [hidden]="errorState"
-               placeholder="Your Postal Code"
+    <uss-input i18n="WIZARD-POSTCODE.LABEL" label="Postal code *" [hidden]="errorState"
+               [placeholder]="'WIZARD-POSTCODE.PLACEHOLDER|Your Postal Code'|translate"
                fieldName="postalCode"
                required>
     </uss-input>

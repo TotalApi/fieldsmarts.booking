@@ -30,12 +30,11 @@ export class AppRecomendationSourcePage {
         this.selectedSource = selection;
     }
 
-    private async save() {
-        let mi = new MarketingInfo();
+    private async save(): Promise<any> {
+        const mi = new MarketingInfo();
         mi.salesNumber = this.wizard.data.salesNumber;
         mi.franchisee = this.wizard.data.franchise;
         mi.heardAboutUs = this.selectedSource.id;
-
-        await this.sales.saveMarkeingInfo(mi);
+        return await this.sales.saveMarkeingInfo(mi);
     }
 }
