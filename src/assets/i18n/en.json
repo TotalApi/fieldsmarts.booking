@@ -1,17 +1,32 @@
 ﻿{
-    "BACK":  "Back" ,
-    "NEXT": "Next ->",
+  "BACK": "Back",
+  "NEXT": "Next ->",
 
-    "WIZARD-HOME": {
-        "CALL_ME": "Call Me"
-    },
+  "WIZARD-HOME": {
+    "CALL_ME": "Call Me"
+  },
 
-    "WIZARD-NAME": {
-        "TITLE": "No Problem!",
-        "DESCRIPTION": "Send us your info & we'll be in touch within the next 24-48 hours.",
-        "FIRST_NAME_LABEL": "First Name *",
-        "LAST_NAME_LABEL": "Last Name *",
-        "FIRST_NAME_PLACEHOLDER": "Enter your first name",
-        "LAST_NAME_PLACEHOLDER": "Enter your last name"
-    }
+  "WIZARD-NAME": {
+    "TITLE": "No Problem!",
+    "DESCRIPTION": "Send us your info & we'll be in touch within the next 24-48 hours.",
+    "FIRST_NAME_LABEL": "First Name *",
+    "LAST_NAME_LABEL": "Last Name *",
+    "FIRST_NAME_PLACEHOLDER": "Enter your first name",
+    "LAST_NAME_PLACEHOLDER": "Enter your last name"
+  },
+  "WIZARD-SURFACES": {
+
+
+
+    "isAluminiumSiding": "Aluminium siding",
+    "isVinylSiding": "Vinyl siding",
+    "isStucco": "Stucco",
+    "isAggregate": "Aggreegate",
+    "isBrick": "Brick",
+    "isFrontDoor": "Front door",
+    "isGarageDoor": "Garage door",
+    "isSoffits": "Soffits",
+    "isWindows": "Windows",
+    "isOther": "My exterior is not listed"
+  }
 }

@@ -1,3 +1,112 @@
+@import '../../components/common/_variables.scss';
+
 .home {
-    background-color: orange;
+    background-color: $orange!important;
+    background-image: url(../../../assets/images/PaintGuy.png);
+    background-repeat: no-repeat;
+    background-position: center 5em;
+    position: relative;
+
+    .content, form{
+        height: 100%;
+    }
+    h2{
+        font-size: 40px;
+        font-weight: 900;
+        text-align: center;
+        color: #fff;
+        line-height: 48px;
+        margin: 0;
+    }
+
+    h1{
+        font-size: 50px;
+        font-weight: 900;
+        text-align: center;
+        color: #fff;
+        line-height: 66px;
+        white-space: nowrap;
+        margin: 0;
+        letter-spacing: -1px;
+    }
+
+    .title-app{
+        padding-top: 4.4em;
+    }
+    button.btn-round{
+        height: 42px;
+        line-height: 38px;
+        border-radius: 21px;
+        border: 2px solid $greyLite;
+        color: $greyLite;
+        font-family: 'Lato', sans-serif;
+        font-size: 20px;
+        background-color: inherit!important;
+        padding: 0 20px;
+
+        &.btn-call{
+             width: 145px;
+             padding-left: 26px;
+             margin-left: 0!important;
+             background-color: $greyLite!important;
+             color: $orange;
+
+             .uss-button-content{
+                 padding-left: 26px;
+                 background-image: url(../../../assets/images/phone-orange.png);
+                 background-position: center left;
+                 background-repeat: no-repeat;
+             }
+
+             &:hover,
+             &:active,
+             &:focus{
+                  background-color: inherit!important;
+                  color: $greyLite!important;
+                 
+                 .uss-button-content{
+                      padding-left: 26px;
+                      background-repeat: no-repeat;
+                      background-image: url(../../../assets/images/phone-white.png);
+                 }
+             }
+        }
+
+        &.btn-next{
+             .uss-button-content{
+                 padding-right: 29px;
+                 background-image: url(../../../assets/images/arrow-next-orange.png);
+                 background-position: center right;
+                 background-repeat: no-repeat;
+             }
+
+             &:hover,
+             &:active,
+             &:focus{
+                 .uss-button-content{
+                     padding-right: 29px;
+                     background-image: url(../../../assets/images/arrow-next-white.png);
+                     background-position: center right;
+                     background-repeat: no-repeat;
+                 }
+             }
+        }
+             
+
+        &:hover,
+        &:active,
+        &:focus{
+            background-color: $greyLite!important;
+            color: $orange!important;
+        }
+
+
+    }
+
+    .title-screen{
+        width: 100%;
+        position: absolute;
+        bottom: 5em;
+        text-align: center;
+    }
 }

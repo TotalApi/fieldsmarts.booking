@@ -57,19 +57,22 @@ export class SalesService extends UssApiService {
     }
 
     public fillSaleWithSurfaces(sale: Sales) {
-        sale.isAluminiumSiding = this.getSurface('isAluminiumSiding').isSelected;
-        sale.isVinylSiding = this.getSurface('isVinylSiding').isSelected;
-        sale.isStucco = this.getSurface('isStucco').isSelected;
-        sale.isAggregate = this.getSurface('isAggregate').isSelected;
-        sale.isBrick = this.getSurface('isBrick').isSelected;
-        sale.isFrontDoor = this.getSurface('isFrontDoor').isSelected;
-        sale.isGarageDoor = this.getSurface('isGarageDoor').isSelected;
-        sale.isWindows = this.getSurface('isWindows').isSelected;
-        sale.isSoffits = this.getSurface('isSoffits').isSelected;
-        sale.isOther = this.getSurface('isOther').isSelected;
 
-        const isOther = this.getSurface('isOther');
-        sale.otherSurfacesNotes = isOther.isSelected ? isOther.options as string : "";
+        if (this.wizard.data.surfaces && this.wizard.data.surfaces.length > 0) {
+            sale.isAluminiumSiding = this.getSurface('isAluminiumSiding').isSelected;
+            sale.isVinylSiding = this.getSurface('isVinylSiding').isSelected;
+            sale.isStucco = this.getSurface('isStucco').isSelected;
+            sale.isAggregate = this.getSurface('isAggregate').isSelected;
+            sale.isBrick = this.getSurface('isBrick').isSelected;
+            sale.isFrontDoor = this.getSurface('isFrontDoor').isSelected;
+            sale.isGarageDoor = this.getSurface('isGarageDoor').isSelected;
+            sale.isWindows = this.getSurface('isWindows').isSelected;
+            sale.isSoffits = this.getSurface('isSoffits').isSelected;
+            sale.isOther = this.getSurface('isOther').isSelected;
+
+            const isOther = this.getSurface('isOther');
+            sale.otherSurfacesNotes = isOther.isSelected ? isOther.options as string : "";
+        }
     }
 
     public async saveLead(): Promise<boolean> {
