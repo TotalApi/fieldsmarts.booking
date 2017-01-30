@@ -15,6 +15,18 @@
     "LAST_NAME_PLACEHOLDER": "Enter your last name"
   },
   "WIZARD-SURFACES": {
-    "isAluminiumSiding": "Aluminium siding"
+
+
+
+    "isAluminiumSiding": "Aluminium siding",
+    "isVinylSiding": "Vinyl siding",
+    "isStucco": "Stucco",
+    "isAggregate": "Aggreegate",
+    "isBrick": "Brick",
+    "isFrontDoor": "Front door",
+    "isGarageDoor": "Garage door",
+    "isSoffits": "Soffits",
+    "isWindows": "Windows",
+    "isOther": "My exterior is not listed"
   }
 }
