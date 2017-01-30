@@ -6,7 +6,7 @@
    
     <div class="button-group title-screen">
         <uss-button i18n="WIZARD-HOME.CALL_ME" class="btn-round fix-margin btn-call" type="ok" (click)="callMe()" *ngIf="isCurrentTimeOff()">Call Me</uss-button>    
-        <uss-button i18n="WIZARD-HOME.CALL" class="btn-round fix-margin btn-call" type="ok" (click)="call()" *ngIf="isCurrentTimeOff()">Call</uss-button>
+        <uss-button i18n="WIZARD-HOME.CALL" class="btn-round fix-margin btn-call" type="ok" (click)="call()" *ngIf="!isCurrentTimeOff()">Call</uss-button>
         <uss-button i18n="WIZARD-HOME.BOOK_ONLINE" class="btn-round fix-margin btn-next" type="ok" (click)="bookOnline()">Book Online</uss-button>
     </div>
 
