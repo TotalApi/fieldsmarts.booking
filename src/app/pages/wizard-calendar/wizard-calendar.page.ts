@@ -40,7 +40,7 @@ export class AppWizardCalendarPage implements ng.OnInit {
     }
 
     private check(): boolean {
-        if (!this.selectedDayTime) {
+        if (!this.wizard.data.bookTime) {
             return false;
         }
 
@@ -49,6 +49,7 @@ export class AppWizardCalendarPage implements ng.OnInit {
         }
 
         return this.wizard.data.agreedForBook;
+
     }
 
     private closePopup() {
@@ -59,6 +60,10 @@ export class AppWizardCalendarPage implements ng.OnInit {
     private next() {
         $('.ui.modal').modal('hide');
         this.wizard.next();
+    }
+
+    public nextDisabled() {
+        return !this.wizard.data.bookTime;
     }
 
     ngOnInit(): void {

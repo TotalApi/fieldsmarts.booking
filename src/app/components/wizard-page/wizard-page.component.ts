@@ -26,6 +26,9 @@ export class WizardPageComponent implements ng.OnInit {
     @ng.Input('error') error: string;
     @ng.Input('oops') oops: string;
 
+    @ng.Input('backDisabled') backDisabled: () => boolean = () => false;
+    @ng.Input('nextDisabled') nextDisabled: () => boolean = () => false;
+
     @ng.ViewChild('ussForm') ussForm: ngForms.NgForm;
 
     public loading: boolean = false;
