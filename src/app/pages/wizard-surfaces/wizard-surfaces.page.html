@@ -12,7 +12,7 @@
             <button (click)="select(surface)">+</button>
             <span *ngIf="surface.isSelected"> >>> </span>
             {{surface.name | translate}}
-            <a *ngIf="surface.name !== 'isOther' && surface.options && surface.options.length > 0" (click)="showOptions(surface)">Options</a>
+            <a class="options" *ngIf="surface.name !== 'isOther' && surface.options && surface.options.length > 0" (click)="showOptions(surface)">Options</a>
         </li>
     </ul>
     
