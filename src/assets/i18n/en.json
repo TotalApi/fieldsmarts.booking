@@ -20,9 +20,13 @@
         "RESCHEDULE": "Re-schedule"
     },
     "WIZARD-DONE": {
+        "ALL_DONE": "All Done",
+        "GOOGLE": "Add to Google Cal",
         "HEAR_ABOUT": "How did you here about us?",
+        "ICAL": "Add to iCal/Outlook",
         "LIKE": "like & visit us on Facebook!",
         "MEANTIME": "in the meantime,",
+        "REMINDER": "Set a reminder in your calendar",
         "THANKS": "Thanks"
     },
     "WIZARD-EMAIL": {
