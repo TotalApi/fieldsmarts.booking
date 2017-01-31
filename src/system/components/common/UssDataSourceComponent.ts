@@ -107,7 +107,7 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
     @ng.Input('fieldName') _fieldName: string;
     get fieldName(): string { return this._fieldName || (this.propertyMetadata ? this.propertyMetadata.Name : "") }
 
-    @ng.Input('defaultValue') defaultValue: any;
+    @ng.Input('defaultValue') defaultValue : string;
 
     /**
      * Metadata reference.
