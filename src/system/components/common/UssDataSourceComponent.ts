@@ -77,7 +77,7 @@ export interface IUssValidateComponent {
  */
 export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implements ng.OnInit, ng.AfterViewInit, ng.OnChanges, IUssValidateComponent {
 
-    public static Inputs = ['value: model', 'required', 'control', 'placeholder', 'metadata', 'disabled', 'ussDataSource', '_fieldName: fieldName', 'class', 'label', 'defaultValue', 'i18n'];
+    public static Inputs = ['value: model', 'required', 'control', 'placeholder', 'metadata', 'disabled', 'ussDataSource', '_fieldName: fieldName', 'class', 'label', 'defaultValue', 'i18n', 'pattern'];
     public static Outputs = ['modelChange'];
 
     constructor(protected viewContainer: ng.ViewContainerRef, protected changeDetector: ng.ChangeDetectorRef) {
@@ -173,13 +173,18 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
      * Required flag.
      */
     @ng.Input('required') required: boolean | string;
-    public isRequired() {
-        let res = this.required === '' || this.required;
+    public isRequired(): boolean {
+        let res = this.required === '' || !!this.required;
         if (this.propertyMetadata && this.propertyMetadata.Required) {
             // если кто-то явно не отменил признак required
             res = this.required !== false && this.required !== 'false';
         }
         return res;
+    }
+
+    @ng.Input('pattern') pattern: string | RegExp;
+    public isPattern(): boolean {
+        return !!this.pattern;
     }
 
     /*
@@ -570,6 +575,12 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
             }
             else if (res) {
                 delete res.required;
+            }
+            if (this.isPattern()) {
+                res = Json.assign(res, ngForms.Validators.pattern(this.pattern)(control));
+            }
+            else if (res) {
+                delete res.pattern;
             }
         }
         return res;
