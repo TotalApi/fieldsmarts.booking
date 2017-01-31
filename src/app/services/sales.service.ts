@@ -77,7 +77,8 @@ export class SalesService extends UssApiService {
 
     public async saveLead(): Promise<boolean> {
         let sale = new Sales();
-        sale.isQualifiedLead = this.wizard.data.isQualifiedLead;
+        sale.isQualifiedLead = this.wizard.data.status === 'Lead';
+        sale.status = this.wizard.data.status;
         sale.franchisee = this.wizard.data.franchise;
         sale.address1 = this.wizard.data.address;
         sale.contactEmail = this.wizard.data.email;
@@ -94,7 +95,8 @@ export class SalesService extends UssApiService {
         sale = await this.save(sale);
         this.wizard.data.salesNumber = sale.salesNumber;
         this.wizard.data.franchise = sale.franchisee;
-        return this.wizard.data.isQualifiedLead;
+        this.wizard.data.status = <any>sale.status || this.wizard.data.status;
+        return true;
     }
 
     public async saveBookTime(): Promise<PostBooking> {

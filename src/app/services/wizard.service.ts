@@ -26,7 +26,7 @@ export class AppWizardService {
         callMe: undefined,
         bookTime: undefined,
         surfaces: undefined,
-        isQualifiedLead: true,
+        status: <TSalesStatus>'Unqualified',
         isOutOfBounds: false
     }
 

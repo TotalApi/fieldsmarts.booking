@@ -63,7 +63,8 @@ export class AppWizardSurfacesPage {
     check(): boolean {
         const ifAnySelected = this.surfaces.any(x => this.checkIfSurfaceSelected(x));
         this.forgotted = !ifAnySelected;
-        this.wizard.data.isQualifiedLead = true;
+        //this.wizard.data.isQualifiedLead = true;
+        this.wizard.data.status = 'Lead';
 
         if (this.forgotted) {
             return false;
@@ -75,7 +76,8 @@ export class AppWizardSurfacesPage {
                 .all((x: SurfaceOption) => ['wood', 'rusted', 'painted'].contains(x.name))) {
             
             $('.ui.modal').modal({blurring: true}).modal('show');
-            this.wizard.data.isQualifiedLead = false;
+            //this.wizard.data.isQualifiedLead = false;
+            this.wizard.data.status = 'Rejected';
             return false;
         }
 

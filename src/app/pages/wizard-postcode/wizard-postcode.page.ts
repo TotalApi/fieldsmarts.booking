@@ -35,7 +35,7 @@ export class AppWizardPostCodePage {
     public async checkPostCode(): Promise<boolean> {
         let ass: PostCodeAssignment;
 
-        this.wizard.data.isQualifiedLead = true;
+        this.wizard.data.status = 'Lead';
         this.wizard.data.isOutOfBounds = false;
 
         try {
@@ -45,13 +45,13 @@ export class AppWizardPostCodePage {
             this.error = 'WIZARD-POSTCODE.NOT_SERVE|Unfortunatelly we do not serve your area';
             this.nextAction = { caption: 'WIZARD-POSTCODE.ALERT_ME|Alert me instead ->', action: () => alert('Alert!!!!!') };
             this.backAction = { isHidden: true };
-            this.wizard.data.isQualifiedLead = false;
-            return await this.sales.saveLead();
+            this.wizard.data.status = 'Unqualified';
+            await this.sales.saveLead();
+            return false;
         } 
-
         if (ass.isOutOfBounds) {
             this.wizard.data.isOutOfBounds = true;
-
+            this.wizard.data.status = 'Rejected';
             this.errorState = 'outbound_code';
             this.error = 'WIZARD-POSTCODE.OUTSIDE|You are a little outside our service area';
             this.nextAction = {
@@ -79,7 +79,8 @@ export class AppWizardPostCodePage {
                 }
             });
         }
-        return await this.sales.saveLead();
+        await this.sales.saveLead();
+        return this.wizard.data.status === 'Lead';
     }
 
 }
