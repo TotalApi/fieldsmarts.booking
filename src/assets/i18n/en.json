@@ -1,14 +1,32 @@
 ﻿{
     "BACK": "Back",
     "DONE": "Done",
+    "EDIT": "Edit",
+    "ERROR_SALES_1": "ERROR_SALES_1",
+    "FINISH": "Finish",
+    "GOTO_SITE": "Go to SPRAY-NET.COM",
+    "LOADING": "Loading...",
     "NEXT": "Next ->",
     "OF": "of",
-    "OOPS": "OOPS!",
+    "OOPS": "Oops!",
     "OPTIONS": "Options",
+    "SORRY": "Sorry",
+    "WIZARD-CALENDAR": {
+        "AFTERNOON": "Afternoon",
+        "DECISION_MARKER": "Decision makers will be present",
+        "EVENING": "Evening",
+        "MORNING": "Morning",
+        "NEXT": "Next",
+        "RESCHEDULE": "Re-schedule"
+    },
     "WIZARD-DONE": {
+        "ALL_DONE": "All Done",
+        "GOOGLE": "Add to Google Cal",
         "HEAR_ABOUT": "How did you here about us?",
+        "ICAL": "Add to iCal/Outlook",
         "LIKE": "like & visit us on Facebook!",
         "MEANTIME": "in the meantime,",
+        "REMINDER": "Set a reminder in your calendar",
         "THANKS": "Thanks"
     },
     "WIZARD-EMAIL": {
@@ -91,5 +109,10 @@
             "isWindows": "Windows"
         },
         "TITLE": "Surfaces"
+    },
+    "WIZARD-VALIDATE": {
+        "DESCRIPTION": "Tap finish to validate your selection",
+        "ONLINE_BOOKING": "Online Booking",
+        "TITLE": "Validate"
     }
 }

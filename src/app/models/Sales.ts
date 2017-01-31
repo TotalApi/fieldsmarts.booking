@@ -164,8 +164,12 @@ export class LookupItem {
     value: string;
 }
 
-export class Lookup {
+export class HeardAboutUsItem extends LookupItem {
+    forBookingOnly: boolean;
+}
+
+export class Lookup<TLookupItem extends LookupItem> {
     name: string;
-    values: Array<LookupItem>;
-    default: LookupItem;
+    values: Array<TLookupItem>;
+    default: TLookupItem;
 }

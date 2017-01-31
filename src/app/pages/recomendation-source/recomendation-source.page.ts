@@ -3,9 +3,7 @@ import { AppRoute } from 'src/app/app.routes';
 import {AppWizardService} from "../../services/wizard.service";
 import {SalesService} from '../../services/sales.service';
 import {LookupService} from '../../services/lookup.service';
-import {Lookup} from '../../models/Sales';
-import {LookupItem} from '../../models/Sales';
-import {MarketingInfo} from '../../models/Sales';
+import {Lookup, LookupItem,MarketingInfo, HeardAboutUsItem} from '../../models/Sales';
 
 @ng.Component({
     styleUrls: ['./recomendation-source.page.scss'],
@@ -15,7 +13,7 @@ import {MarketingInfo} from '../../models/Sales';
 @AppRoute({ path: 'recomendation-source' })
 export class AppRecomendationSourcePage {
 
-    private options: Lookup = new Lookup();
+    private options = new Lookup<HeardAboutUsItem>();
 
     private selectedSource: LookupItem;
 
@@ -23,6 +21,8 @@ export class AppRecomendationSourcePage {
         lookup.getHeardAboutUs().then(x => {
             this.options = x;
             this.selectedSource = x.default;
+            this.options.values = this.options.values
+                .filter(x => x.forBookingOnly !== undefined && x.forBookingOnly !== null);
         });
     }
 
