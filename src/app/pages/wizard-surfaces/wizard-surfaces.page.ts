@@ -75,7 +75,7 @@ export class AppWizardSurfacesPage {
             .where((x: SurfaceOption) => x && x.isSelected).toArray(); 
         if (array.any() && array.all((x: SurfaceOption) => ['isWood', 'isRusted', 'isPainted'].contains(x.name)) && !this.surfaces.first(x => x.name === 'isOther').isSelected) {
             
-            $('.ui.modal').modal({blurring: true}).modal('show');
+            $('#surfacesModal').modal({blurring: true}).modal('show');
             //this.wizard.data.isQualifiedLead = false;
             this.wizard.data.status = 'Rejected';
             return false;
@@ -85,11 +85,11 @@ export class AppWizardSurfacesPage {
     }
 
     closePopup() {
-        $('.ui.modal').modal('hide');
+        $('#surfacesModal').modal('hide');
     }
 
     next() {
-        $('.ui.modal').modal('hide');
+        $('#surfacesModal').modal('hide');
         
         this.wizard.next();
     }

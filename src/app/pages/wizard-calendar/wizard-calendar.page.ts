@@ -43,7 +43,7 @@ export class AppWizardCalendarPage implements ng.OnInit {
         }
 
         if (!this.wizard.data.agreedForBook) {
-            $('.ui.modal').modal({blurring: true}).modal('show');
+            $('#calendarModal').modal({blurring: true}).modal('show');
         }
 
         return this.wizard.data.agreedForBook;
@@ -52,11 +52,11 @@ export class AppWizardCalendarPage implements ng.OnInit {
 
     private closePopup() {
         this.model.agreedForBook = false;
-        $('.ui.modal').modal('hide');
+        $('#calendarModal').modal('hide');
     }
 
     private next() {
-        $('.ui.modal').modal('hide');
+        $('#calendarModal').modal('hide');
         this.wizard.next();
     }
 
