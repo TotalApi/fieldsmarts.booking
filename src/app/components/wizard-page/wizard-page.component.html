@@ -20,15 +20,8 @@
         </form>
     </div>
 
-<!--
-    <pre style="background-color: lightgoldenrodyellow; border: 1px solid black">{{wizard.data | json}}</pre>
-    <pre style="background-color: lightgoldenrodyellow; border: 1px solid black">{{wizard.state | json}}</pre>
-    <pre style="background-color: lightgoldenrodyellow; border: 1px solid black">form.valid = {{ussForm.valid}}</pre>
--->
-                      
-
     <div class="footer" *ngIf="(!back.isHidden || !next.isHidden) && wizard.state.currentStep > 0">
-        <div class="ui tiny active progress">
+        <div class="ui tiny active progress" *ngIf="!error">
             <div class="label">{{wizard.state.currentStep}} {{'OF|of' | translate}} {{wizard.state.totalSteps}}</div>
             <div class="bar" [ngStyle]="{'width': wizard.state.currentStep*100/wizard.state.totalSteps + '%'}"></div>
         </div> 

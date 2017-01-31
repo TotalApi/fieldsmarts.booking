@@ -7,6 +7,7 @@ import {SalesService} from '../../services/sales.service';
 import { AccountService } from '../../services/account.service';
 import { WizardCommand } from '../../components/wizard-page/wizard-page.component';
 import {FranchiseService} from '../../services/franchise.service';
+import {AppSettings} from '../../services/settings.service';
 
 @ng.Component({
     styleUrls: ['./wizard-postcode.page.scss'],
@@ -26,10 +27,13 @@ export class AppWizardPostCodePage {
     public consultant: IUserInfo;
     public partner: IUserInfo;
 
+    public returnSite = 'https://www.spray-net.com';
+
     constructor(public sales: SalesService,
         public wizard: AppWizardService,
         public account: AccountService,
         public franchise: FranchiseService,
+        public settings: AppSettings
     ) { }
 
     public async checkPostCode(): Promise<boolean> {
@@ -44,7 +48,15 @@ export class AppWizardPostCodePage {
             this.errorState = 'invalid_code';
             this.error = 'WIZARD-POSTCODE.NOT_SERVE|Unfortunatelly we do not serve your area';
             this.nextAction = { caption: 'WIZARD-POSTCODE.ALERT_ME|Alert me instead ->', action: () => alert('Alert!!!!!') };
-            this.backAction = { isHidden: true };
+            this.backAction = {
+                caption: 'BACK',
+                action: () => {
+                    this.errorState = '';
+                    this.error = '';
+                    this.backAction = this.defaultBackAction;
+                    this.nextAction = this.defaultNextAction;
+                }
+            };
             this.wizard.data.status = 'Unqualified';
             await this.sales.saveLead();
             return false;
@@ -56,9 +68,7 @@ export class AppWizardPostCodePage {
             this.error = 'WIZARD-POSTCODE.OUTSIDE|You are a little outside our service area';
             this.nextAction = {
                 caption: 'GOTO_SITE|Go to SPRAY-NET.COM',
-                action: () => {
-                    window.location.href = 'https://www.spray-net.com';
-                }
+                action: () => { window.location.href = this.returnSite }
             };
             this.backAction = {
                 caption: 'BACK',
