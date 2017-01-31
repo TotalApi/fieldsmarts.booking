@@ -1,9 +1,9 @@
 ﻿import { Type, SimpleChanges, SimpleChange, EventEmitter } from "@angular/core";
 
 /**
- * Расширяет класс методом другого класса.
- * @param token класс откуда берётся метод-рсширение (миксин).
- * @param fnName имя функции в классе-миксине (если не задано - используется метод с тем же именем).
+ * Extends class by method of another class.
+ * @param token class from wich extension method will be taken (mixin).
+ * @param fnName method name in mixin class (if not set - using method with the same name).
  *
  * Sample:
  *      class Flies {

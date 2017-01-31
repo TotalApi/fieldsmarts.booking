@@ -144,10 +144,10 @@ export class UssCheckboxComponent extends UssDataSourceComponent<number, HTMLInp
         switch (this.inputElement.type) {
             case 'checkbox':
                 if (isNaN(<any>this.inputElement.value)) {
-                    // Если значения value не установлено - этот checkbox просто переключает значения true/false
+                    // If not set - checkbox will switch true/false
                     this.inputElement.checked = !!value;
                 } else {
-                    // Если значения value установлено - этот checkbox устанавливает/сбрасывает указанные в этом значении биты
+                    // If set - checkbox sets bits
                     this.inputElement.checked = (parseInt(this.inputElement.value) & value) !== 0;
                 }
                 break;

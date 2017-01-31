@@ -3,13 +3,13 @@ import {Reflection} from '../utils/Reflection';
 
 
 /**
- * Возможность инектировать DI в поля класса.
- * Работает так же, как и соответствующий декоратор Angular2 в конструкторе.
- * Поддерживается наследование.
+ * Injects DI into class fields.
+ * Works the same as correspondent decorator in Angular2 in constructor.
+ * Inheritance is supported.
  */
 export var Inject = (token: Type<any>) => (target: any, propertyKey: string) => {
     const descriptor = Object.getOwnPropertyDescriptor(target, propertyKey) || <PropertyDescriptor>{ configurable: true, enumerable: true };
-    // Подменяем или объявляем get и set
+    // Replacing get and set
     const originalGet = descriptor.get || function () { return this.__nc_values ? this.__nc_values[<string>propertyKey] : undefined };
     const originalSet = descriptor.set || function (v) {
         this.__nc_values = this.__nc_values || {};
@@ -23,6 +23,6 @@ export var Inject = (token: Type<any>) => (target: any, propertyKey: string) => 
         }
         return result;
     }
-    // Объявляем новое свойство, либо обновляем дескриптор
+    // Updating new property or updating descriptor
     Object.defineProperty(target, propertyKey, descriptor);
 };

@@ -3,8 +3,8 @@ import {systemComponents, componentModuleComponents } from './system-component.d
 
 
 /**
- * Список помеченных данным декоратором компонентов добавляется в массив appComponents.
- * В последствии все такие компоненты можно добавить в bootstrap, указав в разделе declarations.
+ * Adds service to appComponents array.
+ * Then this services could be added to bootstrap inside declarations section.
  */
 export var AppComponent = () => target => {
     if (!systemComponents.contains(target) && !componentModuleComponents.contains(target) && !appComponents.contains(target))
@@ -12,6 +12,6 @@ export var AppComponent = () => target => {
 }
 
 /**
- * Список всех компонентов, помеченных декоратором @AppComponent.
+ * List of all components marked by @AppComponent decorator.
  */
 export var appComponents: Type<any>[] = [];

@@ -13,11 +13,11 @@ export class UssSimpleValueComponent {
     private constructor() { }
 
     /**
-     * Создание простой имплементации интерфейса IUssValueComponent
-     * @param getValueFn метод получения значения
-     * @param setValueFn метод установки значения
-     * @param toTextFn метод преобразования значения в текст
-     * @param toValueFn метод преобразования текста в значение
+     * Simple IUssValueComponent implementation
+     * @param getValueFn method for getting value
+     * @param setValueFn method for setting value
+     * @param toTextFn method for converting value into text
+     * @param toValueFn method for converting text into value
      */
     public static create(
         getValueFn: () => any,
@@ -52,7 +52,7 @@ export class UssSimpleValueComponent {
     public set value(v: any) { this.setValueFn(v) }
 
     /**
-     * Преобразование значения компонента в текстовое представление.
+     * Converts value to text.
      */
     public toText(v: any): string {
         return this.toTextFn
@@ -61,7 +61,7 @@ export class UssSimpleValueComponent {
     }
 
     /**
-     * Преобразование переданного значения (в том числе и текстового представления) в значение компонента корректного типа.
+     * Convert argument into components value.
      */
     public toValue(v: any): any {
         let res = v;
@@ -106,24 +106,24 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
     }
 
     /**
-     * Источник данных (объект) с полем которого связывается компонент
+     * Data source
      */
     @ng.Input('ussDataSource') dataSource: Object;
 
     /**
-     * Название поля источника данных с которым связывается компонент
+     * Field name
      */
     @ng.Input('fieldName') fieldName: string;
 
     /**
-     * Если равно true - содержимое инпута будет автоматически выделено после попадания в него фокуса ввода
+     * If true - input value will be automatically selected after focus in
      */
     @ng.Input('autoSelect') autoSelectOnFocus: boolean = false;
 
     @ng.Input('metadata') metadata: EntityMetadata | PropertyMetadata | any;
 
     /**
-     * Ссылка на форму, внутри которой лежит компонент
+     * Form reference which wraps the component
      */
     protected form: UssFormGroup;
 
@@ -141,16 +141,14 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
 
 
     /**
-     * Это интерфейс для работы с компонентом (установка/получение форматированного значения).
-     * Если его реализует компонент, к которому привязана директива - используется он, иначе
-     * создаём простейшую реализацию этого интерфейса для унификации работы
+     *  Component which hosts the directive
      */
     protected ussHostComponent: UssSimpleValueComponent;
 
 
     private _value: any;
     /**
-     * Текущее значение компонента.
+     * Current components value
      */
     public get value(): any { return (this.dataSource && this.fieldName) ? this.dataSource[this.fieldName] : this._value; }
     public set value(value: any) {
@@ -165,7 +163,7 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
 
     protected _nativeElement: TNativeElement;
     /**
-     * Ссылка на нативный элемент ввода
+     * Reference to native element
      */
     protected abstract nativeElement: TNativeElement;
 
@@ -213,7 +211,7 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
     }
 
     /**
-     * Обновление значения компонента в источнике данных.
+     * Updates value of component in datasource.
      */
     protected updateValue(value?: any) {
         this.fieldName = this.fieldName || (this.propertyMetadata ? this.propertyMetadata.Name : undefined);
@@ -225,9 +223,6 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
     ngOnInit() {
         super.ngOnInit();
         this.hostElementRef.nativeElement['_ussDataSource'] = this;
-        // если хост-компонент имплементирует UssValueComponent - будем использовать этот интерфейс 
-        // для получения/установки значения компонента, если нет - создадим имплементацию по умолчанию,
-        // для простоты работы директивы:
         const hostComponent = this.hostComponent || {};
         this.ussHostComponent = this.createUssHostComponent(hostComponent);
         this.initControl();
@@ -245,14 +240,14 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
     }
 
     /**
-     * Получение текущего значения компонента на основании значения в HTML-элементе
+     * Get current component value based on value of HTML element
      */
     protected getComponentValue(): any {
         return this.nativeElement ? this.nativeElement.value : null;
     }
 
     /**
-     * Установка значения в HTML-элементе, соответствующая текущему значению компонента.
+     * Sets value of HTML element from components value.
      */
     protected setElementValue(value: any) {
         if (this.nativeElement) {
@@ -298,7 +293,7 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
                 });
             }
         }
-        // Установить значение в контроле равным значению в источнике данных
+        // set control value as datasource value
         setTimeout(() => {
             this.updateElementValue(this.value);
         });
@@ -306,7 +301,7 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
     }
 
     /**
-     * Установка значения в FormControl-е, соответствующая текущему значению компонента.
+     * Sets value in FormControl from components value.
      */
     private updateFormValue(value?: any) {
         if (this.form) {
@@ -314,13 +309,9 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
             if (control && this.nativeElement) {
                 if (value === undefined) value = this.nativeElement.value;
                 value = this.ussHostComponent.toValue(value);
-                // Нужно вызывать setValue для FormControl'а только если оно изменилось,
-                // чтобы не вызывались ненужные события, информирующие об изменении состояния
                 let v1 = this.form.controls[this.fieldName].value;
                 let v2 = value;
                 if (isJsObject(value)) {
-                    // Однако объектные значения просто так сравнивать нельзя (например дату),
-                    // поэтому превратим их в текст для сравнения
                     v1 = this.ussHostComponent.toText(v1);
                     v2 = this.ussHostComponent.toText(v2);
                 }
@@ -332,7 +323,7 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
     }
 
     /**
-     * Обновляет значение компонента на основании данных контрола
+     * Updates value of component from control value
      * @param value
      */
     protected updateComponentValue(value?: any) {
@@ -341,7 +332,7 @@ export abstract class UssDataSourceBaseDirective<TNativeElement extends HTMLInpu
     }
 
     /**
-     * Обновляет значение в контроле соответствующего текущему значению компонента
+     * Updates value of control from component value
      * @param value
      */
     protected updateElementValue(value: any) {

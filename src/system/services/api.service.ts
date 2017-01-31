@@ -1,6 +1,5 @@
 ﻿import { Type, EventEmitter, Optional } from "@angular/core";
 import { Json } from "../utils/Json";
-import { OData } from "../utils/OData";
 import { Http, RequestOptionsArgs } from "@angular/http";
 import { Observable } from 'rxjs/Observable';
 import * as utils from "../utils/utils";
@@ -10,7 +9,7 @@ import { ApiMethodMetadata, IApiMethodMetadata } from "../decorators/api-method.
 import { UssHttp } from "./http.service";
 
 /**
- * Описание нашего базового интерфейса API-контроллера ресурсов
+ * Basic API controller
  */
 export class UssApiService {
 
@@ -89,7 +88,7 @@ export class UssApiService {
 
     public request<T>(params?: any, methodDescriptor?: IApiMethodMetadata, options?: RequestOptionsArgs): Observable<T> {
         params = params || {};
-        const paramsObject = params instanceof OData ? params.query : Json.clone(params);
+        const paramsObject = Json.clone(params);
 
         let caller = '';
         methodDescriptor = methodDescriptor || this['__apiMethod'];

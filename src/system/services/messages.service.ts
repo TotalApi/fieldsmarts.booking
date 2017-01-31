@@ -38,58 +38,58 @@ export var DefaultMessagesOptions: ToastOptions | any = {
 
 export interface IUssMessagesService {
     /**
-     * Выводит информационное сообщение в консоль и на панель информационных сообщений, если она доступна.
-     * @param message Текст информационного сообщения
-     * @param closeAfter Время, после которого окно с информационным сообщением будет закрыто
+     * Displays informational message to console and to informational messages panel, if it is avaliable.
+     * @param message informational message text
+     * @param closeAfter Time to wait for closing the message
      */
     info(message: string, closeAfter?: number | boolean): void;
 
     /**
-     * Выводит информационное сообщение в консоль и на панель сообщений об успешной операции, если она доступна.
-     * @param message Текст информационного сообщения
-     * @param closeAfter Время, после которого окно с информационным сообщением будет закрыто
+     * Displays informational message to console and to informational messages panel, if it is avaliable.
+     * @param message informational message text
+     * @param closeAfter Time to wait for closing the message
      */
     success(message: string, closeAfter ?: number | boolean): void;
 
     /**
-     * Выводит предупреждение в консоль и на панель сообщений, если она доступна.
-     * @param message Текст предупреждения
-     * @param closeAfter Время, после которого окно с предупреждением будет закрыто
+     * Displays warning message to console and to informational messages panel, if it is avaliable.
+     * @param message informational message text
+     * @param closeAfter Time to wait for closing the message
      */
     warning(message: string, closeAfter ?: number | boolean): void;
 
     /**
-     * Выводит ошибку в консоль и на панель ошибок/сообщений, если она доступна.
-     * @param message Текст ошибки или объект ошибки из которого будет извлечён текст ошибки как значение св-ва obj.responseText или obj.status + ' ' + obj.statusText
+     * Displays error message to console and to informational messages panel, if it is avaliable.
+     * @param message Error text or object from which the text will be extracted as obj.responseText or obj.status + ' ' + obj.statusText
      * @param closeAfter Время, после которого окно с ошибкой будет закрыто
      */
     error(message: string | Object, closeAfter ?: number | boolean): void;
 
     /**
-     * Выводит ошибку выполнения программы консоль и на панель ошибок/сообщений, если она доступна.
-     * Используйте этот тип ошибок именно для вывода ошибок времени выполнения приложения, а не прикладных ошибок.
-     * Эти ошибки выводятся на экран только в режиме разработки.
-     * @param message Текст ошибки или объект ошибки из которого будет извлечён текст ошибки как значение св-ва obj.responseText или obj.status + ' ' + obj.statusText
+     * Displays runtime error message to console and to informational messages panel, if it is avaliable.
+     * Use this type exactly for runtime errors, not for application errors.
+     * These error displays only in debug mode.
+     * @param message Error text or object from which the text will be extracted as obj.responseText or obj.status + ' ' + obj.statusText
      * @param closeAfter Время, после которого окно с ошибкой будет закрыто
      */
     runtimeError(message: string | Object, closeAfter ?: number | boolean): void;
 
     /**
-     * Выводит строку в консоль.
-     * @param message Текст, выводимый в консоль
+     * Displays string in console.
+     * @param message Text to display in console.
      */
     log(message: string): void;
 
     // ReSharper disable once InconsistentNaming
     /**
-     * Выводит строку в консоль только в отладочном режиме (если значение переменной App.IsDebug == true).
-     * @param message Текст, выводимый в консоль.
+     * Displays string in console only in debug mode (if App.IsDebug == true).
+     * @param message Text to display in console.
      */
     debug(message: string);
 
     /**
-     * Принудительно убирает все сообщения указанного типа.
-     * Если типы не указаны - убираются все сообщения.
+     * Removes all messages of particular type.
+     * If no types not set - all messages will be removed.
      */
     clear(types ?: MessageType): void;
 }
@@ -112,20 +112,20 @@ export class UssMessagesService implements IUssMessagesService {
     }
 
     /**
-     * Признак режима отладки. 
-     * В этом режиме в консоль будут выводится сообщения через debug() 
-     * Если равно false - вызов метода debug() игнорируется.
-     * По умолчанию устанавливается в значение ангуляровской функции isDevMode()
+     * Debug mode flag. 
+     * In this mode messages will be send to console by debug() method
+     * If false - debug() call are ignored.
+     * By default uses value from angulars isDevMode() function
      */
     isDebug: boolean = isDevMode();
 
     /**
-     * Окончание, добавляемое в конец всех сообщений перед записью в лог. Можно указать перевод строки.
+     * All message suffix. Could be line break.
      */
     logMessageStringSuffix: string = "";
 
     /**
-     * Если равно true - все сообщения будут выведены в консоль через console.log()
+     * If true - all messages will be send to console by console.log()
      */
     useOnlyConsoleLog: boolean = false;
 
@@ -278,35 +278,35 @@ export class UssMessagesService implements IUssMessagesService {
     }
 
     /**
-     * Выводит информационное сообщение в консоль и на панель информационных сообщений, если она доступна.
-     * @param message Текст информационного сообщения
-     * @param closeAfter Время, после которого окно с информационным сообщением будет закрыто
+     * Displays informational message to console and to informational messages panel, if it is avaliable.
+     * @param message informational message text
+     * @param closeAfter Time to wait for closing the message
      */
     info(message: string, closeAfter?: number | boolean): void {
         this.logMessage(message, MessageType.Info, closeAfter);
     }
 
     /**
-     * Выводит информационное сообщение в консоль и на панель сообщений об успешной операции, если она доступна.
-     * @param message Текст информационного сообщения
-     * @param closeAfter Время, после которого окно с информационным сообщением будет закрыто
+     * Displays informational message to console and to informational messages panel, if it is avaliable.
+     * @param message informational message text
+     * @param closeAfter Time to wait for closing the message
      */
     success(message: string, closeAfter?: number | boolean): void {
         this.logMessage(message, MessageType.Success, closeAfter);
     }
 
     /**
-     * Выводит предупреждение в консоль и на панель сообщений, если она доступна.
-     * @param message Текст предупреждения
-     * @param closeAfter Время, после которого окно с предупреждением будет закрыто
+     * Displays warning message to console and to informational messages panel, if it is avaliable.
+     * @param message informational message text
+     * @param closeAfter Time to wait for closing the message
      */
     warning(message: string, closeAfter?: number | boolean): void {
         this.logMessage(message, MessageType.Warning, closeAfter);
     }
     
     /**
-     * Выводит ошибку в консоль и на панель ошибок/сообщений, если она доступна.
-     * @param message Текст ошибки или объект ошибки из которого будет извлечён текст ошибки как значение св-ва obj.responseText или obj.status + ' ' + obj.statusText
+     * Displays error message to console and to informational messages panel, if it is avaliable.
+     * @param message Error text or object from which the text will be extracted as obj.responseText or obj.status + ' ' + obj.statusText
      * @param closeAfter Время, после которого окно с ошибкой будет закрыто
      */
     error(message: string | Object | any, closeAfter?: number | boolean): void {
@@ -314,10 +314,10 @@ export class UssMessagesService implements IUssMessagesService {
     }
 
     /**
-     * Выводит ошибку выполнения программы консоль и на панель ошибок/сообщений, если она доступна.
-     * Используйте этот тип ошибок именно для вывода ошибок времени выполнения приложения, а не прикладных ошибок.
-     * Эти ошибки выводятся на экран только в режиме разработки.
-     * @param message Текст ошибки или объект ошибки из которого будет извлечён текст ошибки как значение св-ва obj.responseText или obj.status + ' ' + obj.statusText
+     * Displays runtime error message to console and to informational messages panel, if it is avaliable.
+     * Use this type exactly for runtime errors, not for application errors.
+     * These error displays only in debug mode.
+     * @param message Error text or object from which the text will be extracted as obj.responseText or obj.status + ' ' + obj.statusText
      * @param closeAfter Время, после которого окно с ошибкой будет закрыто
      */
     runtimeError(message: string | Object, closeAfter?: number | boolean): void {
@@ -325,8 +325,8 @@ export class UssMessagesService implements IUssMessagesService {
     }
 
     /**
-     * Выводит строку в консоль.
-     * @param message Текст, выводимый в консоль
+     * Displays string in console.
+     * @param message Text to display in console.
      */
     log(message: string): void {
         this.logMessage(message, MessageType.Log);
@@ -334,8 +334,8 @@ export class UssMessagesService implements IUssMessagesService {
 
     // ReSharper disable once InconsistentNaming
     /**
-     * Выводит строку в консоль только в отладочном режиме (если значение переменной App.IsDebug == true).
-     * @param message Текст, выводимый в консоль.
+     * Displays string in console only in debug mode (if App.IsDebug == true).
+     * @param message Text to display in console.
      */
     debug(message: string) {
         if (this.isDebug)
@@ -343,8 +343,8 @@ export class UssMessagesService implements IUssMessagesService {
     }
 
     /**
-     * Принудительно убирает все сообщения указанного типа.
-     * Если типы не указаны - убираются все сообщения.
+     * Removes all messages of particular type.
+     * If no types not set - all messages will be removed.
      */
     clear(types?: MessageType): void {
         if (!types)

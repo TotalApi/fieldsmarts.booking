@@ -119,10 +119,10 @@ export class UssButtonComponent implements ng.OnChanges {
     }
 
     /**
-     * Вызывает указанный метод.
-     * Если метод возвращает <i>Promise</i> или <i>Observable</i>,
-     * кнопка будет заблокирована и будет выведена анимация загрузки, до окончания выполнения асинхронной операции.
-     * @param fn - вызываемый метод.
+     * Calls the method.
+     * If method returns <i>Promise</i> or <i>Observable</i>,
+     * button will be disabled and animation will be visible until promise is resolved.
+     * @param fn - calling method.
      */
     public execute(fn: () => Promise<any> | Observable<any> | any, context?: Object): Promise<any> | Observable<any> | any {
         if (this.disabled || this.inputDisabled || this.loading || this.inputLoading) return () => { };

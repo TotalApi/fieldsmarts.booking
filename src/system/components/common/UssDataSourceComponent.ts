@@ -65,7 +65,7 @@ export interface EntityMetadata {
 
 
 /**
- * К компонента, реализующего этот интерфейс будет автоматически вызван метод onValidate для валидации.
+ * Components class that implements this interfce, onValidate method will be called.
  */
 export interface IUssValidateComponent {
     onValidate(control: ngForms.AbstractControl): { [key: string]: boolean }
@@ -73,8 +73,7 @@ export interface IUssValidateComponent {
 
 
 /**
- * Для корректной работы директивы uss-data-source наследуйте все компоненты, работающие с ней,
- * от этого класса и корректно реализуйте методы интерфейса IUssValidateComponent.
+ * For correct work of uss-data-source directive inherit all components, that works with it from this class.
  */
 export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implements ng.OnInit, ng.AfterViewInit, ng.OnChanges, IUssValidateComponent {
 
@@ -111,7 +110,7 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
     @ng.Input('defaultValue') defaultValue: any;
 
     /**
-     * Ссылка на метаинформацию свойства или класса, связанного с данным компонентом.
+     * Metadata reference.
      */
     @ng.Input('metadata') metadata: PropertyMetadata | (() => PropertyMetadata) | EntityMetadata | (() => EntityMetadata);
 
@@ -142,7 +141,7 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
     }
 
     /**
-     * Название реального поля, содержащего значение
+     * Field name
      */
     public get dataFieldName(): string {
         return this.fieldName;
@@ -159,7 +158,7 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
     }
 
     /**
-     * Ссылка на FormControl, связанный с данным компонентом. Если явно не указан - создаётся автоматически с валидаторами по умолчанию.
+     * Reference to FormControl connected with components. If not set - will be automatically created with validators.
      */
     @ng.Input('control') control: ngForms.FormControl;
 
@@ -171,7 +170,7 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
     };
 
     /**
-     * Признак обязательного значения у контрола.
+     * Required flag.
      */
     @ng.Input('required') required: boolean | string;
     public isRequired() {
@@ -184,21 +183,21 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
     }
 
     /*
-    * Признак запрета редактирования компонента
+    * Disabled flag.
     */
     @ng.Input('disabled') disabled: boolean;
 
 
     /**
-     * Водяной знак компонента
+     * Components watermark.
      */ 
     @ng.Input("placeholder") placeholder: string = '';
 
     @Inject(ng.NgZone) zone: ng.NgZone;
 
     /**
-     * Признак того, что компонент прошёл инициализацию.
-     * Устанавливается в событии ngAfterViewInit.
+     * Component initialized flag.
+     * Sets in ngAfterViewInit.
      */
     protected wasInit: boolean;
 
@@ -291,14 +290,14 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
     }
 
     /**
-     * Вызывается при установке сво-ва value компонента или нажатии клавиши Escape
+     * Firing when setting components value or pressing Escape 
      */
     protected updateInputElement(value: TValue): void {
         this.setInputElementValue(value);
     }
 
     /**
-     * Вызывается при потере фокуса или нажатии клавиши Enter в поле ввода.
+     * Firing when lost focus or pressing Enter inside input.
      */
     protected updateValue(textValue: string): void {
         if (this.wasInit) {
@@ -307,10 +306,10 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
     }
 
     /**
-     * Вызывается в методе updateValue.
-     * Служит для проверки и исправления значения на основании данных валидации валидаторами.
-     * @param value проверяемое значение, которое должно быть установлено.
-     * @returns {} исправленное корректное значение.
+     * Fires in updateValue method.
+     * Used for checking value by validators.
+     * @param value checking value.
+     * @returns {} correct value.
      */
     protected validateControlValue(value: any): TValue | any {
         let res = this.toValue(value);
@@ -333,9 +332,7 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
 
     public get markAsInvalid(): boolean {
         return this.control && !this.control.valid   
-            && !this.control.disabled // не считаем невалидными запрещённые контролы - всё-равно пользователь ничего сделать не может
-//            && this.control.dirty   // подсвечиваем только контролы которые "трогали"
-            // подсвечиваем, если значение контрола равно значению компонента или текущий компонент находится в фокусе
+            && !this.control.disabled
             && (this.isValuesEqual(this.control.value, this.value) || document.activeElement === this.inputElement);
     }
 
@@ -414,7 +411,7 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
                 switch ($event.keyCode) {
                     case 27: // "Escape"
                         this.updateInputElement(this.value);
-                        // тут НЕ нужен break !!!!
+                        // NO break here !!!!
                     case 13: // "Enter"
                         if (!(el instanceof HTMLTextAreaElement)) {
                             this.updateValue(el.value);
@@ -510,7 +507,7 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
 
 
     /**
-     * Преобразование значения компонента в текстовое представление.
+     * Converting components value to text.
      */
     public toText(v: TValue): string {
         v = this.toValue(v);
@@ -527,7 +524,7 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
     }
 
     /**
-     * Преобразование переданного значения (в том числе и текстового представления) в значение компонента корректного типа.
+     * Converting argument to components value.
      */
     public toValue(v: any): TValue {
         let res = v;
@@ -550,8 +547,8 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
 
 
     /**
-     * Инициирует отсылку сообщений об изменении значения в компоненте.
-     * @param value значение, которое будет послано для уведомления. Если не указано - используется текущее значение.
+     * Emits changes.
+     * @param value value that will be send, if not set - current value will be used.
      */
     public emitChanges(value?: TValue) {
         if (value === undefined) value = this.value;
@@ -559,11 +556,10 @@ export class UssDataSourceComponent<TValue, TElement extends HTMLElement> implem
     }
 
     /**
-     * Имплементация валидатора контрола компонента.
-     * Будет автоматически вызвана, если контрол содержит CustomValidators.ussDataSourceComponentValidator или CustomValidators.ussFormValidator.
-     * Необходимо вернуть null в случае, если валидация прошла успешно или объект с ошибкой валидации.
-     * Пустой объект в качестве успеха валидации возвращать нельзя - форма считает себя невалидной.
-     * @param control ссылка на FormControl, для которого проводится валидация.
+     * Control validator.
+     * Will be automatically called if control contains CustomValidators.ussDataSourceComponentValidator or CustomValidators.ussFormValidator.
+     * Returns null in case of ok validation or validation error.
+     * @param control reference to FormControl which is validating.
      */
     onValidate(control: ngForms.AbstractControl): { [key: string]: boolean } {
         let res = null;

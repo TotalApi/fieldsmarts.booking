@@ -73,7 +73,7 @@ export class AppWizardSurfacesPage {
         const array = this.surfaces.where(x => x.isSelected && x.name !== 'isOther')
             .selectMany(x => x.options as SurfaceOption[])
             .where((x: SurfaceOption) => x && x.isSelected).toArray(); 
-        if (array.any() && array.all((x: SurfaceOption) => ['isWood', 'isRusted', 'isPainted'].contains(x.name))) {
+        if (array.any() && array.all((x: SurfaceOption) => ['isWood', 'isRusted', 'isPainted'].contains(x.name)) && !this.surfaces.first(x => x.name === 'isOther').isSelected) {
             
             $('.ui.modal').modal({blurring: true}).modal('show');
             //this.wizard.data.isQualifiedLead = false;
