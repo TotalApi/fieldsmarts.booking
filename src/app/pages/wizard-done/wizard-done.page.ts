@@ -22,8 +22,6 @@ export class AppWizardDonePage implements ng.OnInit {
     private googleCal: string;
     private iCal: string;
 
-    public returnSite = 'https://www.spray-net.com';
-
     constructor(public wizard: AppWizardService, private settings: AppSettings, private sanitizer: DomSanitizer) { }
 
     ngOnInit(): void {
