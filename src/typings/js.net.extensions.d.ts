@@ -5,13 +5,6 @@ interface RegExpConstructor {
 
 // ReSharper disable InconsistentNaming
 interface String {
-    /*
-        /**
-         * Реализация форматирования "как в C#": var str = String.Format(format, arg0[, arg1[, arg2 ...]]);
-        #1#
-        format(...args: any[]): string;
-    */
-
     /**
         Checks the current string with the passed one whether they are equals. 
     */

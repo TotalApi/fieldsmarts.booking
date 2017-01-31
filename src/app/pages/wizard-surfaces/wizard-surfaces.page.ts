@@ -70,10 +70,10 @@ export class AppWizardSurfacesPage {
             return false;
         }
 
-        if (this.surfaces.where(x => x.isSelected && x.name !== 'isOther')
-                .selectMany(x => x.options as SurfaceOption[])
-                .where((x: SurfaceOption) => x && x.isSelected)
-                .all((x: SurfaceOption) => ['wood', 'rusted', 'painted'].contains(x.name))) {
+        const array = this.surfaces.where(x => x.isSelected && x.name !== 'isOther')
+            .selectMany(x => x.options as SurfaceOption[])
+            .where((x: SurfaceOption) => x && x.isSelected).toArray(); 
+        if (array.any() && array.all((x: SurfaceOption) => ['isWood', 'isRusted', 'isPainted'].contains(x.name))) {
             
             $('.ui.modal').modal({blurring: true}).modal('show');
             //this.wizard.data.isQualifiedLead = false;
