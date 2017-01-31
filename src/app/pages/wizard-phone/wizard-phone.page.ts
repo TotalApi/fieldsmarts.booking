@@ -1,6 +1,7 @@
 import * as ng from '@angular/core';
 import { AppRoute } from 'src/app/app.routes';
 import {AppWizardService} from "../../services/wizard.service";
+import {SalesService} from '../../services/sales.service';
 
 @ng.Component({
     styleUrls: ['./wizard-phone.page.scss'],
@@ -10,6 +11,6 @@ import {AppWizardService} from "../../services/wizard.service";
 @AppRoute({ path: 'wizard-phone' })
 export class AppWizardPhonePage {
 
-    constructor(public wizard: AppWizardService) { }
+    constructor(public wizard: AppWizardService, public sales: SalesService) { }
 
 }

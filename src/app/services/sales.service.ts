@@ -57,7 +57,6 @@ export class SalesService extends UssApiService {
     }
 
     public fillSaleWithSurfaces(sale: Sales) {
-
         if (this.wizard.data.surfaces && this.wizard.data.surfaces.length > 0) {
             sale.isAluminiumSiding = this.getSurface('isAluminiumSiding').isSelected;
             sale.isVinylSiding = this.getSurface('isVinylSiding').isSelected;
@@ -77,7 +76,10 @@ export class SalesService extends UssApiService {
 
     public async saveLead(): Promise<boolean> {
         let sale = new Sales();
-        sale.isQualifiedLead = this.wizard.data.isQualifiedLead;
+
+        sale.isBooking = true;
+        sale.isQualifiedLead = this.wizard.data.status === 'Lead';
+        sale.status = this.wizard.data.status;
         sale.franchisee = this.wizard.data.franchise;
         sale.address1 = this.wizard.data.address;
         sale.contactEmail = this.wizard.data.email;
@@ -87,14 +89,16 @@ export class SalesService extends UssApiService {
         sale.contactPhone = this.wizard.data.phoneNumber;
         sale.postCode = this.wizard.data.postalCode;
         sale.salesNumber = this.wizard.data.salesNumber;
-        sale.isOutOfBounds = this.wizard.data.isOutOfBounds;       
+        sale.isOutOfBounds = this.wizard.data.isOutOfBounds;
+        sale.preferredMethodOfContact = 'PHONE';        
 
         this.fillSaleWithSurfaces(sale);
 
         sale = await this.save(sale);
         this.wizard.data.salesNumber = sale.salesNumber;
         this.wizard.data.franchise = sale.franchisee;
-        return this.wizard.data.isQualifiedLead;
+        this.wizard.data.status = <any>sale.status || this.wizard.data.status;
+        return true;
     }
 
     public async saveBookTime(): Promise<PostBooking> {

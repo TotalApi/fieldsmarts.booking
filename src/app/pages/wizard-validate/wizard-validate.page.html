@@ -14,7 +14,7 @@
         <uss-button i18n="EDIT" (click)="editBookingTime()">Edit</uss-button>
         
         <div *ngFor="let surf of selectedSurfaces">
-            <span>{{surf.description}}</span>
+            <span>{{('WIZARD-SURFACES.SURFACE.' + surf.name) | translate}}</span>
         </div>
         
         <uss-button i18n="EDIT" (click)="editSurfaces()">Edit</uss-button>

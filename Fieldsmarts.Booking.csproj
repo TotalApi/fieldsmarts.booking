@@ -268,6 +268,7 @@
     <TypeScriptCompile Include="src\typings\legacy\moment.d.ts" />
     <TypeScriptCompile Include="src\typings\legacy\rome.d.ts" />
     <TypeScriptCompile Include="src\typings\models\Franshise.d.ts" />
+    <TypeScriptCompile Include="src\typings\models\Sales.ts" />
     <TypeScriptCompile Include="src\typings\models\Settings.d.ts" />
     <TypeScriptCompile Include="src\typings\models\User.d.ts" />
     <TypeScriptCompile Include="src\typings\models\UserInfo.d.ts" />
