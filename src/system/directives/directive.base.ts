@@ -8,27 +8,6 @@ import { SystemComponent } from '../decorators/system-component.decorator';
 import {isString, isArray} from "../utils";
 import { Reflection } from '../utils/Reflection';
 
-
-/**
- * Замена неработающему angular-декоратору.
- * После того как будет исправлено, можно будет убрать.
- */
-export var HostBinding = (propertyName?: string) => (target, propertyKey) => {
-    propertyName = propertyName || propertyKey;
-    Object.defineProperty(target, propertyKey,
-        {
-            get: function() {
-                return this['hostComponent'] ? this['hostComponent'][propertyName] : undefined;
-            },
-            set: function(v) {
-                if (this['hostComponent'])
-                    this['hostComponent'][propertyName] = v;
-            },
-            enumerable: true,
-            configurable: true,
-        });
-};
-
 export abstract class UssDirectiveBase<T> implements ng.OnInit, ng.OnDestroy {
 
     constructor(protected hostComponent: T, protected hostElementRef: ng.ElementRef, protected viewContainer: ng.ViewContainerRef, protected compiler?: ng.Compiler) {
@@ -38,8 +17,8 @@ export abstract class UssDirectiveBase<T> implements ng.OnInit, ng.OnDestroy {
     }
 
     /**
-     * Признак, что компонент прошёл этап инициализации.
-     * Устанавливается в обработчике ngOnInit() - не забывайте вызывать обработчик родителя в дочерних классах.
+     * Component initialized flag.
+     *  Sets in ngOnInit() - dont forget to call parent handler in child classes.
      */
     protected wasInit: boolean;
 

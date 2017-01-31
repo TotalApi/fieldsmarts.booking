@@ -4,16 +4,16 @@ import * as Utils from '../utils/utils';
 
 // ReSharper disable once Class
 /**
- * Изменения поля, название которого переданно в качестве параметра, будут автоматически вызывать метод объекта ngOnChanges, если он есть.
- * А также посылать уведомление через eventEmitter.
- * Для хранения значения создаётся и используется поле с именем __nc_values.
- * Если propertyKey не указан - помечаются все поля.
+ * Field changes, which name is passed as parameter, will automatically fire ngOnChanges method if it exists.
+ * And also sends notification by eventEmitter.
+ * For saving values creates and uses field with name __nc_values.
+ * If propertyKey not set - all fields will be marked.
  */
 export function extendForPropertyChanges(target: any, propertyKey?: string | string[], eventEmitter?: EventEmitter<SimpleChanges>) {
     if (!target) return undefined;
     const isClassPrototype = !(target instanceof target.constructor);
     if (!isClassPrototype) {
-        // Добавлять eventEmitter нельзя для прототипов классов
+        // Adding eventEmitter is not permitted for class prototypes
         target.__nc_values = target.__nc_values || {};
         if (!eventEmitter) {
             if (!(target.__nc_values['$notifyChanges.emmiter'] instanceof EventEmitter)) {
@@ -45,7 +45,7 @@ export function extendForPropertyChanges(target: any, propertyKey?: string | str
         if (target.__nc_values && prevDescriptor.value !== undefined) {
             target.__nc_values[<string>propertyKey] = currentValue;
         }
-        // Подменяем или объявляем get и set
+        // Replacing get and set
         const originalGet = prevDescriptor.get || function () { return this.__nc_values ? this.__nc_values[<string>propertyKey] : currentValue };
         const originalSet = prevDescriptor.set || function (v) {
             this.__nc_values = this.__nc_values || {};
@@ -54,9 +54,9 @@ export function extendForPropertyChanges(target: any, propertyKey?: string | str
         descriptor.get = originalGet;
 
         descriptor.set = function (v: any) {
-            // Внимание, если определяем set через function, 
-            // то this - текущий экземпляр класса,
-            // если через лямбду, то this - Window!!!
+            // Warning, if set id defined by function, 
+            // then this - current class instance,
+            // if by lambda then this - Window!!!
             const oldValue = this[<string>propertyKey];
             if (v !== oldValue) {
                 originalSet.call(this, v);
@@ -72,17 +72,17 @@ export function extendForPropertyChanges(target: any, propertyKey?: string | str
                 }
             }
         };
-        // Объявляем новое свойство, либо обновляем дескриптор
+        // Updating new property or updating descriptor
         Object.defineProperty(target, propertyKey, descriptor);
     }
     return eventEmitter;
 }
 
 /**
- * Изменения полей, помеченных этим декоратором будут автоматически вызывать метод объекта ngOnChanges, если он есть.
- * А также посылать уведомление через EventEmitter, помеченный декоратором @NotifyChangesEmitter.
- * Для хранения значения создаётся и используется поле с именем __nc_values.
- * Если propertyKey не указан - помечаются все поля.
+ * Changing fields marked by this decorator will be automatically fire ngOnChanges, if it exists.
+* And also sends notification by eventEmitter.
+ * For saving values creates and uses field with name __nc_values.
+ * If propertyKey not set - all fields will be marked.
  */
 export var NotifyChanges = () => (target, propertyKey) => { extendForPropertyChanges(target, propertyKey); };
 

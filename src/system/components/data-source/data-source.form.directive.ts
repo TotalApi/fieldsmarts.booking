@@ -18,12 +18,12 @@ export class UssDataSourceFormDirective extends UssDirectiveBase<ngForms.NgForm>
     }
 
     /**
-     * Источник данных (объект) с полем которого связывается компонент
+     * Data source
      */
     @ng.Input('ussDataSource') dataSource: Object;
 
     /**
-     * Метаинформация (опционально) для класса, передаваемого в качестве источника данных
+     * Metadata for class
      */
     @ng.Input('metadata') metadata: EntityMetadata;
 

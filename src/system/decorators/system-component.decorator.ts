@@ -3,8 +3,8 @@ import {appComponents} from './app-component.decorator';
 
 
 /**
- * Список помеченных данным декоратором компонентов добавляется в массив systemViewComponents.
- * Эти компоненты автоматически войдут в состав системных модулей UssSystemModule или UssComponentsModule.
+ * Adds service to systemViewComponents array.
+ * These services automatically will be included into UssSystemModule or UssComponentsModule.
  */
 export var SystemComponent = (addToComponentModule?: boolean) => target => {
     if (!systemComponents.contains(target) && !componentModuleComponents.contains(target) && !appComponents.contains(target))
@@ -13,11 +13,11 @@ export var SystemComponent = (addToComponentModule?: boolean) => target => {
 
 
 /**
- * Список всех компонентов, помеченных декоратором @SystemComponent().
+ * List of all components marked by @SystemComponent() decorator.
  */
 export var systemComponents: Type<any>[] = [];
 
 /**
- * Список всех компонентов, помеченных декоратором @SystemComponent(true).
+ * List of all components marked by @SystemComponent(true) decorator.
  */
 export var componentModuleComponents: Type<any>[] = [];

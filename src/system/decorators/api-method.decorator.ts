@@ -3,29 +3,29 @@
 
 export interface IApiMethodMetadata {
     /**
-     * Название HTTP-метода обработки запроса.
-     * Если не указано - то для методов, начинающихся с Load и Get это будет 'GET',
-     * с Delete и Remove - 'DELETE',
-     * для остальных - 'POST'.
+     * Name of HTTP-method.
+     * If not set - for methods starts with Load and Get it will be 'GET',
+     * with Delete and Remove - 'DELETE',
+     * others - 'POST'.
      */
     method?: string;
 
     /**
-     * Название роута WebApi запроса.
-     * Если параметры (или часть параметров) передаются через адрес - их надо указать в роуте в виде 'routeAddress/{param1}/{param2}'
+     * Name of WebApi route.
+     * If parameters transfers by url - they must be included in route as 'routeAddress/{param1}/{param2}...'
      */
     route?: string;
 
     /**
-     * Указывает как передавать параметры в запрос. false - через адресную строку, true - через тело запроса.
-     * Для методов GET/DELETE/HEAD/OPTIONS игнорируется (всегда передаётся через адресную строку)
-     * Для POST/PUT/PATCH запросов параметры будут по умолчанию передаваться через тело запроса (параметры, передаваемые через адрес роута будут исключены из передаваемого объекта)
-     * Для остальных запросов по умолчанию равно false.
+     * Indicates how to transfer parameters or request. false - by url, true - by request body.
+     * For methods GET/DELETE/HEAD/OPTIONS - ignoring (always by url)
+     * For POST/PUT/PATCH by default uses body (parameters transfered by url will be excluded from transfering object)
+     * In other cases by default is false.
      */
     useBody?: boolean;
 
     /**
-     * Название функции, вызывающей метод
+     * Name of calling method
      */
     caller?: string;
 }
@@ -33,24 +33,24 @@ export interface IApiMethodMetadata {
 export class ApiMethodMetadata implements IApiMethodMetadata {
 
     /**
-     * Название HTTP-метода обработки запроса.
-     * Если не указано - то для методов, начинающихся с Load и Get это будет 'GET',
-     * с Delete и Remove - 'DELETE',
-     * для остальных - 'POST'.
+     * Name of HTTP-method.
+     * If not set - for methods starts with Load and Get it will be 'GET',
+     * with Delete and Remove - 'DELETE',
+     * others - 'POST'.
      */
     method: string;
 
     /**
-     * Название роута WebApi запроса.
-     * Если параметры (или часть параметров) передаются через адрес - их надо указать в роуте в виде 'routeAddress/{param1}/{param2}'
+     * Name of WebApi route.
+     * If parameters transfers by url - they must be included in route as 'routeAddress/{param1}/{param2}...'
      */
     route: string;
 
     /**
-     * Указывает как передавать параметры в запрос. false - через адресную строку, true - через тело запроса.
-     * Для методов GET/DELETE/HEAD/OPTIONS игнорируется (всегда передаётся через адресную строку)
-     * Для POST/PUT/PATCH запросов параметры будут по умолчанию передаваться через тело запроса (параметры, передаваемые через адрес роута будут исключены из передаваемого объекта)
-     * Для остальных запросов по умолчанию равно false.
+     * Indicates how to transfer parameters or request. false - by url, true - by request body.
+     * For methods GET/DELETE/HEAD/OPTIONS - ignoring (always by url)
+     * For POST/PUT/PATCH by default uses body (parameters transfered by url will be excluded from transfering object)
+     * In other cases by default is false.
      */
     useBody: boolean;
 

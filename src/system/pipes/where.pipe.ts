@@ -39,7 +39,7 @@ export class UssWherePipe implements PipeTransform {
 
                         let condValue = condition[prop];
                         let propValue = item[prop];
-                        // Если проверяемое значение не установлено, необходимо обеспечить правильность сравнений следующего вида
+                        // If checking value is not set we should support comparing the following cases
                         // null == undefined
                         // 0 == undefined
                         // false == undefined

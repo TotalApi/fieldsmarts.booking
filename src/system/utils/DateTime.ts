@@ -1,7 +1,7 @@
 ﻿export namespace DateTime {
 
     /**
-        * Преобразует строковое представление Newton.Json и Asp.Net даты в Date.
+        * Converts Newton.Json string and Asp.Net string into Date.
         */
     export function ToDate(obj: string): Date {
         var res: Date = <any>obj;

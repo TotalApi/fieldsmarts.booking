@@ -66,7 +66,7 @@ export class UssHttp extends Http {
     }
 
     /**
-     * Выделяет ошибку из ответа серевера, возникшую при вызове методов сервиса.
+     * Extracts error from server response.
      */
     public static ExctractError(err: any): string {
         if (err instanceof Response) {
@@ -126,7 +126,7 @@ export class UssHttp extends Http {
     }
 
     /**
-     * Обрабатывает ошибку, возникшую при вызове методов сервиса.
+     * Processes error as service response.
      */
     public ProcessError(err: any): string {
         const error = UssHttp.ExctractError(err);
@@ -140,7 +140,7 @@ export class UssHttp extends Http {
     }
 
     /**
-     * Обрабатывает ошибку, возникшую при вызове методов сервиса.
+     * Handles the error.
      */
     public HandleError(error: any): ErrorObservable<string> {
         return Observable.throw(this.ProcessError(error));

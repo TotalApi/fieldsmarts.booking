@@ -6,7 +6,7 @@ declare var jQuery: any;
 export function callerName(level: number = 0, getLastPartOfName: boolean = true) {
         let res;
         const stackTrace = st.getSync({offline: true});
-        // В режиме минификации в стек добавляется ещё два вызова, начиная с метода getSync - это нужно учесть
+        // If minification, two more calls includes to stack starting from getSync method
         var self = stackTrace.firstOrDefault(x => x.functionName && (x.functionName === "getSync" /* IE */ || x.functionName.EndsWith(".getSync") /* Others */));
         if (self) {
             var index = stackTrace.indexOf(self) + 1;
@@ -79,19 +79,19 @@ export function isDate(obj) {
 }
 
 /**
- * Возвращает true, если context равен null или undefined. 
+ * Returns true if context equals null or undefined. 
  */
 export function isEmpty(context: any): boolean {
     return context === undefined || context === null;
 }
 /**
- * Возвращает значение value, если context равен null или undefined или context в ином случае.
+ * Returns value if context equals null or undefined or context in another case.
  */
 export function ifEmpty<T>(context: T, value: T): T {
     return isEmpty(context) ? value : context;
 }
 /**
- * Возвращает значение value, если context равен null или undefined или context в ином случае.
+ * Returns value if context equals null or undefined or context in another case.
  */
 export function coalesce<T>(context: T, value: T): T {
     return ifEmpty(context, value);
@@ -143,73 +143,7 @@ export function getRandomString(digitsNum: number = 12)
 }
 
 /**
- * Транслитерация кириллицы в URL
- */
-export function urlRusLat(str: string): string {
-	str = str.toLowerCase(); // все в нижний регистр
-	const cyr2LatChars = new Array(
-			['а', 'a'], ['б', 'b'], ['в', 'v'], ['г', 'g'],
-			['д', 'd'],  ['е', 'e'], ['ё', 'yo'], ['ж', 'zh'], ['з', 'z'],
-			['и', 'i'], ['й', 'y'], ['к', 'k'], ['л', 'l'],
-			['м', 'm'],  ['н', 'n'], ['о', 'o'], ['п', 'p'],  ['р', 'r'],
-			['с', 's'], ['т', 't'], ['у', 'u'], ['ф', 'f'],
-			['х', 'h'],  ['ц', 'c'], ['ч', 'ch'],['ш', 'sh'], ['щ', 'shch'],
-			['ъ', ''],  ['ы', 'y'], ['ь', ''],  ['э', 'e'], ['ю', 'yu'], ['я', 'ya'],
-				
-			['А', 'A'], ['Б', 'B'],  ['В', 'V'], ['Г', 'G'],
-			['Д', 'D'], ['Е', 'E'], ['Ё', 'YO'],  ['Ж', 'ZH'], ['З', 'Z'],
-			['И', 'I'], ['Й', 'Y'],  ['К', 'K'], ['Л', 'L'],
-			['М', 'M'], ['Н', 'N'], ['О', 'O'],  ['П', 'P'],  ['Р', 'R'],
-			['С', 'S'], ['Т', 'T'],  ['У', 'U'], ['Ф', 'F'],
-			['Х', 'H'], ['Ц', 'C'], ['Ч', 'CH'], ['Ш', 'SH'], ['Щ', 'SHCH'],
-			['Ъ', ''],  ['Ы', 'Y'],
-			['Ь', ''],
-			['Э', 'E'],
-			['Ю', 'YU'],
-			['Я', 'YA'],
-				
-			['a', 'a'], ['b', 'b'], ['c', 'c'], ['d', 'd'], ['e', 'e'],
-			['f', 'f'], ['g', 'g'], ['h', 'h'], ['i', 'i'], ['j', 'j'],
-			['k', 'k'], ['l', 'l'], ['m', 'm'], ['n', 'n'], ['o', 'o'],
-			['p', 'p'], ['q', 'q'], ['r', 'r'], ['s', 's'], ['t', 't'],
-			['u', 'u'], ['v', 'v'], ['w', 'w'], ['x', 'x'], ['y', 'y'],
-			['z', 'z'],
-				
-			['A', 'A'], ['B', 'B'], ['C', 'C'], ['D', 'D'],['E', 'E'],
-			['F', 'F'],['G', 'G'],['H', 'H'],['I', 'I'],['J', 'J'],['K', 'K'],
-			['L', 'L'], ['M', 'M'], ['N', 'N'], ['O', 'O'],['P', 'P'],
-			['Q', 'Q'],['R', 'R'],['S', 'S'],['T', 'T'],['U', 'U'],['V', 'V'],
-			['W', 'W'], ['X', 'X'], ['Y', 'Y'], ['Z', 'Z'],
-				
-			[' ', '_'],['0', '0'],['1', '1'],['2', '2'],['3', '3'],
-			['4', '4'],['5', '5'],['6', '6'],['7', '7'],['8', '8'],['9', '9'],
-			['-', '-'], ['/', '/']
-    );
-
-    var newStr = new String();
-
-    for (var i = 0; i < str.length; i++) {
-
-        let ch = str.charAt(i);
-        var newCh = '';
-
-        for (var j = 0; j < cyr2LatChars.length; j++) {
-            if (ch === cyr2LatChars[j][0]) {
-                newCh = cyr2LatChars[j][1];
-
-            }
-        }
-        // Если найдено совпадение, то добавляется соответствие, если нет - пустая строка
-        newStr += newCh;
-
-    }
-    // Удаляем повторяющие знаки - Именно на них заменяются пробелы.
-    // Так же удаляем символы перевода строки, но это наверное уже лишнее
-    return newStr.replace(/[_]{2,}/gim, '_').replace(/\n/gim, '');
-}
-
-/**
- * Проверяет, можно ли привести переданное значение в целое число.
+ * Checks if value could be converted into integer number.
  */
 export function isIntNumber(val: any): boolean {
     const isInt = !isNaN(val) && val.toString().indexOf('.') < 0 && Number(val) === Math.ceil(val);
@@ -224,7 +158,7 @@ export function isIntNumber(val: any): boolean {
 }
 
 /**
- * Проверяет, можно ли привести переданное значение в число с плавающей точкой.
+ * Checks if value could be converted into float number.
  */
 export function isFloatNumber(val: any) {
     let result;
@@ -272,7 +206,7 @@ export function getCaretPosition(input: HTMLInputElement | HTMLTextAreaElement |
 }
 
 /**
- * Возвращает текущий десятичный разделитель
+ * Returns current decimal separator
  */
 export function getDecimalSeparator(): string {
     return (1.1).toLocaleString().substring(1, 2);

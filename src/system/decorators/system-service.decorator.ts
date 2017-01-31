@@ -2,8 +2,8 @@
 
 
 /**
- * Список помеченных данным декоратором сервисов добавляется в массив systemServices.
- * Эти сервисы автоматически войдут в состав системных модулей UssSystemModule или UssComponentsModule.
+ * Adds service to systemServices array.
+ * These services automatically will be included into UssSystemModule or UssComponentsModule.
  */
 export var SystemService = (addToComponentModule?: boolean) => target => {
     addToComponentModule ? componentModuleServices.push(target) : systemServices.push(target);
@@ -11,11 +11,11 @@ export var SystemService = (addToComponentModule?: boolean) => target => {
 
 
 /**
- * Список всех компонентов, помеченных декоратором @SystemComponent().
+ * List of all components marked by @SystemComponent() decorator.
  */
 export var systemServices: Type<any>[] = [];
 
 /**
- * Список всех компонентов, помеченных декоратором @SystemComponent(true).
+ * List of all components marked by @SystemComponent(true) decorator.
  */
 export var componentModuleServices: Type<any>[] = [];

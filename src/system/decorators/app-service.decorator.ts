@@ -2,12 +2,12 @@
 
 
 /**
- * Список помеченных данным декоратором сервисов добавляется в массив appServices.
- * В последствии все такие сервисы можно добавить в bootstrap, указав в разделе providers.
+ * Adds service to appServices array.
+ * Then this services could be added to bootstrap inside providers section.
  */
 export var AppService = () => target => { appServices.push(target); }
 
 /**
- * Список всех компонентов, помеченных декоратором @AppService.
+ * List of all components marked by @AppService decorator.
  */
 export var appServices: Type<any>[] = [];

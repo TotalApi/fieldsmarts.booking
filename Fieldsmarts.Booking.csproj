@@ -241,7 +241,6 @@
     <TypeScriptCompile Include="src\system\services\account.service.ts" />
     <TypeScriptCompile Include="src\system\system.module.ts" />
     <TypeScriptCompile Include="src\system\utils\DateTime.ts" />
-    <TypeScriptCompile Include="src\system\utils\EventedWorker.ts" />
     <TypeScriptCompile Include="src\system\utils\index.ts" />
     <TypeScriptCompile Include="src\system\utils\js.net.array.ts" />
     <TypeScriptCompile Include="src\system\utils\js.net.extensions.ts" />
@@ -252,13 +251,10 @@
     <TypeScriptCompile Include="src\system\utils\ObserveableCollection.ts" />
     <TypeScriptCompile Include="src\system\utils\ObserveableDictionary.ts" />
     <TypeScriptCompile Include="src\system\utils\ObserveableEventType.ts" />
-    <TypeScriptCompile Include="src\system\utils\OData.ts" />
-    <TypeScriptCompile Include="src\system\utils\ODataFilterCreator.ts" />
     <TypeScriptCompile Include="src\system\utils\parser.ts" />
     <TypeScriptCompile Include="src\system\utils\Reflection.ts" />
     <TypeScriptCompile Include="src\system\utils\TypedEventEmitter.ts" />
     <TypeScriptCompile Include="src\system\utils\utils.ts" />
-    <TypeScriptCompile Include="src\system\utils\WebWorkersManager.ts" />
     <TypeScriptCompile Include="src\typings\custom-typings.d.ts" />
     <TypeScriptCompile Include="src\typings\index.d.ts" />
     <TypeScriptCompile Include="src\typings\js-core.d.ts" />
