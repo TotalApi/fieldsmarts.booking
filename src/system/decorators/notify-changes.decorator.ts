@@ -62,7 +62,7 @@ export function extendForPropertyChanges(target: any, propertyKey?: string | str
                 originalSet.call(this, v);
 
                 const changes = { };
-                changes[<string>propertyKey] = new SimpleChange(oldValue, v);
+                changes[<string>propertyKey] = new SimpleChange(oldValue, v, false);
                 if (this.__nc_values['$notifyChanges.emmiter'] instanceof EventEmitter) {
                     setTimeout(() => this.__nc_values['$notifyChanges.emmiter'].emit(changes));
                 }
