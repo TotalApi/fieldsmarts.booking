@@ -44,6 +44,9 @@ export class AppTranslateService {
         }
     }
 
+    private saveTranslations(lang: string) {
+        localStorage.setItem(`_${lang}_translations`, system.Json.toJson(this.translations[lang], true, true));
+    }
     addKey(key: string, value: string, lang?: string, addCurrentDictionary?: boolean) {
         lang = lang || this.translate.currentLang;
         if (addCurrentDictionary || !this.translations[`${lang}.${key}`]) {
@@ -59,6 +62,7 @@ export class AppTranslateService {
                             this.addKey(key, loadedDictionary[key], lang, true);
                         }
                     }
+                    this.saveTranslations(lang);
                 });
             }
             let current = this.translations[lang];
@@ -69,7 +73,7 @@ export class AppTranslateService {
             }
             current[keys[keys.length - 1]] = value;
             if (!addCurrentDictionary) {
-                localStorage.setItem(`_${lang}_translations`, system.Json.toJson(this.translations[lang], true, true));
+                this.saveTranslations(lang);
             }
         }
     }

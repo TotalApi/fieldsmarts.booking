@@ -1,7 +1,7 @@
 @import '../../components/common/_variables.scss';
 
-.home {
-    background-color: $orange!important;
+.wizard-page.home {
+    background-color: $orange;
     background-image: url(../../../assets/images/PaintGuy.png);
     background-repeat: no-repeat;
     position: relative;

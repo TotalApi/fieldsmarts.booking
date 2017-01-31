@@ -126,7 +126,7 @@ export namespace Json {
                     const propName = keys[i];
                     let propValue = obj[propName];
                     propValue = toJson(propValue, format, sort, indent);
-                    res += `${propStart}"${propName}":${propSeparator}${propValue}`;
+                    res += `${propStart}"${propName}":${propSeparator}${propValue}${i === keys.length - 1  ? '' : ','}`;
                 }
                 res = `{${res}${propEnd}}`;
                 return res;

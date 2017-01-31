@@ -26,8 +26,9 @@ export class AddToCalendar {
           const endTime = this.calculateEndTime(event);
 
           const href = encodeURI([
-              'https://www.google.com/calendar/render',
-              '?action=TEMPLATE',
+              //'https://www.google.com/calendar/render',
+              'https://www.google.com/calendar/gp#~calendar:view=e&bm=1&trp=false',
+              '&action=TEMPLATE',
               '&text=' + (event.title || ''),
               '&dates=' + (startTime || ''),
               '/' + (endTime || ''),

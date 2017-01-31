@@ -1,13 +1,13 @@
 /*
     Angular
 */
-import { NgModule, Injector, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { RouterModule } from '@angular/router';
+import { NgModule, Injector, CUSTOM_ELEMENTS_SCHEMA, Injectable } from '@angular/core'
+import { RouterModule, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Http, HttpModule } from '@angular/http';
-import { AgmCoreModule } from 'angular2-google-maps/core';
+import { AgmCoreModule} from 'angular2-google-maps/core';
 
 /*
     3rd party
@@ -29,6 +29,7 @@ import { AppRoutes } from "src/app/app.routes";
 
 import { AppTranslateService, AppTranslateLoader, AppMissingTranslationHandler } from './services/translate.service';
 import {AppSettings} from './services/settings.service';
+import {AppSettingsResolver} from './services/settings.service';
 
 @NgModule({
     declarations: [
@@ -46,8 +47,7 @@ import {AppSettings} from './services/settings.service';
         system.UssSystemModule,
         system.UssComponentsModule,
         AgmCoreModule.forRoot({
-          libraries: ["places"],
-          apiKey: 'AIzaSyASScrTpFyyeEruSLIaOyg_GLmPwXoHLgA'
+            libraries: ["places"]
         })
     ],
     providers: [
@@ -62,10 +62,11 @@ import {AppSettings} from './services/settings.service';
             provide: ng2Translate.MissingTranslationHandler,
             useFactory: (http: Http) => new AppMissingTranslationHandler(http),
             deps: [Http]
-        }
+        },
+        AppSettingsResolver
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 

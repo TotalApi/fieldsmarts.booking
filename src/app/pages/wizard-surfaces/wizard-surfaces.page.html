@@ -1,18 +1,16 @@
-﻿<wizard-page title="SURFACES"
-             description="Select the surface"
-             [next]="nextAction">
-
-    <div *ngIf="forgotted">
-        OOPS!
-        You forgot to select description for your exterior surface!
-        <button (click)="closeAlert()">X</button>
-    </div>
+﻿<wizard-page title="WIZARD-SURFACES.TITLE|Surfaces"
+             description="WIZARD-SURFACES.DESCRIPTION|Select the surface"
+             [next]="nextAction"
+             [oops]="forgotted ? 'WIZARD-SURFACES.FORGOTTED|You forgot to select description for your exterior surface!' : ''"
+>
     <ul>
         <li *ngFor="let surface of surfaces">
             <button (click)="select(surface)">+</button>
+<!--
             <span *ngIf="surface.isSelected"> >>> </span>
-            {{surface.name | translate}}
-            <a class="options" *ngIf="surface.name !== 'isOther' && surface.options && surface.options.length > 0" (click)="showOptions(surface)">Options</a>
+-->
+            {{('WIZARD-SURFACES.SURFACE.' + surface.name) | translate}}
+            <a class="options" *ngIf="surface.name !== 'isOther' && surface.options && surface.options.length > 0" (click)="showOptions(surface)" i18n="OPTIONS">Options</a>
         </li>
     </ul>
     
@@ -20,17 +18,13 @@
         <div class="image content">
             
             <div class="description">
-                <div>
-                    Unfortunatelly, we dont paint wood or previously painted surfaces. 
-                </div>
-                <div>
-                    Is there another exterior surface you'd like to paint?.
-                </div>
+                <div i18n="WIZARD-SURFACES.MODAL.1">Unfortunatelly, we dont paint wood or previously painted surfaces.</div>
+                <div i18n="WIZARD-SURFACES.MODAL.2">Is there another exterior surface you'd like to paint?</div>
             </div>
         </div>
         <div class="actions">
-            <button class="ui deny button" (click)="closePopup()">Yes</button>
-            <button class="ui deny button" (click)="next()">No</button>
+            <uss-button type="yes" (click)="closePopup()"></uss-button>
+            <uss-button type="no" (click)="next()"></uss-button>
         </div>
     </div>
 
