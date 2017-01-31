@@ -70,7 +70,8 @@ export class CustomValidators {
 
     public static intNumberValidator(c: AbstractControl) {
         if (CustomValidators.valueIsEmpty(c.value)) return null;
-        let isValid = utils.isIntNumber(c.value);
+
+        let isValid = utils.isIntNumber(c.value);
         let result;
         if (isValid) {
             result = null;
