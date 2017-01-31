@@ -9,7 +9,7 @@
         <div class="like">
             <div id="fb-like-btn" class="fb-like" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
         </div>
-        <a class="text-about" [href]="returnSite" i18n="WIZARD-DONE.TAKE_ME_BACK">Take me back to Spay-Net</a>
+        <a class="text-about" [href]="settings.returnUrl" i18n="WIZARD-DONE.TAKE_ME_BACK">Take me back to Spay-Net</a>
     </div>
     
     <div *ngIf="!wizard.data.callMe">

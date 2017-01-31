@@ -21,6 +21,7 @@ export class AppSettings extends UssApiService {
     facebookAppId: string;
     googleApiKey: string;
     translateApiUrl: string;
+    returnUrl: string;
 
     workingHours: WorkingHours[];
     nonWorkingDays: string[];
@@ -34,6 +35,7 @@ export class AppSettings extends UssApiService {
         this.siteToLike = 'https://www.spray-net.com';
         this.facebookAppId = '773528466036157';
         this.googleApiKey = 'AIzaSyASScrTpFyyeEruSLIaOyg_GLmPwXoHLgA';
+        this.returnUrl = 'https://www.spray-net.com';
 
         this.load().then((s: Settings[]) => {
             s.forEach(x => {

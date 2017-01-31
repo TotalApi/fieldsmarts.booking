@@ -16,7 +16,8 @@ import AppSettingsResolver = Settingsservice.AppSettingsResolver;
 export class AppWizardHomePage {
 
     constructor(public wizard: AppWizardService, private route: ActivatedRoute, private settings: Settingsservice.AppSettings) {
-        wizard.translate.use(wizard.translate.getBrowserLang());
+        //wizard.translate.use(wizard.translate.getBrowserLang());
+        wizard.translate.use("en");
         this.route.params.subscribe((p: any) => {
             if (p.lang) {
                 wizard.data.language = p.lang;

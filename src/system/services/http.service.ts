@@ -131,7 +131,7 @@ export class UssHttp extends Http {
     public ProcessError(err: any): string {
         const error = UssHttp.ExctractError(err);
         if (error) {
-            if (this.msg)
+            if (this.msg && isDevMode)
                 this.msg.runtimeError(error);
             else
                 console.error(error);

@@ -27,8 +27,6 @@ export class AppWizardPostCodePage {
     public consultant: IUserInfo;
     public partner: IUserInfo;
 
-    public returnSite = 'https://www.spray-net.com';
-
     constructor(public sales: SalesService,
         public wizard: AppWizardService,
         public account: AccountService,
@@ -68,7 +66,7 @@ export class AppWizardPostCodePage {
             this.error = 'WIZARD-POSTCODE.OUTSIDE|You are a little outside our service area';
             this.nextAction = {
                 caption: 'GOTO_SITE|Go to SPRAY-NET.COM',
-                action: () => { window.location.href = this.returnSite }
+                action: () => { window.location.href = this.settings.returnUrl }
             };
             this.backAction = {
                 caption: 'BACK',
