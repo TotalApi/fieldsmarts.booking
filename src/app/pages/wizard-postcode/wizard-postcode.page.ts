@@ -44,7 +44,16 @@ export class AppWizardPostCodePage {
             this.errorState = 'invalid_code';
             this.error = 'WIZARD-POSTCODE.NOT_SERVE|Unfortunatelly we do not serve your area';
             this.nextAction = { caption: 'WIZARD-POSTCODE.ALERT_ME|Alert me instead ->', action: () => alert('Alert!!!!!') };
-            this.backAction = { isHidden: true };
+            this.backAction = {
+//                isHidden: true,
+                caption: 'BACK',
+                action: () => {
+                    this.errorState = '';
+                    this.error = '';
+                    this.backAction = this.defaultBackAction;
+                    this.nextAction = this.defaultNextAction;
+                }
+            };
             this.wizard.data.status = 'Unqualified';
             await this.sales.saveLead();
             return false;
