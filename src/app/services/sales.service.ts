@@ -89,7 +89,8 @@ export class SalesService extends UssApiService {
         sale.contactPhone = this.wizard.data.phoneNumber;
         sale.postCode = this.wizard.data.postalCode;
         sale.salesNumber = this.wizard.data.salesNumber;
-        sale.isOutOfBounds = this.wizard.data.isOutOfBounds;       
+        sale.isOutOfBounds = this.wizard.data.isOutOfBounds;
+        sale.preferredMethodOfContact = 'PHONE';        
 
         this.fillSaleWithSurfaces(sale);
 

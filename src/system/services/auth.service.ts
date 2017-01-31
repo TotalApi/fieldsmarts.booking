@@ -14,26 +14,26 @@ export interface UssAuthServiceEvent {
 export interface IUssAuthService {
     Event: { loggedIn: string, loggedOut: string };
     /**
-     * Признак, что пользователь залогинен
+     * Indicates if user is logged in
      */
     IsLoggedIn: boolean;
     /**
-     * Информация о текущем залогиненом пользователе
+     * Logged user info
      */
     LoggedUser: User;
 
     /**
-     * Информация о логине текущего пользователя
+     * Info about users login
      */
     LoggedUserName: string;
 
     /**
-     * Информация о текущем токене залогиненого пользователя
+     * Current logged user token
      */
     AccessToken: string;
 
     /**
-     * Время до которого текущий токен валиден
+     * Access token expiration time
      */
     AccessTokenExpires: moment.Moment;
 
@@ -59,24 +59,22 @@ export class UssAuthService {
 
     constructor(private account: UssAccountService, private _http: Http) {
         if (_http instanceof UssHttp) {
-            // Прописываем информацию о менеджере аутентификации в расширенный Http-сервис.
-            // Сделать это чере DI невозможно из-за взаимных ссылок друг на друга.
+            //Including information about authentication manager into extended Http-service.
+            //Implement it by DI is impossible due to cross references
             _http.AuthorizationManager = <any>this;
         }
 
         if (this.IsLoggedIn) {
-            // Восстанавливаем данные о текущем пользователе из локального хранилища.
             this.LoggedUser = <User>{
                 userName: localStorage.getItem(`${this.storageKey}_uid`),
                 role: localStorage.getItem(`${this.storageKey}_urole`),
             }
-            // Обновим данные о пользователе
             this.updateUserInfo();
         }
     }
 
     /**
-     * Признак, что пользователь залогинен
+     * Is user logged
      * @returns {} 
      */
     public get IsLoggedIn(): boolean {
@@ -90,27 +88,27 @@ export class UssAuthService {
     }
 
     /**
-     * Информация о текущем залогиненом пользователе
+     * Inforation about current logged user
      */
     public LoggedUser = <User>{};
 
     /**
-     * Информация о логине текущего пользователя
+     * Current logged user name
      */
     public LoggedUserName: string = localStorage.getItem(`${this.storageKey}_login`);
 
     /**
-     * Информация о текущем токене залогиненого пользователя
+     * Current logged user token
      */
     public AccessToken: string = localStorage.getItem(`${this.storageKey}_access`);
 
     /**
-     * Время до которого текущий токен валиден
+     * Access token expiration time
      */
     public AccessTokenExpires: moment.Moment = moment(localStorage.getItem(`${this.storageKey}_exp`));
 
     /**
-     * Обновляет информацию о пользователе.
+     * Updates user information
      */
     private updateUserInfo(userNameOrId?: string): Promise<User> {
         //userNameOrId = userNameOrId || localStorage.getItem(`${this.storageKey}_uid`) || this.LoggedUserName;

@@ -72,7 +72,7 @@ export class AppModule {
 
     constructor(private translate: AppTranslateService, private auth: system.UssAuthService) {
         translate.init();
-        auth.Login('lionsoft@ukr.net', 'P@ssw0rd');
+        //auth.Login('lionsoft@ukr.net', 'P@ssw0rd');
     }
 
 }
