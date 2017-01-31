@@ -31,10 +31,9 @@ export class AppSettings extends UssApiService {
         super(http);
 
         this.mainCallPhone = '+1234567890';
-        this.siteToLike = 'http://aelitsoft.com';
+        this.siteToLike = 'https://www.spray-net.com';
         this.facebookAppId = '773528466036157';
         this.googleApiKey = 'AIzaSyASScrTpFyyeEruSLIaOyg_GLmPwXoHLgA';
-        this.translateApiUrl = 'http://192.168.3.202:7202/locales';
 
         this.load().then((s: Settings[]) => {
             s.forEach(x => {
