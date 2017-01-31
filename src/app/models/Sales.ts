@@ -90,6 +90,7 @@ export class SalesConsultant {
         public contractNumber: string;
 
         public isOutOfBounds: boolean;
+        public isBooking: boolean;
 
         public isAluminiumSiding: boolean;
         public isVinylSiding : boolean;

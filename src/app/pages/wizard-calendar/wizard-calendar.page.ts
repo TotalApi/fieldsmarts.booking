@@ -29,8 +29,6 @@ export class AppWizardCalendarPage implements ng.OnInit {
 
     constructor(public wizard: AppWizardService) {
         this.model = wizard.data;
-        //this.model.franchise = 'corporate';
-        //this.model.salesNumber = '17011295915';
         this.model.agreedForBook = false;
 
     }

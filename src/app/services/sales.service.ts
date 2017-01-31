@@ -57,7 +57,6 @@ export class SalesService extends UssApiService {
     }
 
     public fillSaleWithSurfaces(sale: Sales) {
-
         if (this.wizard.data.surfaces && this.wizard.data.surfaces.length > 0) {
             sale.isAluminiumSiding = this.getSurface('isAluminiumSiding').isSelected;
             sale.isVinylSiding = this.getSurface('isVinylSiding').isSelected;
@@ -77,6 +76,8 @@ export class SalesService extends UssApiService {
 
     public async saveLead(): Promise<boolean> {
         let sale = new Sales();
+
+        sale.isBooking = true;
         sale.isQualifiedLead = this.wizard.data.status === 'Lead';
         sale.status = this.wizard.data.status;
         sale.franchisee = this.wizard.data.franchise;
