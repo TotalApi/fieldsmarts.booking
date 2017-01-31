@@ -75,10 +75,10 @@
         "PLACEHOLDER": "Your Postal Code",
         "TITLE": "Your Location"
     },
-    "WIZARD-RECOMENDATION": {
-        "DESCRIPTION": "We'll email you if we can't reach you by phone.",
-        "TITLE": "Just In Case..."
-    },
+  "WIZARD-RECOMENDATION": {
+    "DESCRIPTION": "How did you hear about us?",
+    "TITLE": "One last question..."
+  },
     "WIZARD-SURFACE-OPTIONS": {
         "DESCRIPTION": "Description",
         "OPTION": {
