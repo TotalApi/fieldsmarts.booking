@@ -43,7 +43,7 @@
     "typescript": "^2.1.4",
     "typings": "^2.1.0",
     "url-loader": "^0.5.7",
-    "webpack": "2.2.0",
+    "webpack": "2.2.1",
     "webpack-build-notifier": "^0.1.12",
     "webpack-dev-server": "^2.2.0-rc.0",
     "webpack-merge": "^2.4.0",
