@@ -25,6 +25,25 @@
                 margin-top: 20px;
                 margin-right: 22px;
             }
+
+            input[type="checkbox"]{
+                display: none;
+            }
+            
+            input[type="checkbox"] + label span {
+                display:inline-block;
+                 width: 24px;
+                height: 24px;
+                background: url(../../../assets/images/unchecked.png) no-repeat;
+                cursor:pointer;
+            }
+
+            input[type="checkbox"]:checked + label span {
+                background: url(../../../assets/images/checked.png) no-repeat;
+            }
+            .check-trigger{
+               
+            }
         }
         li:first-child{
             border-radius: 12px 12px 0 0;

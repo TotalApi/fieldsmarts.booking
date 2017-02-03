@@ -266,3 +266,5 @@ __pycache__/
 /src/**/*.css.map
 
 !/src/assets/scripts/*.js
+/semantic
+/semantic.json

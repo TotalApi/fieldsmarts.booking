@@ -107,10 +107,12 @@
     <Content Include="src\assets\images\arrow-next-orange.png" />
     <Content Include="src\assets\images\arrow-next-white.png" />
     <Content Include="src\assets\images\check.png" />
+    <Content Include="src\assets\images\checked.png" />
     <Content Include="src\assets\images\PaintGuy.png" />
     <Content Include="src\assets\images\phone-orange.png" />
     <Content Include="src\assets\images\phone-white.png" />
     <Content Include="src\assets\images\sorry.png" />
+    <Content Include="src\assets\images\unchecked.png" />
     <Content Include="src\assets\styles\globals.scss" />
     <Content Include="src\assets\styles\_colors.scss" />
     <Content Include="src\assets\styles\_semantic.scss" />

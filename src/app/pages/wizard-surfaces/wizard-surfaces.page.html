@@ -5,12 +5,17 @@
 >
     <ul>
         <li *ngFor="let surface of surfaces">
-            <button (click)="select(surface)">+</button>
+            <input type="checkbox" id="check-surf"/>
+            <label class="check-trigger" for="checkbox">
+                <span (click)="select(surface)"></span>
+                {{('WIZARD-SURFACES.SURFACE.' + surface.name) | translate}}
+                <a class="options" *ngIf="surface.name !== 'isOther' && surface.options && surface.options.length > 0" (click)="showOptions(surface)" i18n="OPTIONS">Options</a>
+            </label>
+            <!--<button (click)="select(surface)">+</button>-->
 
             <span *ngIf="surface.isSelected"> >>> </span>
 
-            {{('WIZARD-SURFACES.SURFACE.' + surface.name) | translate}}
-            <a class="options" *ngIf="surface.name !== 'isOther' && surface.options && surface.options.length > 0" (click)="showOptions(surface)" i18n="OPTIONS">Options</a>
+            
         </li>
     </ul>
     
